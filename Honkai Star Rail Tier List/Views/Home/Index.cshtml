@@ -2,7 +2,56 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html>
+ <head>
+    <link rel="stylesheet" href="C:\Users\Ariel\source\repos\Honkai Star Rail Tier List\Honkai Star Rail Tier List\Views\Home\Styles.css" type="text/css" />
+ </head>
+
+<body>
+    
+
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>
+
+    <button class="accordion">About</button>
+    <div class="panel">
+        <p>This tier list ranks each charcter based on his or her performance in each of the different end game modes</p>
+    </div>
+
+    <button class="accordion">Catagories</button>
+    <div class="panel">
+        <ul>
+            <li>
+                DPS
+            </li>
+        </ul>
+    </div>
+
+    <button class="accordion">Section 3</button>
+    <div class="panel">
+        <p>Lorem ipsum...</p>
+    </div>
+
+</body>
+</html>
+
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+          panel.style.display = "none";
+        } else {
+          panel.style.display = "block";
+        }
+      });
+    }
+</script>
+
