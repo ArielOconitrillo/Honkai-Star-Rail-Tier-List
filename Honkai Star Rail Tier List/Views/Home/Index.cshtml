@@ -1,14 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
-<!DOCTYPE html>
-<html>
- <head>
-    <link rel="stylesheet" href="C:\Users\Ariel\source\repos\Honkai Star Rail Tier List\Honkai Star Rail Tier List\Views\Home\Styles.css" type="text/css" />
- </head>
-
-<body>
     
 
     <div class="text-center">
@@ -16,42 +8,30 @@
         <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     </div>
 
-    <button class="accordion">About</button>
+<button class="accordion">About the tier list</button>
     <div class="panel">
         <p>This tier list ranks each charcter based on his or her performance in each of the different end game modes</p>
     </div>
 
-    <button class="accordion">Catagories</button>
+<button class="accordion">Catagories</button>
     <div class="panel">
         <ul>
             <li>
-                DPS
+                DPS - DPS is the main damage dealer of the team. Their goals are to defeat the enemy.
+            </li>
+            <li>
+                Sub-DPS - A secondary damage dealer, that typically doesn't deal as much damage as a proper DPS, but can make up for it by also providing a bit of support to other team members.
+            </li>
+            <li>
+                Support - Supports are there to help the team by buffing other team members or debuffing enemies.
+            </li>
+            <li>
+                Sustain - Sustain units keep their teammates alive. This is done by either healing or providing the team with shields.
             </li>
         </ul>
     </div>
 
-    <button class="accordion">Section 3</button>
+<button class="accordion">Changes </button>
     <div class="panel">
-        <p>Lorem ipsum...</p>
+        <p>Below is a list of recent changes to a characthers rating and an explanation</p>
     </div>
-
-</body>
-</html>
-
-<script>
-    var acc = document.getElementsByClassName("accordion");
-    var i;
-
-    for (i = 0; i < acc.length; i++) {
-      acc[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var panel = this.nextElementSibling;
-        if (panel.style.display === "block") {
-          panel.style.display = "none";
-        } else {
-          panel.style.display = "block";
-        }
-      });
-    }
-</script>
-
