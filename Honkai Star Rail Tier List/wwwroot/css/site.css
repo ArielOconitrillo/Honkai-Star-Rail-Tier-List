@@ -64,3 +64,78 @@ body {
     overflow: hidden;
     transition: max-height 0.2s ease-out;
 }
+
+/*
+    Tier List
+*/
+
+.tier-list {
+    max-width: 1100px;
+    margin: 40px auto;
+}
+
+.tier-row {
+    display: grid;
+    grid-template-columns: 100px repeat(4, 1fr);
+    margin-bottom: 12px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.tier-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.role-column {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px;
+    background: #1e293b;
+    min-height: 80px;
+    border-left: 1px solid #0f172a;
+}
+
+.character {
+    width: 60px;
+    height: 60px;
+    background: #334155;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+    .character:hover {
+        transform: scale(1.1);
+    }
+
+.tS {
+    background: #ef4444;
+}
+
+.tA {
+    background: #f97316;
+}
+
+.tB {
+    background: #eab308;
+}
+
+.tF {
+    background: #22c55e;
+}
+
+.role-header {
+    display: grid;
+    grid-template-columns: 100px repeat(4, 1fr);
+    margin-bottom: 6px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.role-header div {
+    padding: 8px;
+}
