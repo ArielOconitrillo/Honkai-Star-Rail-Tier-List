@@ -7,4 +7,8 @@
     <RootNamespace>Honkai_Star_Rail_Tier_List</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
+
 </Project>
