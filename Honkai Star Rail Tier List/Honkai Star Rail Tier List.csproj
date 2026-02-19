@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Images\" />
+    <None Include="wwwroot\Images\Firefly_profile.webp" />
   </ItemGroup>
 
 </Project>
