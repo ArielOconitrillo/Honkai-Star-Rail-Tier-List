@@ -1,0 +1,17 @@
+[
+  {
+    "Name": "Firefly",
+    "Image": "Firefly_profile.webp",
+    "Tier": "TS",
+    "Role": "DPS",
+    "Element": "Fire"
+  },
+
+  {
+    "Name": "Sparxie",
+    "Image": "Sparxie_profile.webp",
+    "Tier": "TA",
+    "Role": "Sub-DPS",
+    "Element": "Quantum"
+  }
+]
