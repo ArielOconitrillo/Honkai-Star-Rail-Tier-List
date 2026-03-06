@@ -1,6 +1,7 @@
 using Honkai_Star_Rail_Tier_List.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Text.Json;
 
 namespace Honkai_Star_Rail_Tier_List.Controllers
 {
@@ -15,7 +16,17 @@ namespace Honkai_Star_Rail_Tier_List.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/data/characters.json");
+            var json = System.IO.File.ReadAllText(path);
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+            var characters = JsonSerializer.Deserialize<List<Character>>(json, options) ?? new List<Character>();
+
+            return View(characters);
         }
 
         public IActionResult Privacy()

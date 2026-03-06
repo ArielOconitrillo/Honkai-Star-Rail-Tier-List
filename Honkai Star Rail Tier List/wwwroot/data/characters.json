@@ -8,10 +8,34 @@
   },
 
   {
-    "Name": "Sparxie",
-    "Image": "Sparxie_profile.webp",
+    "Name": "Jade",
+    "Image": "Jade_profile.webp",
     "Tier": "TA",
     "Role": "Sub-DPS",
     "Element": "Quantum"
+  },
+
+  {
+    "Name": "March 7th",
+    "Image": "March_7th_profile.webp",
+    "Tier": "TF",
+    "Role": "Sustain",
+    "Element": "Ice"
+  },
+
+  {
+    "Name": "Sparxie",
+    "Image": "Sparxie_profile.webp",
+    "Tier": "TA",
+    "Role": "DPS",
+    "Element": "Quantum"
+  },
+
+  {
+    "Name": "Tingyun",
+    "Image": "Tingyun_profile.webp",
+    "Tier": "TB",
+    "Role": "Support",
+    "Element": "Lightning"
   }
 ]

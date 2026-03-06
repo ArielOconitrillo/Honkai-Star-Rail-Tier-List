@@ -1,5 +1,9 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    @model List<Honkai_Star_Rail_Tier_List.Models.Character>
+
+    var tiers = new[] { "TS", "TA", "TB", "TF" };
+    var roles = new[] { "DPS", "Sub-DPS", "Support", "Sustain" };
 }
 
 <h1>
@@ -47,46 +51,29 @@
         <div>Sustain</div>
     </div>
 
-    <!-- S -->
-    <div class="tier-row">
-        <div class="tier-label tS">S</div>
-        <div class="role-column">
-            <a asp-controller="Character" asp-action="Details" asp-route-name="Firefly">
-                <div class="character">
-                    <img src="/Images/Firefly_profile.webp">
+    @foreach (var tier in tiers)
+    {
+        <div class="tier-row">
+
+            <div class="tier-label @tier">@tier.Replace("T", "")</div>
+
+            @foreach (var role in roles)
+            {
+                <div class="role-column">
+
+                    @foreach (var character in Model.Where(c => c.Tier == tier && c.Role == role))
+                    {
+                        <a asp-controller="Character" asp-action="Details" asp-route-name="@character.Name">
+                            <div class="character">
+                                <img src="/Images/@character.Image">
+                            </div>
+                        </a>
+                    }
+
                 </div>
-            </a>
+            }
+
         </div>
-        <div class="role-column"></div>
-        <div class="role-column"></div>
-        <div class="role-column"></div>
-    </div>
-
-    <!-- A -->
-    <div class="tier-row">
-        <div class="tier-label tA">A</div>
-        <div class="role-column"></div>
-        <div class="role-column"></div>
-        <div class="role-column"></div>
-        <div class="role-column"></div>
-    </div>
-
-    <!-- B -->
-    <div class="tier-row">
-        <div class="tier-label tB">B</div>
-        <div class="role-column"></div>
-        <div class="role-column"></div>
-        <div class="role-column"></div>
-        <div class="role-column"></div>
-    </div>
-
-    <!-- F -->
-    <div class="tier-row">
-        <div class="tier-label tF">F</div>
-        <div class="role-column"></div>
-        <div class="role-column"></div>
-        <div class="role-column"></div>
-        <div class="role-column"></div>
-    </div>
+    }
 
 </div>
