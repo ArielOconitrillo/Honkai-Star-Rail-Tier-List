@@ -1,11 +1,30 @@
-﻿namespace Honkai_Star_Rail_Tier_List.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Honkai_Star_Rail_Tier_List.Models
 {
     public class Character
     {
+        public int Id { get; set; }
+
+        [Required]
         public string Name { get; set; }
-        public string Image { get; set; }
-        public string Tier { get; set; }
-        public string Role { get; set; }
+
         public string Element { get; set; }
+
+        public string Path { get; set; }
+
+        public string Role { get; set; }
+
+        public int Rarity { get; set; }
+
+        public string TierMOC { get; set; }
+
+        public string TierAS { get; set; }
+
+        public string TierPF { get; set; }
+
+        public string Image { get; set; }
+
+        public string Description { get; set; }
     }
 }

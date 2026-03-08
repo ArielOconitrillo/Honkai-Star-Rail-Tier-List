@@ -2,7 +2,7 @@
     ViewData["Title"] = "Home Page";
     @model List<Honkai_Star_Rail_Tier_List.Models.Character>
 
-    var tiers = new[] { "TS", "TA", "TB", "TF" };
+    var tiers = new[] { "S", "A", "B", "F" };
     var roles = new[] { "DPS", "Sub-DPS", "Support", "Sustain" };
 }
 
@@ -61,7 +61,7 @@
             {
                 <div class="role-column">
 
-                    @foreach (var character in Model.Where(c => c.Tier == tier && c.Role == role))
+                    @foreach (var character in Model.Where(c => c.TierAS == tier && c.Role == role))
                     {
                         <a asp-controller="Character" asp-action="Details" asp-route-name="@character.Name">
                             <div class="character">

@@ -1,5 +1,7 @@
+using Honkai_Star_Rail_Tier_List.Data;
 using Honkai_Star_Rail_Tier_List.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Text.Json;
 
@@ -8,25 +10,41 @@ namespace Honkai_Star_Rail_Tier_List.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
         {
             _logger = logger;
+            _context = context;
+        }
+
+        public IActionResult AddTestCharacter()
+        {
+            var character = new Character
+            {
+                Name = "Firefly",
+                Element = "Fire",
+                Path = "Destruction",
+                Role = "DPS",
+                Rarity = 5,
+                TierMOC = "S",
+                TierAS = "S",
+                TierPF = "S",
+                Image = "Firefly_profile.webp",
+                Description = "A powerful fire DPS character."
+            };
+
+            _context.Characters.Add(character);
+            _context.SaveChanges();
+
+            return Content("Character added!");
         }
 
         public IActionResult Index()
         {
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/data/characters.json");
-            var json = System.IO.File.ReadAllText(path);
+                var characters = _context.Characters.ToList();
 
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            };
-
-            var characters = JsonSerializer.Deserialize<List<Character>>(json, options) ?? new List<Character>();
-
-            return View(characters);
+                return View(characters);
         }
 
         public IActionResult Privacy()
