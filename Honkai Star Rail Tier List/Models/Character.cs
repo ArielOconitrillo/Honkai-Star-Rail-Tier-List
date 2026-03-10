@@ -26,5 +26,7 @@ namespace Honkai_Star_Rail_Tier_List.Models
         public string Image { get; set; }
 
         public string Description { get; set; }
+
+        public List<Skill> Skills { get; set; }
     }
 }

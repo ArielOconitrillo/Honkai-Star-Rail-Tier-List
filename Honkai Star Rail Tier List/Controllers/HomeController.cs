@@ -18,28 +18,6 @@ namespace Honkai_Star_Rail_Tier_List.Controllers
             _context = context;
         }
 
-        public IActionResult AddTestCharacter()
-        {
-            var character = new Character
-            {
-                Name = "Firefly",
-                Element = "Fire",
-                Path = "Destruction",
-                Role = "DPS",
-                Rarity = 5,
-                TierMOC = "S",
-                TierAS = "S",
-                TierPF = "S",
-                Image = "Firefly_profile.webp",
-                Description = "A powerful fire DPS character."
-            };
-
-            _context.Characters.Add(character);
-            _context.SaveChanges();
-
-            return Content("Character added!");
-        }
-
         public IActionResult Index()
         {
                 var characters = _context.Characters.ToList();
