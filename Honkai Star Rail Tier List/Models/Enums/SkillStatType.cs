@@ -6,11 +6,12 @@
         MainDamage,
         AdjacentDamage,
         Healing,
-        EnergyRestore,
+        Energy,
         Shield,
         BreakDamage,
         BuffDuration,
         Speed,
-        DamageReduction
+        DamageReduction,
+        EffectRES
     }
 }

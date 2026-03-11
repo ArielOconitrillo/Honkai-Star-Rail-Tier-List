@@ -14,5 +14,7 @@
         public int MaxLevel {  get; set; }
 
         public Character Character { get; set; }
+
+        public List<SkillLevelValue> LevelValue { get; set; }
     }
 }

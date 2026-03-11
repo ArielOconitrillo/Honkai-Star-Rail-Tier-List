@@ -12,5 +12,6 @@ namespace Honkai_Star_Rail_Tier_List.Data
 
         public DbSet<Character> Characters { get; set; }
         public DbSet<Skill> Skills { get; set; }
+        public DbSet<SkillLevelValue> SkillValues { get; set; }
     }
 }

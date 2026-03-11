@@ -9,3 +9,17 @@
 <img src="/Images/@Model.Image" width="300">
 <p>@Model.Role</p>
 
+@foreach (var skill in Model.Skills)
+{
+    <h3>@skill.Name</h3>
+
+    <p>@skill.Description</p>
+
+    <ul>
+        @foreach (var value in skill.LevelValue.Where(v => v.Level == 1))
+        {
+            <li>@value.StatType: @value.Value</li>
+        }
+    </ul>
+}
+
