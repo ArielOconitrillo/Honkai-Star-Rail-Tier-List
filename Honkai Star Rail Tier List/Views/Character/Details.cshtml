@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Character";
 }
 
@@ -11,15 +10,52 @@
 
 @foreach (var skill in Model.Skills)
 {
-    <h3>@skill.Name</h3>
+    <div class="skill" id="skill_@skill.Id">
 
-    <p>@skill.Description</p>
+        <h3>@skill.Name</h3>
+        <p>@skill.SkillType</p>
 
-    <ul>
-        @foreach (var value in skill.LevelValue.Where(v => v.Level == 1))
+        <p class="skill-description">
+            @Html.Raw(skill.Description)
+        </p>
+
+        @if (skill.MaxLevel > 1)
         {
-            <li>@value.StatType: @value.Value</li>
-        }
-    </ul>
-}
+            <label>
+                Skill Level: <span id="levelDisplay_@skill.Id">1</span>
+            </label>
 
+            <input type="range"
+                   id="slider_@skill.Id"
+                   min="1"
+                   max="@skill.MaxLevel"
+                   value="1">
+
+            <script>
+                const skillValues_@skill.Id =
+                @Html.Raw(Json.Serialize(
+                             skill.LevelValue.Select(v => new
+                             {
+                                 level = v.Level,
+                                 statType = v.StatType.ToString(),
+                                 value = v.Value
+                             })
+                             ));
+            </script>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+
+                    initializeSkillSlider(
+                        "slider_@skill.Id",
+                        "levelDisplay_@skill.Id",
+                        "skill_@skill.Id",
+                        skillValues_@skill.Id
+                                        );
+
+                });
+            </script>
+        }
+
+    </div>
+}

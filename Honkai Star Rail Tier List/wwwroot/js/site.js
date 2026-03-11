@@ -4,7 +4,7 @@
 // Write your JavaScript code.
 
 /*
-* Code taken for W3Schools: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_accordion_symbol
+* Accordian code taken from W3Schools: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_accordion_symbol
 */
 var acc = document.getElementsByClassName("accordion");
 var i;
@@ -19,4 +19,39 @@ for (i = 0; i < acc.length; i++) {
             panel.style.maxHeight = panel.scrollHeight + "px";
         }
     });
+}
+
+function initializeSkillSlider(sliderId, displayId, containerId, values) {
+
+    const slider = document.getElementById(sliderId);
+    const display = document.getElementById(displayId);
+    const container = document.getElementById(containerId);
+
+    if (!slider || !display || !container) return;
+
+    function updateLevel(level) {
+
+        display.textContent = level;
+
+        const stats = values.filter(v => v.level === level);
+
+        stats.forEach(stat => {
+
+            const element = container.querySelector(
+                `[data-stat="${stat.statType}"]`
+            );
+
+            if (element) {
+                element.textContent = stat.value;
+            }
+
+        });
+
+    }
+
+    slider.addEventListener("input", function () {
+        updateLevel(parseInt(this.value));
+    });
+
+    updateLevel(1);
 }

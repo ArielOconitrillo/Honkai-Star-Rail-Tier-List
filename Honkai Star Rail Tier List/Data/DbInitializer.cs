@@ -137,7 +137,7 @@ namespace Honkai_Star_Rail_Tier_List.Data
                 SkillType = "Technique",
                 Name = "Δ Order: Meteoric Incineratoin",
                 Description = "Leaps into the air and moves about freely for 5 seconds, which can ended early by launching a plunging attack. When the duration ends, plunges and immediately attacks all enemies within a set area. At the start of each wave, applies a Fire Weakness to all enemies, lasting for 2 turn(s). Then, deals Fire DMG equal to 200% of SAM's ATK to all enemies.",
-                MaxLevel = 12
+                MaxLevel = 1
             }
             };
 
