@@ -220,6 +220,20 @@ namespace Honkai_Star_Rail_Tier_List.Data
             context.SkillValues.AddRange(skillLevels);
             context.SaveChanges();
 
+            //Adding Fireflys eidolons
+
+            var eidolons = new Eidolon[] {
+                new Eidolon() { CharacterId = firefly.Id, Level = 1, Name = "In Reddened Chrysalis, I Once Rest", Description = "When using the Enhanced Skill, ignores 15% of the target's DEF. The Enhanced Skill does not consume Skill Points."},
+                new Eidolon() { CharacterId = firefly.Id, Level = 2, Name = "From Shattered Sky, I Free Fall", Description = "While in Complete Combustion, using the Enhanced Basic ATK or the Enhanced Skill to defeat an enemy target or to Break their Weakness allows SAM to immediately gain 1 extra turn. This effect can trigger again after 1 turn(s)." },
+                new Eidolon() { CharacterId = firefly.Id, Level = 3, Name = "Amidst Silenced Stars, I Deep Sleep", Description = "Skill Lv. +2, up to a maximum of Lv. 15.\r\nBasic ATK Lv. +1, up to a maximum of Lv. 10." },
+                new Eidolon() { CharacterId = firefly.Id, Level = 4, Name = "Upon Lighted Fyrefly, I Soon Gaze", Description = "While in Complete Combustion, increases SAM's Effect RES by 50%." }, 
+                new Eidolon() { CharacterId = firefly.Id, Level = 5, Name = "From Undreamt Night, I Thence Shine", Description = "Ultimate Lv. +2, up to a maximum of Lv. 15.\r\nTalent Lv. +2, up to a maximum of Lv. 15." },
+                new Eidolon() { CharacterId = firefly.Id, Level = 6, Name ="In Finalized Morrow, I Full Bloom", Description = "While in Complete Combustion, increases SAM's Fire RES PEN by 20%. When using the Enhanced Basic ATK or Enhanced Skill, increases Weakness Break Efficiency by 50%." }
+            };
+
+            context.Eidolons.AddRange(eidolons);
+            context.SaveChanges();
+
         }
     }
 }

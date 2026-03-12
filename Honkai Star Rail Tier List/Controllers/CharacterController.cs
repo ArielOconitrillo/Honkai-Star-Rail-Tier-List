@@ -21,6 +21,7 @@ namespace Honkai_Star_Rail_Tier_List.Controllers
             var character = _context.Characters
                 .Include(c => c.Skills)
                     .ThenInclude(s => s.LevelValue)
+                .Include(c => c.Eidolons)
                 .FirstOrDefault(c => c.Name == name);
 
             if (character == null)

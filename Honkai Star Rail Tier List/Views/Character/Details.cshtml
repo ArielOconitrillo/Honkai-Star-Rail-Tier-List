@@ -15,47 +15,47 @@
         <h3>@skill.Name</h3>
         <p>@skill.SkillType</p>
 
+        @*@ Display the discription and add a slider if needed to view the skill at differnt levels *@
         <p class="skill-description">
             @Html.Raw(skill.Description)
         </p>
 
         @if (skill.MaxLevel > 1)
         {
+            var startLevel = Math.Max(1, skill.MaxLevel - 2);
+
             <label>
-                Skill Level: <span id="levelDisplay_@skill.Id">1</span>
+                Skill Level: <span id="levelDisplay_@skill.Id">@startLevel</span>
             </label>
 
+
+
             <input type="range"
+                   class="skill-slider"
                    id="slider_@skill.Id"
+                   data-display="levelDisplay_@skill.Id"
+                   data-container="skill_@skill.Id"
+                   data-values='@Html.Raw(Json.Serialize(
+                 skill.LevelValue.Select(v => new
+                 {
+                     level = v.Level,
+                     statType = v.StatType.ToString(),
+                     value = v.Value
+                 })
+                 ))'
                    min="1"
                    max="@skill.MaxLevel"
-                   value="1">
-
-            <script>
-                const skillValues_@skill.Id =
-                @Html.Raw(Json.Serialize(
-                             skill.LevelValue.Select(v => new
-                             {
-                                 level = v.Level,
-                                 statType = v.StatType.ToString(),
-                                 value = v.Value
-                             })
-                             ));
-            </script>
-
-            <script>
-                document.addEventListener("DOMContentLoaded", function () {
-
-                    initializeSkillSlider(
-                        "slider_@skill.Id",
-                        "levelDisplay_@skill.Id",
-                        "skill_@skill.Id",
-                        skillValues_@skill.Id
-                                        );
-
-                });
-            </script>
+                   value="@startLevel">
         }
 
+    </div>
+}
+
+@foreach (var eidolon in Model.Eidolons.OrderBy(e => e.Level))
+{
+    <div class="eidolon" id="eidolon_@eidolon.Id">
+        <h4>E@(eidolon.Level)</h4>
+        <p>@eidolon.Name</p>
+        <p>@eidolon.Description</p>
     </div>
 }

@@ -21,37 +21,44 @@ for (i = 0; i < acc.length; i++) {
     });
 }
 
-function initializeSkillSlider(sliderId, displayId, containerId, values) {
+document.addEventListener("DOMContentLoaded", function () {
 
-    const slider = document.getElementById(sliderId);
-    const display = document.getElementById(displayId);
-    const container = document.getElementById(containerId);
+    const sliders = document.querySelectorAll(".skill-slider");
 
-    if (!slider || !display || !container) return;
+    sliders.forEach(slider => {
 
-    function updateLevel(level) {
+        const display = document.getElementById(slider.dataset.display);
+        const container = document.getElementById(slider.dataset.container);
+        const values = JSON.parse(slider.dataset.values);
 
-        display.textContent = level;
+        if (!display || !container) return;
 
-        const stats = values.filter(v => v.level === level);
+        function updateLevel(level) {
 
-        stats.forEach(stat => {
+            display.textContent = level;
 
-            const element = container.querySelector(
-                `[data-stat="${stat.statType}"]`
-            );
+            const stats = values.filter(v => v.level === level);
 
-            if (element) {
-                element.textContent = stat.value;
-            }
+            stats.forEach(stat => {
 
+                const element = container.querySelector(
+                    `[data-stat="${stat.statType}"]`
+                );
+
+                if (element) {
+                    element.textContent = stat.value;
+                }
+
+            });
+
+        }
+
+        slider.addEventListener("input", function () {
+            updateLevel(parseInt(this.value));
         });
 
-    }
+        updateLevel(parseInt(slider.value));
 
-    slider.addEventListener("input", function () {
-        updateLevel(parseInt(this.value));
     });
 
-    updateLevel(1);
-}
+});
