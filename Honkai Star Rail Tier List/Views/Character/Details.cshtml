@@ -75,3 +75,25 @@
         <ul>@weakness.Description</ul>
     </div>
 }
+
+<h6 style="color:deeppink">Builds</h6>
+@foreach (var build in Model.Builds)
+{
+    <p>@build.Name</p>
+    <p>@build.Description</p>
+    @foreach (var relicSet in build.RelicSets)
+    {
+        <p>@relicSet.Rank</p>
+        if(relicSet.RelicSet1Id == relicSet.RelicSet2Id)
+            {
+                <img src="~/Images/Relics/@relicSet.RelicSet1.Image" width="100" />
+                <p>4pc @relicSet.RelicSet1.FourPieceEffect</p>
+            }
+        else
+            {
+                <p>2pc @relicSet.RelicSet1.Name + 2pc @relicSet.RelicSet2.Name</p>
+                <ul><img src="~/Images/Relics/@relicSet.RelicSet1.Image" width="25"/> @relicSet.RelicSet1.Name: @relicSet.RelicSet1.TwoPieceEffect</ul>
+                <ul><img src="~/Images/Relics/@relicSet.RelicSet2.Image" width="40" /> @relicSet.RelicSet2.Name: @relicSet.RelicSet2.TwoPieceEffect</ul>
+            }
+    }
+}

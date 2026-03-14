@@ -182,8 +182,8 @@ namespace Honkai_Star_Rail_Tier_List.Data
             addSkillValues(skillLevels, damageScaling, skill.Id, SkillStatType.Damage);
 
             // Skill
-            double[] energyScaling = new double[] { 50, 51, 52, 53, 54, 54, 56.25, 57.5, 58.75, 60, 61, 62};
-            damageScaling = new double[] { 100, 110, 120, 130, 140, 150, 162.5, 175, 187.5, 200, 210, 220};
+            double[] energyScaling = new double[] { 50, 51, 52, 53, 54, 54, 56.25, 57.5, 58.75, 60, 61, 62 };
+            damageScaling = new double[] { 100, 110, 120, 130, 140, 150, 162.5, 175, 187.5, 200, 210, 220 };
 
             skill = context.Skills.First(s => s.Name == "Order: Aerial Bombardment");
 
@@ -226,12 +226,14 @@ namespace Honkai_Star_Rail_Tier_List.Data
                 new Eidolon() { CharacterId = firefly.Id, Level = 1, Name = "In Reddened Chrysalis, I Once Rest", Description = "When using the Enhanced Skill, ignores 15% of the target's DEF. The Enhanced Skill does not consume Skill Points."},
                 new Eidolon() { CharacterId = firefly.Id, Level = 2, Name = "From Shattered Sky, I Free Fall", Description = "While in Complete Combustion, using the Enhanced Basic ATK or the Enhanced Skill to defeat an enemy target or to Break their Weakness allows SAM to immediately gain 1 extra turn. This effect can trigger again after 1 turn(s)." },
                 new Eidolon() { CharacterId = firefly.Id, Level = 3, Name = "Amidst Silenced Stars, I Deep Sleep", Description = "Skill Lv. +2, up to a maximum of Lv. 15.\r\nBasic ATK Lv. +1, up to a maximum of Lv. 10." },
-                new Eidolon() { CharacterId = firefly.Id, Level = 4, Name = "Upon Lighted Fyrefly, I Soon Gaze", Description = "While in Complete Combustion, increases SAM's Effect RES by 50%." }, 
+                new Eidolon() { CharacterId = firefly.Id, Level = 4, Name = "Upon Lighted Fyrefly, I Soon Gaze", Description = "While in Complete Combustion, increases SAM's Effect RES by 50%." },
                 new Eidolon() { CharacterId = firefly.Id, Level = 5, Name = "From Undreamt Night, I Thence Shine", Description = "Ultimate Lv. +2, up to a maximum of Lv. 15.\r\nTalent Lv. +2, up to a maximum of Lv. 15." },
                 new Eidolon() { CharacterId = firefly.Id, Level = 6, Name ="In Finalized Morrow, I Full Bloom", Description = "While in Complete Combustion, increases SAM's Fire RES PEN by 20%. When using the Enhanced Basic ATK or Enhanced Skill, increases Weakness Break Efficiency by 50%." }
             };
 
             context.Eidolons.AddRange(eidolons);
+
+            // Adding FireFlys strengths
 
             var strengths = new Strength[]
             {
@@ -243,6 +245,8 @@ namespace Honkai_Star_Rail_Tier_List.Data
 
             context.Strengths.AddRange(strengths);
 
+            // Adding FireFlys weaknesses
+
             var weaknesses = new Weakness[] {
                 new Weakness() {Character = firefly, Description = "Requires a lot of speed to build properly" },
                 new Weakness() {Character = firefly, Description = "High speed means she uses a lot of skill points if she doesn't have at least E1" },
@@ -251,6 +255,43 @@ namespace Honkai_Star_Rail_Tier_List.Data
             };
 
             context.Weaknesss.AddRange(weaknesses);
+
+            // Adding Relics
+
+            var relics = new RelicSet[] {
+                new RelicSet() {Name = "Iron Cavalry Against the Scourge", TwoPieceEffect = "Increases Break Effect by 16%.", FourPieceEffect = "If the wearer's Break Effect is 150% or higher, the Break DMG dealt to the enemy target ignores 10% of their DEF. If the wearer's Break Effect is 250% or higher, the Super Break DMG dealt to the enemy target additionally ignores 15% of their DEF.", Image = "Iron_Cavalry_Against_the_Scourge.webp" },
+                new RelicSet() {Name = "Thief of Shooting Meteor", TwoPieceEffect = "Increases Break Effect by 16%.", FourPieceEffect = "Increases the wearer's Break Effect by 16%. After the wearer inflicts Weakness Break on an enemy, regenerates 3 Energy.", Image = "Thief_of_Shooting_Meteor.webp" },
+                new RelicSet() {Name = "Watchmaker, Master of Dream Machinations", TwoPieceEffect = "Increases Break Effect by 16%.", FourPieceEffect = "When the wearer uses their Ultimate on an ally, all allies' Break Effect increases by 30% for 2 turn(s). This effect cannot be stacked.", Image = "Watchmaker_Master_of_Dream_Machinations.webp"}
+            };
+
+            context.RelicSets.AddRange(relics);
+
+            // Adding Fireflys builds
+
+            var builds = new Build[] {
+                new Build() {Character = firefly, Name = "Firefly Standard Build", Description = "Fireflys standard build revolves around getting high speed and a lot of break damage to break enemies quickly and defeat them before they can recover" },
+                new Build() {Character = firefly, Name = "Firefly Alternative Build", Description = "Don't worry as much about speed, but instead gather as much break damage and attack as you can to beat the enemy in just a few hits" }
+            };
+
+            context.Builds.AddRange(builds);
+            context.SaveChanges();
+
+            //Add Fireflys buildRelicSets
+
+            var iron = context.RelicSets.First(r => r.Name == "Iron Cavalry Against the Scourge");
+            var tief = context.RelicSets.First(r => r.Name == "Thief of Shooting Meteor");
+            var watchmaker = context.RelicSets.First(r => r.Name == "Watchmaker, Master of Dream Machinations");
+
+            var build1 = context.Builds.First(b => b.Name == "Firefly Standard Build");
+            var build2 = context.Builds.First(b => b.Name == "Firefly Alternative Build");
+
+            var buildRelicSets = new BuildRelicSet[] {
+                new BuildRelicSet() {Build = build1, Rank = 1, RelicSet1 = iron, RelicSet2 = iron, Description = "Easily Fireflys best build, as it provides plenty of break damage and defense shred"},
+                new BuildRelicSet() {Build = build1, Rank = 2, RelicSet1 = iron, RelicSet2 = watchmaker, Description = "An alterantive build that trades defense shred for more break damage"},
+                new BuildRelicSet() { Build = build2, Rank = 1, RelicSet1 = tief, RelicSet2 = tief, Description = "Gives more Break damage and Energy" }
+            };
+
+            context.BuildRelicSets.AddRange(buildRelicSets);
             context.SaveChanges();
 
         }
