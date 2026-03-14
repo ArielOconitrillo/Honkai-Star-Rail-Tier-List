@@ -59,3 +59,19 @@
         <p>@eidolon.Description</p>
     </div>
 }
+
+<h5 style="color:greenyellow">Strengths</h5>
+@foreach (var strength in Model.Strengths)
+{
+    <div class="strength" id="strength_@strength.Id">
+        <ul>@strength.Description</ul>
+    </div>
+}
+
+<h5 style="color:orangered">Weaknesses</h5>
+@foreach (var weakness in Model.Weaknesss)
+{
+    <div class="strength" id="strength_@weakness.Id">
+        <ul>@weakness.Description</ul>
+    </div>
+}

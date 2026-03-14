@@ -22,6 +22,14 @@ namespace Honkai_Star_Rail_Tier_List.Controllers
                 .Include(c => c.Skills)
                     .ThenInclude(s => s.LevelValue)
                 .Include(c => c.Eidolons)
+                .Include(c => c.Strengths)
+                .Include(c => c.Weaknesss)
+                .Include(c => c.Builds)
+                    .ThenInclude(b => b.RelicSets)
+                        .ThenInclude(rs => rs.RelicSet1)
+                .Include(c => c.Builds)
+                    .ThenInclude(b => b.RelicSets)
+                        .ThenInclude(rs => rs.RelicSet2)
                 .FirstOrDefault(c => c.Name == name);
 
             if (character == null)

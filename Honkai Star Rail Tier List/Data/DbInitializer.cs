@@ -232,6 +232,25 @@ namespace Honkai_Star_Rail_Tier_List.Data
             };
 
             context.Eidolons.AddRange(eidolons);
+
+            var strengths = new Strength[]
+            {
+                new Strength() {Character = firefly, Description = "Can help keep herself alive with self healing"},
+                new Strength() {Character = firefly, Description = "Has plenty of viable team members, including some easily accesable ones"},
+                new Strength() {Character = firefly, Description = "Her E1 helps a lot with skill point management, as her enhanced skill no longer consumes them"},
+                new Strength() {Character = firefly, Description = "Best girl"}
+            };
+
+            context.Strengths.AddRange(strengths);
+
+            var weaknesses = new Weakness[] {
+                new Weakness() {Character = firefly, Description = "Requires a lot of speed to build properly" },
+                new Weakness() {Character = firefly, Description = "High speed means she uses a lot of skill points if she doesn't have at least E1" },
+                new Weakness() {Character = firefly, Description = "Best support units are all currently limited 5*" },
+                new Weakness() {Character = firefly, Description = "Enemies with high toughness take much longer to beat"}
+            };
+
+            context.Weaknesss.AddRange(weaknesses);
             context.SaveChanges();
 
         }

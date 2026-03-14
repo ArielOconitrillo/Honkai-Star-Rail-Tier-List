@@ -30,5 +30,11 @@ namespace Honkai_Star_Rail_Tier_List.Models
         public List<Skill> Skills { get; set; }
 
         public List<Eidolon> Eidolons { get; set; }
+
+        public List<Strength> Strengths { get; set; }
+
+        public List<Weakness> Weaknesss { get; set; }
+
+        public List<Build> Builds { get; set; }
     }
 }
