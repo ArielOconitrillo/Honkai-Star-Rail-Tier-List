@@ -2,6 +2,7 @@
 using Honkai_Star_Rail_Tier_List.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Honkai_Star_Rail_Tier_List.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260314220950_CreateLightConesTable")]
+    partial class CreateLightConesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.23");
@@ -38,34 +41,6 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                     b.HasIndex("CharacterId");
 
                     b.ToTable("Builds");
-                });
-
-            modelBuilder.Entity("Honkai_Star_Rail_Tier_List.Models.BuildLightCone", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("BuildId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("LightConeId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Rank")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BuildId");
-
-                    b.HasIndex("LightConeId");
-
-                    b.ToTable("BuildLightCones");
                 });
 
             modelBuilder.Entity("Honkai_Star_Rail_Tier_List.Models.BuildRelicSet", b =>
@@ -230,13 +205,6 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Path")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Rarity")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
 
                     b.ToTable("LightCones");
@@ -376,25 +344,6 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                     b.Navigation("Character");
                 });
 
-            modelBuilder.Entity("Honkai_Star_Rail_Tier_List.Models.BuildLightCone", b =>
-                {
-                    b.HasOne("Honkai_Star_Rail_Tier_List.Models.Build", "Build")
-                        .WithMany("LightCones")
-                        .HasForeignKey("BuildId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Honkai_Star_Rail_Tier_List.Models.LightCone", "LightCone")
-                        .WithMany()
-                        .HasForeignKey("LightConeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Build");
-
-                    b.Navigation("LightCone");
-                });
-
             modelBuilder.Entity("Honkai_Star_Rail_Tier_List.Models.BuildRelicSet", b =>
                 {
                     b.HasOne("Honkai_Star_Rail_Tier_List.Models.Build", "Build")
@@ -492,8 +441,6 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                 {
                     b.Navigation("BuildStats")
                         .IsRequired();
-
-                    b.Navigation("LightCones");
 
                     b.Navigation("RelicSets");
                 });

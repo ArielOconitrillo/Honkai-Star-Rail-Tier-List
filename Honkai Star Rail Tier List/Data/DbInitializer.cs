@@ -276,7 +276,7 @@ namespace Honkai_Star_Rail_Tier_List.Data
             context.Builds.AddRange(builds);
             context.SaveChanges();
 
-            //Add Fireflys buildRelicSets
+            //Adding Fireflys buildRelicSets
 
             var iron = context.RelicSets.First(r => r.Name == "Iron Cavalry Against the Scourge");
             var tief = context.RelicSets.First(r => r.Name == "Thief of Shooting Meteor");
@@ -292,8 +292,49 @@ namespace Honkai_Star_Rail_Tier_List.Data
             };
 
             context.BuildRelicSets.AddRange(buildRelicSets);
+            // Adding Fireflys Build stats
+
+            var stats = new BuildStats[]
+            {
+                new BuildStats() { Build = build1, Body = "Atk%", Feet = "Speed", SubstatPriority = "Speed > Break Effect% >> ATK%"},
+                new BuildStats() { Build = build2, Body = "Break Effect%", Feet = "Atk%", SubstatPriority = "Break Effect% >= ATK% >> Speed" }
+            };
+
+            context.BuildStats.AddRange(stats);
             context.SaveChanges();
 
+            //Adding Light Cones
+
+            var lightCones = new LightCone[]
+            {
+                new LightCone() { Name = "Whereabouts Should Dreams Rest", Rarity = 5, Path = "Destruction", Description = "Increases the wearer's Break Effect by 60/70/80/90/100%. When the wearer deals Break DMG to an enemy target, inflicts Routed on the enemy, lasting for 2 turn(s). Targets afflicted with Routed receive 24/28/32/36/40% increased Break DMG from the wearer, and their SPD is lowered by 20%. Effects of the similar type cannot be stacked.", Obtain = "Limited Warp", Image = "Whereabouts_Should_Dreams_Rest.webp" },
+                new LightCone() { Name = "Thus Burns the Dawn", Rarity = 5, Path = "Destruction", Description = "The wearer's base SPD increases by 12/14/16/18/20. When the wearer deals DMG, ignores 18/22/27/31/36% of the target's DEF. After the wearer uses Ultimate, obtains \"Blazing Sun,\" which is removed at the start of their turn. While \"Blazing Sun\" is in possession, increases the wearer's DMG dealt by 60/78/96/114/132%.", Obtain = "Limited Warp", Image = "Thus_Burns_the_Dawn.webp"},
+                new LightCone() { Name = "On the Fall of an Aeon", Rarity = 5, Path = "Destruction", Description = "Whenever the wearer attacks, their ATK is increased by 8/10/12/14/16% in this battle, up to 4 times. When the wearer inflicts Weakness Break on enemies, the wearer's DMG increases by 12/15/18/21/24% for 2 turn(s).", Obtain = "Herta's Shop", Image = "On_the_Fall_of_an_Aeon.webp"},
+                new LightCone() { Name = "Indelible Promise", Rarity = 4, Path = "Destruction", Description = "Increases the wearer's Break Effect by 28/35/42/49/56%. When the wearer uses their Ultimate, increases CRIT Rate by 15/18.75/22.5/26.25/30%, lasting for 2 turns.", Obtain = "Stellar Warp or Event Warp", Image = "Light_Cone_Indelible_Promise.webp"}
+            };
+
+            context.LightCones.AddRange(lightCones);
+            context.SaveChanges();
+
+            // Adding build light cones
+            LightCone lightCone = context.LightCones.First(lc => lc.Name == "Whereabouts Should Dreams Rest");
+            LightCone lightCone2 = context.LightCones.First(lc => lc.Name == "Thus Burns the Dawn");
+            LightCone lightCone3 = context.LightCones.First(lc => lc.Name == "On the Fall of an Aeon");
+            LightCone lightCone4 = context.LightCones.First(lc => lc.Name == "Indelible Promise");
+
+            var buildLightCones = new BuildLightCone[] {
+                new BuildLightCone() { Build = build1, Rank = 1, LightCone = lightCone, Description = "Firefly's signature light cone is her best performing Light Cone, as it gives her a lot of break damage and applies a debuff to enemies causing them to take more break damage and have lower speed, allowing Firefly to attack even more times before her enemies can recover. "},
+                new BuildLightCone() { Build = build1, Rank = 2, LightCone = lightCone2, Description = "A very close second. Phainon's signature light cone grants Firefly a nice speed boost and high defense ignore." },
+                new BuildLightCone() { Build = build1, Rank = 3, LightCone = lightCone3, Description = "An easily accessible light cone that provides Firefly a good boost to her attack and damage." },
+                new BuildLightCone() { Build = build1, Rank = 4, LightCone = lightCone4, Description = "A close alternative to Fall of an Aeon, giving Firefly a nice boost to her break effect. Unfortunately the crit rate boost is useless as Break damage can not crit." },
+                new BuildLightCone() { Build = build2, Rank = 1, LightCone = lightCone, Description = "Still her best option, this light cone gives Firefly an incredible amount of break damage." },
+                new BuildLightCone() { Build = build2, Rank = 2, LightCone = lightCone4, Description = "Gives Firefly a big boost to her break damage." },
+                new BuildLightCone() { Build = build2, Rank = 3, LightCone = lightCone3, Description = "A good boost to Firefly's attack and damage." },
+                new BuildLightCone() { Build = build2, Rank = 4, LightCone = lightCone2, Description = "Doesn't offer any break damage or attack boosts, but still give Firefly a great boost to her damage."},
+            };
+
+            context.BuildLightCones.AddRange(buildLightCones);
+            context.SaveChanges();
         }
     }
 }

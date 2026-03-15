@@ -30,6 +30,11 @@ namespace Honkai_Star_Rail_Tier_List.Controllers
                 .Include(c => c.Builds)
                     .ThenInclude(b => b.RelicSets)
                         .ThenInclude(rs => rs.RelicSet2)
+                .Include(c => c.Builds)
+                    .ThenInclude (b => b.BuildStats)
+                .Include(c => c.Builds)
+                    .ThenInclude(l => l.LightCones)
+                        .ThenInclude(lc => lc.LightCone)
                 .FirstOrDefault(c => c.Name == name);
 
             if (character == null)

@@ -96,4 +96,20 @@
                 <ul><img src="~/Images/Relics/@relicSet.RelicSet2.Image" width="40" /> @relicSet.RelicSet2.Name: @relicSet.RelicSet2.TwoPieceEffect</ul>
             }
     }
+    <p>Recommended Stats:</p>
+    <ul>Body: @build.BuildStats.Body</ul>
+    <ul>Feet: @build.BuildStats.Feet</ul>
+    <ul>Substats: @build.BuildStats.SubstatPriority</ul>
+
+    <h7 style="color:lightpink">Light Cones</h7>
+    foreach( var lightCone in build.LightCones.OrderBy(lc => lc.Rank))
+    {
+        <ol>
+            <div>
+                <img src="Images/Light Cones/Whereabouts_Should_Dreams_Rest.webp" width="100" />
+                <p>@lightCone.LightCone.Name</p>
+            </div>
+            <p>@lightCone.Description</p>
+        </ol>
+    }
 }

@@ -14,6 +14,8 @@
 
         public List<BuildRelicSet> RelicSets { get; set; }
 
-        //public List<BuildLightCone> LightCones { get; set; }
+        public BuildStats BuildStats { get; set; }
+
+        public List<BuildLightCone> LightCones { get; set; }
     }
 }
