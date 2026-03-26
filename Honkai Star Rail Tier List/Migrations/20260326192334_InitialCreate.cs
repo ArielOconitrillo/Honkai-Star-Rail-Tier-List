@@ -33,6 +33,24 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "LightCones",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Rarity = table.Column<int>(type: "INTEGER", nullable: false),
+                    Path = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    Obtain = table.Column<string>(type: "TEXT", nullable: false),
+                    Image = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LightCones", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RelicSets",
                 columns: table => new
                 {
@@ -46,6 +64,20 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_RelicSets", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Teams",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Teams", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -155,6 +187,90 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CharacterTeams",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    CharacterId = table.Column<int>(type: "INTEGER", nullable: false),
+                    TeamId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Type = table.Column<string>(type: "TEXT", nullable: false),
+                    Rank = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CharacterTeams", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CharacterTeams_Characters_CharacterId",
+                        column: x => x.CharacterId,
+                        principalTable: "Characters",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CharacterTeams_Teams_TeamId",
+                        column: x => x.TeamId,
+                        principalTable: "Teams",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TeamMembers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    TeamId = table.Column<int>(type: "INTEGER", nullable: false),
+                    CharacterId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Order = table.Column<int>(type: "INTEGER", nullable: false),
+                    Role = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TeamMembers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TeamMembers_Characters_CharacterId",
+                        column: x => x.CharacterId,
+                        principalTable: "Characters",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TeamMembers_Teams_TeamId",
+                        column: x => x.TeamId,
+                        principalTable: "Teams",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BuildLightCones",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    BuildId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Rank = table.Column<int>(type: "INTEGER", nullable: false),
+                    LightConeId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BuildLightCones", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BuildLightCones_Builds_BuildId",
+                        column: x => x.BuildId,
+                        principalTable: "Builds",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BuildLightCones_LightCones_LightConeId",
+                        column: x => x.LightConeId,
+                        principalTable: "LightCones",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "BuildRelicSets",
                 columns: table => new
                 {
@@ -190,6 +306,28 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BuildStats",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    BuildId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Body = table.Column<string>(type: "TEXT", nullable: false),
+                    Feet = table.Column<string>(type: "TEXT", nullable: false),
+                    SubstatPriority = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BuildStats", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BuildStats_Builds_BuildId",
+                        column: x => x.BuildId,
+                        principalTable: "Builds",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SkillValues",
                 columns: table => new
                 {
@@ -212,6 +350,16 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_BuildLightCones_BuildId",
+                table: "BuildLightCones",
+                column: "BuildId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BuildLightCones_LightConeId",
+                table: "BuildLightCones",
+                column: "LightConeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_BuildRelicSets_BuildId",
                 table: "BuildRelicSets",
                 column: "BuildId");
@@ -230,6 +378,22 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                 name: "IX_Builds_CharacterId",
                 table: "Builds",
                 column: "CharacterId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BuildStats_BuildId",
+                table: "BuildStats",
+                column: "BuildId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CharacterTeams_CharacterId",
+                table: "CharacterTeams",
+                column: "CharacterId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CharacterTeams_TeamId",
+                table: "CharacterTeams",
+                column: "TeamId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Eidolons_CharacterId_Level",
@@ -253,6 +417,16 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                 column: "CharacterID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TeamMembers_CharacterId",
+                table: "TeamMembers",
+                column: "CharacterId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TeamMembers_TeamId",
+                table: "TeamMembers",
+                column: "TeamId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Weaknesss_CharacterID",
                 table: "Weaknesss",
                 column: "CharacterID");
@@ -262,7 +436,16 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "BuildLightCones");
+
+            migrationBuilder.DropTable(
                 name: "BuildRelicSets");
+
+            migrationBuilder.DropTable(
+                name: "BuildStats");
+
+            migrationBuilder.DropTable(
+                name: "CharacterTeams");
 
             migrationBuilder.DropTable(
                 name: "Eidolons");
@@ -274,16 +457,25 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                 name: "Strengths");
 
             migrationBuilder.DropTable(
+                name: "TeamMembers");
+
+            migrationBuilder.DropTable(
                 name: "Weaknesss");
 
             migrationBuilder.DropTable(
-                name: "Builds");
+                name: "LightCones");
 
             migrationBuilder.DropTable(
                 name: "RelicSets");
 
             migrationBuilder.DropTable(
+                name: "Builds");
+
+            migrationBuilder.DropTable(
                 name: "Skills");
+
+            migrationBuilder.DropTable(
+                name: "Teams");
 
             migrationBuilder.DropTable(
                 name: "Characters");

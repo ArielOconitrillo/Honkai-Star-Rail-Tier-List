@@ -180,6 +180,34 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                     b.ToTable("Characters");
                 });
 
+            modelBuilder.Entity("Honkai_Star_Rail_Tier_List.Models.CharacterTeam", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CharacterId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Rank")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TeamId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CharacterId");
+
+                    b.HasIndex("TeamId");
+
+                    b.ToTable("CharacterTeams");
+                });
+
             modelBuilder.Entity("Honkai_Star_Rail_Tier_List.Models.Eidolon", b =>
                 {
                     b.Property<int>("Id")
@@ -345,6 +373,53 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                     b.ToTable("Strengths");
                 });
 
+            modelBuilder.Entity("Honkai_Star_Rail_Tier_List.Models.Team", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Teams");
+                });
+
+            modelBuilder.Entity("Honkai_Star_Rail_Tier_List.Models.TeamMember", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CharacterId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("TeamId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CharacterId");
+
+                    b.HasIndex("TeamId");
+
+                    b.ToTable("TeamMembers");
+                });
+
             modelBuilder.Entity("Honkai_Star_Rail_Tier_List.Models.Weakness", b =>
                 {
                     b.Property<int>("Id")
@@ -433,6 +508,25 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                     b.Navigation("Build");
                 });
 
+            modelBuilder.Entity("Honkai_Star_Rail_Tier_List.Models.CharacterTeam", b =>
+                {
+                    b.HasOne("Honkai_Star_Rail_Tier_List.Models.Character", "Character")
+                        .WithMany("CharacterTeams")
+                        .HasForeignKey("CharacterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Honkai_Star_Rail_Tier_List.Models.Team", "Team")
+                        .WithMany()
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Character");
+
+                    b.Navigation("Team");
+                });
+
             modelBuilder.Entity("Honkai_Star_Rail_Tier_List.Models.Eidolon", b =>
                 {
                     b.HasOne("Honkai_Star_Rail_Tier_List.Models.Character", "Character")
@@ -477,6 +571,25 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                     b.Navigation("Character");
                 });
 
+            modelBuilder.Entity("Honkai_Star_Rail_Tier_List.Models.TeamMember", b =>
+                {
+                    b.HasOne("Honkai_Star_Rail_Tier_List.Models.Character", "Character")
+                        .WithMany()
+                        .HasForeignKey("CharacterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Honkai_Star_Rail_Tier_List.Models.Team", "Team")
+                        .WithMany("TeamMembers")
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Character");
+
+                    b.Navigation("Team");
+                });
+
             modelBuilder.Entity("Honkai_Star_Rail_Tier_List.Models.Weakness", b =>
                 {
                     b.HasOne("Honkai_Star_Rail_Tier_List.Models.Character", "Character")
@@ -502,6 +615,8 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                 {
                     b.Navigation("Builds");
 
+                    b.Navigation("CharacterTeams");
+
                     b.Navigation("Eidolons");
 
                     b.Navigation("Skills");
@@ -514,6 +629,11 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
             modelBuilder.Entity("Honkai_Star_Rail_Tier_List.Models.Skill", b =>
                 {
                     b.Navigation("LevelValue");
+                });
+
+            modelBuilder.Entity("Honkai_Star_Rail_Tier_List.Models.Team", b =>
+                {
+                    b.Navigation("TeamMembers");
                 });
 #pragma warning restore 612, 618
         }

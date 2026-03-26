@@ -68,6 +68,45 @@ namespace Honkai_Star_Rail_Tier_List.Data
                     TierPF = "A",
                     Image = "The_Dahlia_profile.webp",
                     Description = "An crucial member of the break team."
+                },
+
+                new Character {
+                    Name = "Harmony Trailblazer",
+                    Element = "Imaginary",
+                    Path = "Harmony",
+                    Role = "Support",
+                    Rarity = 5,
+                    TierMOC = "A",
+                    TierAS = "A",
+                    TierPF = "S",
+                    Image = "Harmony_Trailblazer.webp",
+                    Description = "A great Super Break damage enabler"
+                },
+
+                new Character {
+                    Name = "Ruan Mei",
+                    Element = "Ice",
+                    Path = "Harmony",
+                    Role = "Support",
+                    Rarity = 5,
+                    TierMOC = "A",
+                    TierAS = "A",
+                    TierPF = "B",
+                    Image = "Ruan_Mei.webp",
+                    Description = "A fantastic damage buffer"
+                },
+
+                new Character {
+                    Name = "Gallagher",
+                    Element = "Fire",
+                    Path = "Abundance",
+                    Role = "Sustain",
+                    Rarity = 4,
+                    TierMOC = "F",
+                    TierAS = "F",
+                    TierPF = "F",
+                    Image = "Gallagher_profile.webp",
+                    Description = "A good easily obatainable sustainer"
                 }
             };
 
@@ -334,6 +373,51 @@ namespace Honkai_Star_Rail_Tier_List.Data
             };
 
             context.BuildLightCones.AddRange(buildLightCones);
+
+            //Adding Firefly's two teams
+
+            var teams = new Team[] {
+                new Team() { Name = "Premium Break Team", Description = "The best current break team" },
+                new Team() { Name = "Alternate Break Team", Description = "Firefly's secondary Teammates"}
+            };
+
+            context.Teams.AddRange(teams);
+            context.SaveChanges();
+
+            // Adding team members for Firefly's two teams
+
+            var team = context.Teams.First(t => t.Name == "Premium Break Team");
+            var team2 = context.Teams.First(t => t.Name == "Alternate Break Team");
+
+            var lingsha = context.Characters.First(c => c.Name == "Lingsha");
+            var dahlia = context.Characters.First(c => c.Name == "The Dahlia");
+            var fugue = context.Characters.First(c => c.Name == "Fugue");
+            var ruanMei = context.Characters.First(c => c.Name == "Ruan Mei");
+            var trailblazer = context.Characters.First(c => c.Name == "Harmony Trailblazer");
+            var gallagher = context.Characters.First(c => c.Name == "Gallagher");
+
+            var teamMembers = new TeamMember[] { 
+                new TeamMember() { Team = team, Character = firefly, Order = 1, Role = TeamRole.DPS },
+                new TeamMember() { Team = team, Character = dahlia, Order = 2, Role = TeamRole.SubDPS },
+                new TeamMember() { Team = team, Character = fugue, Order = 3, Role = TeamRole.Support },
+                new TeamMember() { Team = team, Character = lingsha, Order = 4, Role = TeamRole.Sustain },
+                new TeamMember() { Team = team2, Character = firefly, Order = 1, Role = TeamRole.DPS },
+                new TeamMember() { Team = team2, Character = ruanMei, Order = 2, Role = TeamRole.Support },
+                new TeamMember() { Team = team2, Character = trailblazer, Order = 3, Role = TeamRole.Support },
+                new TeamMember() { Team = team2, Character = gallagher, Order = 4, Role = TeamRole.Sustain },
+            };
+
+            context.AddRange(teamMembers);
+            context.SaveChanges();
+
+            //Adding Firefly's teams
+
+            var characterTeams = new CharacterTeam[] {
+                new CharacterTeam() { Character = firefly, Team = team, Type = "Premium", Rank = 1},
+                new CharacterTeam() { Character = firefly, Team = team2, Type = "Alternate", Rank = 2}
+            };
+
+            context.AddRange(characterTeams);
             context.SaveChanges();
         }
     }

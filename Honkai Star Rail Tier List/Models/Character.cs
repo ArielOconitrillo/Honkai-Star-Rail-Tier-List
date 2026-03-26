@@ -36,5 +36,7 @@ namespace Honkai_Star_Rail_Tier_List.Models
         public List<Weakness> Weaknesss { get; set; }
 
         public List<Build> Builds { get; set; }
+        
+        public List<CharacterTeam> CharacterTeams { get; set; }
     }
 }

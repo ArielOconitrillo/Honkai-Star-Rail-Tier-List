@@ -22,6 +22,9 @@ namespace Honkai_Star_Rail_Tier_List.Data
         public DbSet<BuildStats> BuildStats { get; set; }
         public DbSet<LightCone> LightCones { get; set; }
         public DbSet<BuildLightCone> BuildLightCones { get; set; }
+        public DbSet<Team> Teams { get; set; }
+        public DbSet<TeamMember> TeamMembers { get; set; }
+        public DbSet<CharacterTeam> CharacterTeams { get; set; }
 
         //Charaters should only have one eidolon for each level
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -41,6 +44,10 @@ namespace Honkai_Star_Rail_Tier_List.Data
                 .WithMany()
                 .HasForeignKey(b => b.RelicSet2Id)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<TeamMember>()
+                .Property(t => t.Role)
+                .HasConversion<string>();
         }
     }
 }

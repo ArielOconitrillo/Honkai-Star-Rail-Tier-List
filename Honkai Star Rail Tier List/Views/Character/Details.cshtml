@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Character";
 }
+@using Honkai_Star_Rail_Tier_List.Helpers
 
 @model Honkai_Star_Rail_Tier_List.Models.Character
 
@@ -92,8 +93,8 @@
         else
             {
                 <p>2pc @relicSet.RelicSet1.Name + 2pc @relicSet.RelicSet2.Name</p>
-                <ul><img src="~/Images/Relics/@relicSet.RelicSet1.Image" width="25"/> @relicSet.RelicSet1.Name: @relicSet.RelicSet1.TwoPieceEffect</ul>
-                <ul><img src="~/Images/Relics/@relicSet.RelicSet2.Image" width="40" /> @relicSet.RelicSet2.Name: @relicSet.RelicSet2.TwoPieceEffect</ul>
+                <ul><img src="/Images/Relics/@relicSet.RelicSet1.Image" width="25"/> @relicSet.RelicSet1.Name: @relicSet.RelicSet1.TwoPieceEffect</ul>
+                <ul><img src="/Images/Relics/@relicSet.RelicSet2.Image" width="40" /> @relicSet.RelicSet2.Name: @relicSet.RelicSet2.TwoPieceEffect</ul>
             }
     }
     <p>Recommended Stats:</p>
@@ -101,15 +102,32 @@
     <ul>Feet: @build.BuildStats.Feet</ul>
     <ul>Substats: @build.BuildStats.SubstatPriority</ul>
 
-    <h7 style="color:lightpink">Light Cones</h7>
-    foreach( var lightCone in build.LightCones.OrderBy(lc => lc.Rank))
+    <h6 style="color:lightpink">Light Cones</h6>
+    @foreach( var lightCone in build.LightCones.OrderBy(lc => lc.Rank))
     {
-        <ol>
-            <div>
-                <img src="Images/Light Cones/Whereabouts_Should_Dreams_Rest.webp" width="100" />
-                <p>@lightCone.LightCone.Name</p>
-            </div>
-            <p>@lightCone.Description</p>
-        </ol>
+        <div>
+            <img src="/Images/Light Cones/@lightCone.LightCone.Image" width="100" />
+            <p>@lightCone.LightCone.Name</p>
+        </div>
+        
+        <p>@lightCone.Description</p>
+        
     }
+}
+
+<h6 style="color:gold">Teams</h6>
+@foreach (var ct in Model.CharacterTeams.OrderBy(ct => ct.Rank))
+{
+    <h4>@ct.Type Team</h4>
+
+    <div style="display:flex; gap:10px;">
+        @foreach (var member in ct.Team.TeamMembers.OrderBy(m => m.Order))
+        {
+            <div style="text-align:center;">
+                <img src="/Images/@member.Character.Image" width="60" />
+                <p>@member.Character.Name</p>
+                <p>@member.Role</p>
+            </div>
+        }
+    </div>
 }
