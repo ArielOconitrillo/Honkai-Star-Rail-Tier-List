@@ -40,39 +40,57 @@
         <p>Below is a list of recent changes to a characthers rating and an explanation</p>
     </div>
 
+<div class="mode-buttons">
+    <button class="mode-btn" data-mode="as">Apocalyptic Shadow</button>
+    <button class="mode-btn" data-mode="moc">Memory of Chaos</button>
+    <button class="mode-btn" data-mode="pf">Pure Fiction</button>
+</div>
+
+@foreach (var character in Model)
+{
+    <div class="character-card"
+         data-role="@character.Role"
+         data-as="@character.TierAS"
+         data-moc="@character.TierMOC"
+         data-pf="@character.TierPF">
+
+        <a asp-controller="Character" asp-action="Details" asp-route-name="@character.Name">
+            <div class="character">
+                <img src="/Images/@character.Image">
+            </div>
+        </a>
+
+    </div>
+}
+
 <div class="tier-list">
 
     <!-- Role Headers -->
     <div class="role-header">
         <div></div>
         <div>DPS</div>
-        <div>Sub DPS</div>
+        <div>SubDPS</div>
         <div>Support</div>
         <div>Sustain</div>
     </div>
 
+    <!--Create the table-->
     @foreach (var tier in tiers)
     {
-        <div class="tier-row">
+        <div class="tier" data-tier="@tier">
 
-            <div class="tier-label @tier">@tier.Replace("T", "")</div>
+            <div class="tier-row">
 
-            @foreach (var role in roles)
-            {
-                <div class="role-column">
+                <div class="tier-label @tier">@tier</div>
 
-                    @foreach (var character in Model.Where(c => c.TierAS == tier && c.Role == role))
-                    {
-                        <a asp-controller="Character" asp-action="Details" asp-route-name="@character.Name">
-                            <div class="character">
-                                <img src="/Images/@character.Image">
-                            </div>
-                        </a>
-                    }
+                @foreach (var role in roles)
+                {
+                    <div class="role-column" data-role="@role">
+                        <div class="tier-container"></div>
+                    </div>
+                }
 
-                </div>
-            }
-
+            </div>
         </div>
     }
 

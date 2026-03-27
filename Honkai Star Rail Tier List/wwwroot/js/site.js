@@ -1,9 +1,4 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
-
-/*
+﻿/*
 * Accordian code taken from W3Schools: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_accordion_symbol
 */
 var acc = document.getElementsByClassName("accordion");
@@ -21,6 +16,9 @@ for (i = 0; i < acc.length; i++) {
     });
 }
 
+/*
+*   Code for the skill sliders
+*/
 document.addEventListener("DOMContentLoaded", function () {
 
     const sliders = document.querySelectorAll(".skill-slider");
@@ -59,6 +57,52 @@ document.addEventListener("DOMContentLoaded", function () {
 
         updateLevel(parseInt(slider.value));
 
+    });
+
+});
+
+/**
+ * Code for the mode buttons that change the tier list
+ */
+document.addEventListener("DOMContentLoaded", function () {
+
+    const buttons = document.querySelectorAll(".mode-btn");
+    const characters = document.querySelectorAll(".character-card");
+
+    function updateTierList(mode) {
+
+        document.querySelectorAll(".tier-container").forEach(c => c.innerHTML = "");
+
+        characters.forEach(char => {
+
+            let tier = char.dataset[mode];
+            let role = char.dataset.role;
+
+            if (!tier || !role) return;
+
+            let container = document.querySelector(
+                `.tier[data-tier="${tier}"] 
+             .role-column[data-role="${role}"] 
+             .tier-container`
+            );
+
+            if (container) {
+                container.appendChild(char);
+            }
+        });
+    }
+
+    // Default
+    updateTierList("as");
+
+    buttons.forEach(btn => {
+        btn.addEventListener("click", function () {
+
+            buttons.forEach(b => b.classList.remove("active"));
+            this.classList.add("active");
+
+            updateTierList(this.dataset.mode);
+        });
     });
 
 });
