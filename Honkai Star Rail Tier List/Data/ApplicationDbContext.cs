@@ -25,6 +25,7 @@ namespace Honkai_Star_Rail_Tier_List.Data
         public DbSet<Team> Teams { get; set; }
         public DbSet<TeamMember> TeamMembers { get; set; }
         public DbSet<CharacterTeam> CharacterTeams { get; set; }
+        public DbSet<Companion> Companions { get; set; }
 
         //Charaters should only have one eidolon for each level
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -52,6 +52,54 @@
     </div>
 }
 
+@if (Model.Companions != null && Model.Companions.Any())
+{
+    var companion = Model.Companions.First();
+
+    <h4>Memosprite: @companion.Name</h4>
+    <img src="/Images/Companions/@companion.Image" width="500" />
+
+    @foreach(var skill in companion.Skills)
+    {
+        <div class="skill" id="skill_@skill.Id">
+            <h5>@skill.Name</h5>
+            <p>@skill.SkillType</p>
+
+            <p class="skill-description">
+                @Html.Raw(skill.Description)
+            </p>
+
+            @if (skill.MaxLevel > 1)
+            {
+                var startLevel = Math.Max(1, skill.MaxLevel - 2);
+
+                <label>
+                    Skill Level: <span id="levelDisplay_@skill.Id">@startLevel</span>
+                </label>
+
+
+
+                <input type="range"
+                       class="skill-slider"
+                       id="slider_@skill.Id"
+                       data-display="levelDisplay_@skill.Id"
+                       data-container="skill_@skill.Id"
+                       data-values='@Html.Raw(Json.Serialize(
+                  skill.LevelValue.Select(v => new
+                  {
+                      level = v.Level,
+                      statType = v.StatType.ToString(),
+                      value = v.Value
+                  })
+                  ))'
+                       min="1"
+                       max="@skill.MaxLevel"
+                       value="@startLevel">
+            }
+        </div>
+    }
+}
+
 @foreach (var eidolon in Model.Eidolons.OrderBy(e => e.Level))
 {
     <div class="eidolon" id="eidolon_@eidolon.Id">

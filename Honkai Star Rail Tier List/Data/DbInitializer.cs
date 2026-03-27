@@ -1,5 +1,11 @@
 ﻿using Honkai_Star_Rail_Tier_List.Models;
 using Honkai_Star_Rail_Tier_List.Models.Enums;
+using Humanizer;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
+using Mono.TextTemplating;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System;
+using System.Security.Cryptography.Xml;
 
 namespace Honkai_Star_Rail_Tier_List.Data
 {
@@ -107,6 +113,31 @@ namespace Honkai_Star_Rail_Tier_List.Data
                     TierPF = "F",
                     Image = "Gallagher_profile.webp",
                     Description = "A good easily obatainable sustainer"
+                },
+
+                new Character {
+                    Name = "Castorice",
+                    Element = "Quantum",
+                    Path = "Remembrance",
+                    Role = "DPS",
+                    Rarity = 5,
+                    TierMOC = "S",
+                    TierAS = "S",
+                    TierPF = "S",
+                    Image = "Castorice.webp",
+                    Description = "The best Remembrance damage dealer"
+                },
+                new Character {
+                    Name = "Hyacine",
+                    Element = "Wind",
+                    Path = "Remembrance",
+                    Role = "Sustain",
+                    Rarity = 5,
+                    TierMOC = "S",
+                    TierAS = "S",
+                    TierPF = "S",
+                    Image = "Hyacine.webp",
+                    Description = "One of the best healers in the game"
                 }
             };
 
@@ -349,7 +380,7 @@ namespace Honkai_Star_Rail_Tier_List.Data
                 new LightCone() { Name = "Whereabouts Should Dreams Rest", Rarity = 5, Path = "Destruction", Description = "Increases the wearer's Break Effect by 60/70/80/90/100%. When the wearer deals Break DMG to an enemy target, inflicts Routed on the enemy, lasting for 2 turn(s). Targets afflicted with Routed receive 24/28/32/36/40% increased Break DMG from the wearer, and their SPD is lowered by 20%. Effects of the similar type cannot be stacked.", Obtain = "Limited Warp", Image = "Whereabouts_Should_Dreams_Rest.webp" },
                 new LightCone() { Name = "Thus Burns the Dawn", Rarity = 5, Path = "Destruction", Description = "The wearer's base SPD increases by 12/14/16/18/20. When the wearer deals DMG, ignores 18/22/27/31/36% of the target's DEF. After the wearer uses Ultimate, obtains \"Blazing Sun,\" which is removed at the start of their turn. While \"Blazing Sun\" is in possession, increases the wearer's DMG dealt by 60/78/96/114/132%.", Obtain = "Limited Warp", Image = "Thus_Burns_the_Dawn.webp"},
                 new LightCone() { Name = "On the Fall of an Aeon", Rarity = 5, Path = "Destruction", Description = "Whenever the wearer attacks, their ATK is increased by 8/10/12/14/16% in this battle, up to 4 times. When the wearer inflicts Weakness Break on enemies, the wearer's DMG increases by 12/15/18/21/24% for 2 turn(s).", Obtain = "Herta's Shop", Image = "On_the_Fall_of_an_Aeon.webp"},
-                new LightCone() { Name = "Indelible Promise", Rarity = 4, Path = "Destruction", Description = "Increases the wearer's Break Effect by 28/35/42/49/56%. When the wearer uses their Ultimate, increases CRIT Rate by 15/18.75/22.5/26.25/30%, lasting for 2 turns.", Obtain = "Stellar Warp or Event Warp", Image = "Light_Cone_Indelible_Promise.webp"}
+                new LightCone() { Name = "Indelible Promise", Rarity = 4, Path = "Destruction", Description = "Increases the wearer's Break Effect by 28/35/42/49/56%. When the wearer uses their Ultimate, increases CRIT Rate by 15/18.75/22.5/26.25/30%, lasting for 2 turns.", Obtain = "Stellar Warp or Event Warp", Image = "Indelible_Promise.webp"}
             };
 
             context.LightCones.AddRange(lightCones);
@@ -396,7 +427,7 @@ namespace Honkai_Star_Rail_Tier_List.Data
             var trailblazer = context.Characters.First(c => c.Name == "Harmony Trailblazer");
             var gallagher = context.Characters.First(c => c.Name == "Gallagher");
 
-            var teamMembers = new TeamMember[] { 
+            var teamMembers = new TeamMember[] {
                 new TeamMember() { Team = team, Character = firefly, Order = 1, Role = TeamRole.DPS },
                 new TeamMember() { Team = team, Character = dahlia, Order = 2, Role = TeamRole.SubDPS },
                 new TeamMember() { Team = team, Character = fugue, Order = 3, Role = TeamRole.Support },
@@ -418,6 +449,210 @@ namespace Honkai_Star_Rail_Tier_List.Data
             };
 
             context.AddRange(characterTeams);
+            context.SaveChanges();
+
+            //Adding Castorice skills
+
+            var castorice = context.Characters.First(c => c.Name == "Castorice");
+
+            skills = new Skill[]
+            {
+                new Skill
+                {
+                    CharacterId = castorice.Id,
+                    SkillType = "Basic ATK",
+                    Name = "Lament, Nethersea's Ripple",
+                    Description = "Deals Quantum DMG equal to <span data-stat=\"Damage\"></span>% of Castorice's Max HP to one designated enemy.",
+                    MaxLevel = 7
+                },
+                new Skill
+                {
+                    CharacterId = castorice.Id,
+                    SkillType = "Skill",
+                    Name = "Silence, Wraithfly's Caress",
+                    Description = "Consumes 30% of all allies' current HP. Deals Quantum DMG equal to <span data-stat=\"MainDamage\"></span>% of Castorice's Max HP to one designated enemy and Quantum DMG equal to <span data-stat=\"AdjacentDamage\"></span>% of Castorice's Max HP to adjacent targets.\r\nIf the current HP is insufficient, reduces the current HP down to 1.\r\nIf Netherwing is on the battlefield, the Skill becomes \"Boneclaw, Doomdrake's Embrace\" instead.",
+                    MaxLevel = 12
+                },
+                new Skill
+                {
+                    CharacterId = castorice.Id,
+                    SkillType = "Skill (Enhanced)",
+                    Name = "Boneclaw, Doomdrake's Embrace",
+                    Description = "Consumes 40% of the current HP of all allies (except Netherwing). Castorice and Netherwing launch Joint ATK on the targets, dealing Quantum DMG equal to <span data-stat=\"MainDamage\"></span>% and <span data-stat=\"SecondaryDamage\"></span>% of Castorice's Max HP to all enemies.\r\nIf the current HP is insufficient, reduces the current HP down to 1.",
+                    MaxLevel = 12
+                },
+                new Skill
+                {
+                    CharacterId = castorice.Id,
+                    SkillType = "Ultimate",
+                    Name = "Doomshriek, Dawn's Chime",
+                    Description = "Summons the memosprite Netherwing and advances its action by 100%. At the same time, deploys the Territory \"Lost Netherland,\" which decreases all enemies' All-Type RES by <span data-stat=\"DamageReduction\"></span>%. If Castorice has the DMG Boost effect from her Talent, then this effect spreads to Netherwing. Netherwing has an initial SPD of 165 and a set Max HP equal to 100% of max \"Newbud.\"\r\nAfter Netherwing experiences 3 turns or when its HP is 0, it disappears and dispels the Territory \"Lost Netherland.\"",
+                    MaxLevel = 12
+                },
+                new Skill
+                {
+                    CharacterId = castorice.Id,
+                    SkillType = "Talent",
+                    Name = "Desolation Across Palms",
+                    Description = "The maximum limit of \"Newbud\" is related to the levels of all characters on the battlefield. For every 1 point of HP lost by all allies, Castorice gains 1 point of \"Newbud.\" When \"Newbud\" reaches its maximum limit, can activate the Ultimate. When allies lose HP, Castorice's and Netherwing's DMG dealt increases by <span data-stat=\"DamageBoost\"></span>%. This effect can stack up to 3 time(s), lasting for 3 turn(s).\r\nWhen Netherwing is on the field, \"Newbud\" cannot be gained through Talent, and every 1 point of HP lost by all allies (except Netherwing) will be converted to an equal amount of HP for Netherwing.",
+                    MaxLevel = 12
+                },
+                new Skill
+                {
+                    CharacterId = castorice.Id,
+                    SkillType = "Technique",
+                    Name = "Wail, Death's Herald",
+                    Description = "After using Technique, enters the \"Netherveil\" state that lasts for 20 seconds. While \"Netherveil\" is active, enemies are unable to actively approach Castorice.\r\nDuring \"Netherveil,\" active attacks will cause all enemies within range to enter combat. At the same time, summons the memosprite Netherwing, advances its action by 100%, and deploys the Territory \"Lost Netherland.\" Netherwing has its current HP equal to 50% of max \"Newbud.\" After entering battle, consumes 40% of the current HP of all allies (except Netherwing).\r\nIf Netherwing is not summoned after entering battle, Castorice gains \"Newbud\" by an amount equal to 30% of max \"Newbud.\"",
+                    MaxLevel = 1
+                },
+                new Skill
+                {
+                    CharacterId = castorice.Id,
+                    SkillType = "Exclusive",
+                    Name = "Sanctuary of Mooncocoon",
+                    Description = "After obtaining Castorice or when Castorice is in the current team, receive the following effect: In battle, when an ally character receives a killing blow, all ally characters that received a killing blow in this action enter the \"Mooncocoon\" state. Characters in \"Mooncocoon\" temporarily delay becoming downed and can take actions normally. After the action and before the start of the next turn, if their current HP increases or they gain a Shield, \"Mooncocoon\" is removed. Otherwise, they will be downed immediately. This effect can only trigger once per battle.",
+                    MaxLevel = 1
+                }
+            };
+
+            context.AddRange(skills);
+            context.SaveChanges();
+
+            //Add Skill Values
+
+            skillLevels = new List<SkillLevelValue>();
+
+            //Basic Attack
+            skill = context.Skills.First(s => s.Name == "Lament, Nethersea's Ripple");
+
+            damageScaling = new double[] { 25, 30, 35, 40, 45, 50, 55 };
+
+            addSkillValues(skillLevels, damageScaling, skill.Id, SkillStatType.Damage);
+
+            //Skill
+            skill = context.Skills.First(s => s.Name == "Silence, Wraithfly's Caress");
+            mainDamageScaling = new double[] { 25, 27.5, 30, 32.5, 35, 37.5, 40.63, 43.75, 46.88, 50, 52.5, 55 };
+            adjacentDamageScaling = new double[] { 15, 16.5, 18, 19.5, 21, 22.5, 24.38, 26.25, 28.13, 30, 31.5, 33};
+
+            addSkillValues(skillLevels, mainDamageScaling, skill.Id, SkillStatType.MainDamage);
+            addSkillValues(skillLevels, adjacentDamageScaling, skill.Id, SkillStatType.AdjacentDamage);
+
+            //Skill (Enhanced)
+            skill = context.Skills.First(s => s.Name == "Boneclaw, Doomdrake's Embrace");
+            mainDamageScaling = new double[] { 15, 16.5, 18, 19.5, 21, 22.5, 24.4, 26.3, 28.1, 30, 31.5, 33};
+            var secondaryDamageScaling = new double[] { 25, 27.5, 30, 32.5, 35, 37.5, 40.6, 43.8, 46.9, 50, 52.5, 55};
+
+            addSkillValues(skillLevels, mainDamageScaling, skill.Id, SkillStatType.MainDamage);
+            addSkillValues(skillLevels, secondaryDamageScaling, skill.Id, SkillStatType.SecondaryDamage);
+
+            //Ultimate
+            skill = context.Skills.First(s => s.Name == "Doomshriek, Dawn's Chime");
+            damageReductionScaling = new double[] { 10, 11, 12, 13, 14, 15, 16.25, 17.5, 18.75, 20, 21, 22};
+
+            addSkillValues(skillLevels, damageReductionScaling, skill.Id, SkillStatType.DamageReduction);
+
+            //Talent
+            skill = context.Skills.First(s => s.Name == "Desolation Across Palms");
+            damageScaling = new double[] { 10, 11, 12, 13, 14, 15, 16.25, 17.5, 18.75, 20, 21, 22};
+
+            addSkillValues(skillLevels, damageScaling, skill.Id, SkillStatType.DamageBoost);
+
+            context.SkillValues.AddRange(skillLevels);
+            context.SaveChanges();
+
+            //Adding Pollux and Little Ica (Castorice's and Hyacine's Memosprirtes.
+            var hyacine = context.Characters.First(c => c.Name == "Hyacine");
+
+            var memosprites = new Companion[]
+            {
+                new Companion{Name = "Pollux", Description = "A powerful Dragon that fights alongside Castorice and contributes most of her damage", Character = castorice, Image = "Pollux.webp"},
+                new Companion{Name = "Little Ica", Description = "Hyacines memosprite, Little Ica, helps her by healing allies and constantly launching follow up attacks", Character = hyacine, Image = "Little Ica.webp"}
+            };
+
+            context.Companions.AddRange(memosprites);
+            context.SaveChanges();
+
+            //Add Pollux's skills
+            var pollux = context.Companions.First(c => c.Name == "Pollux");
+
+            skills = new Skill[]
+            {
+                new Skill
+                {
+                    Companion = pollux,
+                    SkillType = "Memosprite Skill",
+                    Name = "Claw Splits the Veil",
+                    Description = "Deals Quantum DMG equal to <span data-stat=\"Damage\"></span>% of Castorice's Max HP to all enemies.",
+                    MaxLevel = 9,
+                },
+                new Skill
+                {
+                    Companion = pollux,
+                    SkillType = "Memosprite Skill",
+                    Name = "Breath Scorches the Shadow",
+                    Description = "Launching \"Breath Scorches the Shadow\" will consume 25% of Netherwing's Max HP to deal Quantum DMG equal to <span data-stat=\"Damage\"></span>% of Castorice's Max HP to all enemies.\r\nIn one attack, \"Breath Scorches the Shadow\" can be launched repeatedly, with the DMG multiplier increased progressively to <span data-stat=\"DamageBoost\"></span>% / <span data-stat=\"DamageReduction\"></span>%. After reaching <span data-stat=\"DamageReduction\"></span>%, it will not increase further. The DMG Multiplier Boost effect will not decrease before Netherwing disappears.\r\nWhen Netherwing's current HP is equal to or less than 25% of its Max HP, launching this ability will actively reduce HP down to 1, and then trigger the ability effect equal to that of the Talent \"Wings Sweep the Ruins.\"",
+                    MaxLevel = 9,
+                },
+                new Skill
+                {
+                    Companion = pollux,
+                    SkillType = "Memosprite Talent",
+                    Name = "Mooncocoon Shrouds the Form",
+                    Description = "When Netherwing is on the field, it acts as backup for allies. When allies take DMG or consume HP, their current HP can be reduced down to a minimum of 1, after which Netherwing will consume HP at 500% of the original value until Netherwing disappears.",
+                    MaxLevel = 1,
+                },
+                new Skill
+                {
+                    Companion = pollux,
+                    SkillType = "Memosprite Talent",
+                    Name = "Roar Rumbles the Realm",
+                    Description = "When Netherwing is summoned, increases DMG dealt by all allies by 10%, lasting for 3 turn(s).",
+                    MaxLevel = 1,
+                },
+                new Skill
+                {
+                    Companion = pollux,
+                    SkillType = "Memosprite Talent",
+                    Name = "Wings Sweep the Ruins",
+                    Description = "When Netherwing disappears, deals 6 instance(s) of DMG, with each instance dealing Quantum DMG equal to <span data-stat=\"Damage\"></span>% of Castorice's Max HP to one random enemy. At the same time, restores HP by an amount equal to <span data-stat=\"Healing\"></span>% of Castorice's Max HP plus <span data-stat=\"Health\"></span> for all allies.",
+                    MaxLevel = 7,
+                },
+            };
+
+            context.Skills.AddRange(skills);
+            context.SaveChanges();
+
+            //Adding Skill Values for Pollux
+
+            skillLevels = new List<SkillLevelValue>();
+
+            //First Skill
+            skill = context.Skills.First(s => s.Name == "Claw Splits the Veil");
+            damageScaling = new double[] { 20, 24, 28, 32, 36, 40, 44, 48, 52};
+
+            addSkillValues(skillLevels, damageScaling, skill.Id, SkillStatType.Damage);
+
+            //Second Skill
+            skill = context.Skills.First(s => s.Name == "Breath Scorches the Shadow");
+            damageScaling = new double[] { 12, 14.4, 16.8, 19.2, 21.6, 24, 26.4, 28.8, 31.2};
+            var scaling2 = new double[] { 14, 16.8, 19.6, 22.4, 25.2, 28, 30.8, 33.6, 36.4};
+            var scaling3 = new double[] { 17, 20.4, 23.8, 27.2, 30.6, 34, 37.4, 40.8, 44.2};
+
+            addSkillValues(skillLevels, damageScaling, skill.Id, SkillStatType.Damage);
+            addSkillValues(skillLevels, scaling2, skill.Id, SkillStatType.DamageBoost);
+            addSkillValues(skillLevels, scaling3, skill.Id, SkillStatType.DamageReduction);
+
+            //Talent
+            skill = context.Skills.First(s => s.Name == "Wings Sweep the Ruins");
+            damageScaling = new double[] { 20, 24, 28, 32, 36, 40, 44};
+            scaling2 = new double[] { 3, 3.6, 4.2, 4.8, 5.4, 6, 6.6};
+            scaling3 = new double[] { 3, 3.6, 4.2, 4.8, 5.4, 6, 6.6};
+
+            addSkillValues(skillLevels, damageScaling, skill.Id, SkillStatType.Damage);
+            addSkillValues(skillLevels, scaling2, skill.Id, SkillStatType.Healing);
+            addSkillValues(skillLevels, scaling3, skill.Id, SkillStatType.Health);
+
+            context.SkillValues.AddRange(skillLevels);
             context.SaveChanges();
         }
     }

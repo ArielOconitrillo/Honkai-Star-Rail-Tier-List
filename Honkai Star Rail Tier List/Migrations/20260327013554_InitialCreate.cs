@@ -102,6 +102,28 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Companions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    CharacterId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Image = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Companions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Companions_Characters_CharacterId",
+                        column: x => x.CharacterId,
+                        principalTable: "Characters",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Eidolons",
                 columns: table => new
                 {
@@ -117,29 +139,6 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                     table.PrimaryKey("PK_Eidolons", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Eidolons_Characters_CharacterId",
-                        column: x => x.CharacterId,
-                        principalTable: "Characters",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Skills",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    CharacterId = table.Column<int>(type: "INTEGER", nullable: false),
-                    SkillType = table.Column<string>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: false),
-                    MaxLevel = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Skills", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Skills_Characters_CharacterId",
                         column: x => x.CharacterId,
                         principalTable: "Characters",
                         principalColumn: "Id",
@@ -328,6 +327,34 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Skills",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    CharacterId = table.Column<int>(type: "INTEGER", nullable: true),
+                    CompanionId = table.Column<int>(type: "INTEGER", nullable: true),
+                    SkillType = table.Column<string>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    MaxLevel = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Skills", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Skills_Characters_CharacterId",
+                        column: x => x.CharacterId,
+                        principalTable: "Characters",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Skills_Companions_CompanionId",
+                        column: x => x.CompanionId,
+                        principalTable: "Companions",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SkillValues",
                 columns: table => new
                 {
@@ -396,6 +423,11 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                 column: "TeamId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Companions_CharacterId",
+                table: "Companions",
+                column: "CharacterId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Eidolons_CharacterId_Level",
                 table: "Eidolons",
                 columns: new[] { "CharacterId", "Level" },
@@ -405,6 +437,11 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                 name: "IX_Skills_CharacterId",
                 table: "Skills",
                 column: "CharacterId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Skills_CompanionId",
+                table: "Skills",
+                column: "CompanionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SkillValues_SkillId",
@@ -476,6 +513,9 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
 
             migrationBuilder.DropTable(
                 name: "Teams");
+
+            migrationBuilder.DropTable(
+                name: "Companions");
 
             migrationBuilder.DropTable(
                 name: "Characters");

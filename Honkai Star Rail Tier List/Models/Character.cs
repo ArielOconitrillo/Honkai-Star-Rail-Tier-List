@@ -38,5 +38,7 @@ namespace Honkai_Star_Rail_Tier_List.Models
         public List<Build> Builds { get; set; }
         
         public List<CharacterTeam> CharacterTeams { get; set; }
+
+        public List<Companion> Companions { get; set; }
     }
 }
