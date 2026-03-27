@@ -303,28 +303,23 @@ namespace Honkai_Star_Rail_Tier_List.Data
 
             context.Eidolons.AddRange(eidolons);
 
-            // Adding FireFlys strengths
-
-            var strengths = new Strength[]
+            var guide = new CharacterGuide()
             {
-                new Strength() {Character = firefly, Description = "Can help keep herself alive with self healing"},
-                new Strength() {Character = firefly, Description = "Has plenty of viable team members, including some easily accesable ones"},
-                new Strength() {Character = firefly, Description = "Her E1 helps a lot with skill point management, as her enhanced skill no longer consumes them"},
-                new Strength() {Character = firefly, Description = "Best girl"}
+                Character = firefly,
+                Strengths = @"Strengths
+                              Can help keep herself alive with self healing
+                              Has plenty of viable team members, including some easily accesable ones</li>
+                              Her E1 helps a lot with skill point management, as her enhanced skill no longer consumes them
+                              Best girl",
+                Weaknesses = @"Weaknesses
+                               Requires a lot of speed to build properly
+                               High speed means she uses a lot of skill points if she doesn't have at least E1
+                               Best support units are all currently limited 5*
+                               Enemies with high toughness take much longer to beat",
+                Review = "Definetly worth pulling even more than a year after she was released"
             };
 
-            context.Strengths.AddRange(strengths);
-
-            // Adding FireFlys weaknesses
-
-            var weaknesses = new Weakness[] {
-                new Weakness() {Character = firefly, Description = "Requires a lot of speed to build properly" },
-                new Weakness() {Character = firefly, Description = "High speed means she uses a lot of skill points if she doesn't have at least E1" },
-                new Weakness() {Character = firefly, Description = "Best support units are all currently limited 5*" },
-                new Weakness() {Character = firefly, Description = "Enemies with high toughness take much longer to beat"}
-            };
-
-            context.Weaknesss.AddRange(weaknesses);
+            context.CharacterGuides.AddRange(guide);
 
             // Adding Relics
 
@@ -560,26 +555,26 @@ namespace Honkai_Star_Rail_Tier_List.Data
             context.SkillValues.AddRange(skillLevels);
             context.SaveChanges();
 
-            //Adding Pollux and Little Ica (Castorice's and Hyacine's Memosprirtes.
+            //Adding Netherwing and Little Ica (Castorice's and Hyacine's Memosprirtes.
             var hyacine = context.Characters.First(c => c.Name == "Hyacine");
 
             var memosprites = new Companion[]
             {
-                new Companion{Name = "Pollux", Description = "A powerful Dragon that fights alongside Castorice and contributes most of her damage", Character = castorice, Image = "Pollux.webp"},
+                new Companion{Name = "Netherwing", Description = "A powerful Dragon that fights alongside Castorice and contributes most of her damage", Character = castorice, Image = "Netherwing.webp"},
                 new Companion{Name = "Little Ica", Description = "Hyacines memosprite, Little Ica, helps her by healing allies and constantly launching follow up attacks", Character = hyacine, Image = "Little Ica.webp"}
             };
 
             context.Companions.AddRange(memosprites);
             context.SaveChanges();
 
-            //Add Pollux's skills
-            var pollux = context.Companions.First(c => c.Name == "Pollux");
+            //Add Netherwing's skills
+            var Netherwing = context.Companions.First(c => c.Name == "Netherwing");
 
             skills = new Skill[]
             {
                 new Skill
                 {
-                    Companion = pollux,
+                    Companion = Netherwing,
                     SkillType = "Memosprite Skill",
                     Name = "Claw Splits the Veil",
                     Description = "Deals Quantum DMG equal to <span data-stat=\"Damage\"></span>% of Castorice's Max HP to all enemies.",
@@ -587,7 +582,7 @@ namespace Honkai_Star_Rail_Tier_List.Data
                 },
                 new Skill
                 {
-                    Companion = pollux,
+                    Companion = Netherwing,
                     SkillType = "Memosprite Skill",
                     Name = "Breath Scorches the Shadow",
                     Description = "Launching \"Breath Scorches the Shadow\" will consume 25% of Netherwing's Max HP to deal Quantum DMG equal to <span data-stat=\"Damage\"></span>% of Castorice's Max HP to all enemies.\r\nIn one attack, \"Breath Scorches the Shadow\" can be launched repeatedly, with the DMG multiplier increased progressively to <span data-stat=\"DamageBoost\"></span>% / <span data-stat=\"DamageReduction\"></span>%. After reaching <span data-stat=\"DamageReduction\"></span>%, it will not increase further. The DMG Multiplier Boost effect will not decrease before Netherwing disappears.\r\nWhen Netherwing's current HP is equal to or less than 25% of its Max HP, launching this ability will actively reduce HP down to 1, and then trigger the ability effect equal to that of the Talent \"Wings Sweep the Ruins.\"",
@@ -595,7 +590,7 @@ namespace Honkai_Star_Rail_Tier_List.Data
                 },
                 new Skill
                 {
-                    Companion = pollux,
+                    Companion = Netherwing,
                     SkillType = "Memosprite Talent",
                     Name = "Mooncocoon Shrouds the Form",
                     Description = "When Netherwing is on the field, it acts as backup for allies. When allies take DMG or consume HP, their current HP can be reduced down to a minimum of 1, after which Netherwing will consume HP at 500% of the original value until Netherwing disappears.",
@@ -603,7 +598,7 @@ namespace Honkai_Star_Rail_Tier_List.Data
                 },
                 new Skill
                 {
-                    Companion = pollux,
+                    Companion = Netherwing,
                     SkillType = "Memosprite Talent",
                     Name = "Roar Rumbles the Realm",
                     Description = "When Netherwing is summoned, increases DMG dealt by all allies by 10%, lasting for 3 turn(s).",
@@ -611,7 +606,7 @@ namespace Honkai_Star_Rail_Tier_List.Data
                 },
                 new Skill
                 {
-                    Companion = pollux,
+                    Companion = Netherwing,
                     SkillType = "Memosprite Talent",
                     Name = "Wings Sweep the Ruins",
                     Description = "When Netherwing disappears, deals 6 instance(s) of DMG, with each instance dealing Quantum DMG equal to <span data-stat=\"Damage\"></span>% of Castorice's Max HP to one random enemy. At the same time, restores HP by an amount equal to <span data-stat=\"Healing\"></span>% of Castorice's Max HP plus <span data-stat=\"Health\"></span> for all allies.",
@@ -622,7 +617,7 @@ namespace Honkai_Star_Rail_Tier_List.Data
             context.Skills.AddRange(skills);
             context.SaveChanges();
 
-            //Adding Skill Values for Pollux
+            //Adding Skill Values for Netherwing
 
             skillLevels = new List<SkillLevelValue>();
 

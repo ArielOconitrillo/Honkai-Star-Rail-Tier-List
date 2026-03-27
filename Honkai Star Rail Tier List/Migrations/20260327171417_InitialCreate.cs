@@ -102,6 +102,28 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CharacterGuides",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    CharacterId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Review = table.Column<string>(type: "TEXT", nullable: false),
+                    Strengths = table.Column<string>(type: "TEXT", nullable: false),
+                    Weaknesses = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CharacterGuides", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CharacterGuides_Characters_CharacterId",
+                        column: x => x.CharacterId,
+                        principalTable: "Characters",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Companions",
                 columns: table => new
                 {
@@ -413,6 +435,12 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_CharacterGuides_CharacterId",
+                table: "CharacterGuides",
+                column: "CharacterId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CharacterTeams_CharacterId",
                 table: "CharacterTeams",
                 column: "CharacterId");
@@ -480,6 +508,9 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
 
             migrationBuilder.DropTable(
                 name: "BuildStats");
+
+            migrationBuilder.DropTable(
+                name: "CharacterGuides");
 
             migrationBuilder.DropTable(
                 name: "CharacterTeams");

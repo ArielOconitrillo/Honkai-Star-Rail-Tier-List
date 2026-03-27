@@ -181,6 +181,35 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                     b.ToTable("Characters");
                 });
 
+            modelBuilder.Entity("Honkai_Star_Rail_Tier_List.Models.CharacterGuide", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CharacterId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Review")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Strengths")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Weaknesses")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CharacterId")
+                        .IsUnique();
+
+                    b.ToTable("CharacterGuides");
+                });
+
             modelBuilder.Entity("Honkai_Star_Rail_Tier_List.Models.CharacterTeam", b =>
                 {
                     b.Property<int>("Id")
@@ -542,6 +571,17 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                     b.Navigation("Build");
                 });
 
+            modelBuilder.Entity("Honkai_Star_Rail_Tier_List.Models.CharacterGuide", b =>
+                {
+                    b.HasOne("Honkai_Star_Rail_Tier_List.Models.Character", "Character")
+                        .WithOne("CharacterGuide")
+                        .HasForeignKey("Honkai_Star_Rail_Tier_List.Models.CharacterGuide", "CharacterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Character");
+                });
+
             modelBuilder.Entity("Honkai_Star_Rail_Tier_List.Models.CharacterTeam", b =>
                 {
                     b.HasOne("Honkai_Star_Rail_Tier_List.Models.Character", "Character")
@@ -663,6 +703,9 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
             modelBuilder.Entity("Honkai_Star_Rail_Tier_List.Models.Character", b =>
                 {
                     b.Navigation("Builds");
+
+                    b.Navigation("CharacterGuide")
+                        .IsRequired();
 
                     b.Navigation("CharacterTeams");
 

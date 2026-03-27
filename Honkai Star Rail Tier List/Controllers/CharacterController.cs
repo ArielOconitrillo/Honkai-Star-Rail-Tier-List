@@ -42,12 +42,15 @@ namespace Honkai_Star_Rail_Tier_List.Controllers
                 .Include (c => c.Companions)
                     .ThenInclude(co => co.Skills)
                         .ThenInclude(s => s.LevelValue)
+                .Include(c => c.CharacterGuide)
                 .FirstOrDefault(c => c.Name == name);
 
             if (character == null)
             {
                 return NotFound();
             }
+
+            character.CharacterGuide ??= new CharacterGuide();
 
             return View(character);
         }

@@ -109,20 +109,40 @@
     </div>
 }
 
-<h5 style="color:greenyellow">Strengths</h5>
-@foreach (var strength in Model.Strengths)
-{
-    <div class="strength" id="strength_@strength.Id">
-        <ul>@strength.Description</ul>
-    </div>
+@{
+    var guide = Model.CharacterGuide;
 }
 
-<h5 style="color:orangered">Weaknesses</h5>
-@foreach (var weakness in Model.Weaknesss)
+@if (!string.IsNullOrWhiteSpace(guide?.Strengths)){
+<h4 style="color:greenyellow">Strengths</h4>
+<ul>
+@foreach (var strength in Model.CharacterGuide.Strengths.Split('\n'))
 {
-    <div class="strength" id="strength_@weakness.Id">
-        <ul>@weakness.Description</ul>
-    </div>
+    if (!string.IsNullOrWhiteSpace(strength))
+    {
+        <li>@strength.Trim()</li>
+    }
+}
+</ul>
+}
+
+@if (!string.IsNullOrWhiteSpace(guide?.Weaknesses)){
+<h4 style="color:red">Weaknesses</h4>
+<ul>
+    @foreach (var weakness in Model.CharacterGuide.Weaknesses.Split('\n'))
+    {
+        if (!string.IsNullOrWhiteSpace(weakness))
+        {
+            <li>@weakness.Trim()</li>
+        }
+    }
+</ul>
+}
+
+@if (!string.IsNullOrWhiteSpace(guide?.Review))
+{
+    <h4 style="color:fuchsia">Review</h4>
+@Model.CharacterGuide.Review
 }
 
 <h6 style="color:deeppink">Builds</h6>
