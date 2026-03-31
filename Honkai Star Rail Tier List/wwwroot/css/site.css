@@ -1,36 +1,44 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 
 .try {
-    color:yellow;
+    color: yellow;
+}
+
+.TLBackground {
+    background-image: url('/Images/BackgroundTL.webp');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    color: white;
 }
 
 /*
-    Accordian and panel code taken from W3Schools
+    Accordian and panel code taken and modified from W3Schools
 */
 .accordion {
-    background-color: #eee;
-    color: #444;
+    background-color: lightslategrey;
+    color: white;
     cursor: pointer;
     padding: 18px;
     width: 100%;
@@ -41,28 +49,29 @@ body {
     transition: 0.4s;
 }
 
-.active, .accordion:hover {
-    background-color: #ccc;
-}
+    .accordion:hover {
+        background-color: #ccc;
+    }
 
-.accordion:after {
-    content: '\002B';
-    color: #777;
-    font-weight: bold;
-    float: right;
-    margin-left: 5px;
-}
+    .accordion:after {
+        content: '\002B';
+        color: white;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+    }
 
-.active:after {
-    content: "\2212";
-}
+    .accordion.active:after {
+        content: "\2212";
+    }
 
 .panel {
     padding: 0 18px;
-    background-color: white;
+    background: rgba(30, 41, 59, 0.85);
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.2s ease-out;
+    border-radius:8px;
 }
 
 /*
@@ -89,7 +98,7 @@ body {
     font-weight: bold;
     font-size: 22px;
     color: white;
-    padding: 10px; 
+    padding: 10px;
 }
 
 .tier-container {
@@ -158,12 +167,108 @@ body {
     text-align: center;
 }
 
-.role-header div {
-    padding: 8px;
-}
+    .role-header div {
+        padding: 8px;
+    }
 
 .mode-buttons {
     display: flex;
     gap: 10px;
-    margin-top: 50px;
+    height: 80px;
+    margin-top: 30px;
+    margin-bottom: 20px;
 }
+
+.mode-btn {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+    border: none;
+    color: white;
+    font-size: 24px;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.7);
+    cursor: pointer;
+}
+
+    .mode-btn.active {
+        box-shadow: 0 0 0 2px gold;
+    }
+
+    .mode-btn img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; 
+        object-position: center;
+    }
+
+    .mode-btn span {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        text-align: center;
+        font-weight: bold;
+    }
+
+/*
+   Filter buttons
+*/
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+.filter-btn {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    background-color: black;
+    border: 2px solid transparent;
+    box-sizing: border-box;
+    cursor: pointer;
+    line-height: 0;
+    padding: 0;
+}
+
+    .filter-btn img {
+        width: 70%;
+        height: 70%;
+        object-fit: contain;
+        display: block;
+    }
+
+    .filter-btn:active {
+        outline: none;
+        box-shadow: none;
+    }
+
+.clear-filter-btn{
+    color:whitesmoke;
+    font-size:100%;
+}
+
+.path-btn.active {
+    box-shadow: 0 0 0 2px gold;
+    background: #334155;
+}
+
+.element-btn.active {
+    box-shadow: 0 0 0 2px gold;
+    background: #EBD5D1;
+}
+
+.rarity-btn{
+    font-size:20px;
+}
+
+    .rarity-btn.active {
+        box-shadow: 0 0 0 2px gold;
+    }

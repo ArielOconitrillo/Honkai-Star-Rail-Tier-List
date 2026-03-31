@@ -61,6 +61,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+//Filters for the tier list
+let activeFilters = {
+    rarity: [],
+    path: [],
+    element: []
+};
+
+let currentMode = "as";
+
 /**
  * Code for the mode buttons that change the tier list
  */
@@ -77,6 +86,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
             let tier = char.dataset[mode];
             let role = char.dataset.role;
+            let rarity = char.dataset.rarity;
+            let path = char.dataset.path;
+            let element = char.dataset.element;
+
+            if (
+                (activeFilters.rarity.length && !activeFilters.rarity.includes(rarity)) ||
+                (activeFilters.path.length && !activeFilters.path.includes(path)) ||
+                (activeFilters.element.length && !activeFilters.element.includes(element))
+            ) { return; }
+
 
             if (!tier || !role) return;
 
@@ -98,11 +117,63 @@ document.addEventListener("DOMContentLoaded", function () {
     buttons.forEach(btn => {
         btn.addEventListener("click", function () {
 
+            currentMode = this.dataset.mode;
+
             buttons.forEach(b => b.classList.remove("active"));
             this.classList.add("active");
 
-            updateTierList(this.dataset.mode);
+            updateTierList(currentMode);
         });
     });
 
+    /**
+ * Code for the filter buttons
+ */
+    const filterButtons = document.querySelectorAll(".filter-btn");
+
+    filterButtons.forEach(btn => {
+        btn.addEventListener("click", function () {
+
+            const filterType = this.dataset.filter;
+            const value = this.dataset.value;
+
+            let filterArray = activeFilters[filterType];
+
+            // Toggle behavior
+            if (filterArray.includes(value)) {
+                activeFilters[filterType] = filterArray.filter(v => v !== value);
+                this.classList.remove("active");
+            } else {
+
+                // remove active from same group
+                filterArray.push(value);
+                this.classList.add("active");
+            }
+
+            updateTierList(currentMode);
+
+            this.blur();
+        });
+    });
+
+    document.querySelectorAll(".clear-filter-btn").forEach(btn => {
+        btn.addEventListener("click", function () {
+            clearFilter(this.dataset.filter);
+        });
+    });
+
+    function clearFilter(filterType) {
+
+        // Reset the filter array
+        activeFilters[filterType] = [];
+
+        // Remove active class from buttons of that type
+        document.querySelectorAll(`.filter-btn[data-filter="${filterType}"]`)
+            .forEach(btn => btn.classList.remove("active"));
+
+        // Re-render list
+        updateTierList(currentMode);
+    }
+
 });
+

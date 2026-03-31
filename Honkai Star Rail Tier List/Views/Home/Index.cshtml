@@ -1,23 +1,23 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Tier List";
     @model List<Honkai_Star_Rail_Tier_List.Models.Character>
 
     var tiers = new[] { "S", "A", "B", "F" };
     var roles = new[] { "DPS", "Sub-DPS", "Support", "Sustain" };
 }
 
-<h1>
-    Honkai: Star Rail Tier List
-</h1>
+<html>
+<body class="TLBackground">
+    <h1>
+        Honkai: Star Rail Tier List
+    </h1>
 
-<div></div>
-
-<button class="accordion">About the tier list</button>
+    <button class="accordion">About the tier list</button>
     <div class="panel">
         <p>This tier list ranks each charcter based on his or her performance in each of the different end game modes</p>
     </div>
 
-<button class="accordion">Catagories</button>
+    <button class="accordion">Catagories</button>
     <div class="panel">
         <ul>
             <li>
@@ -35,63 +35,110 @@
         </ul>
     </div>
 
-<button class="accordion">Changes </button>
+    <button class="accordion">Changes </button>
     <div class="panel">
         <p>Below is a list of recent changes to a characthers rating and an explanation</p>
     </div>
 
-<div class="mode-buttons">
-    <button class="mode-btn" data-mode="as">Apocalyptic Shadow</button>
-    <button class="mode-btn" data-mode="moc">Memory of Chaos</button>
-    <button class="mode-btn" data-mode="pf">Pure Fiction</button>
-</div>
-
-@foreach (var character in Model)
-{
-    <div class="character-card"
-         data-role="@character.Role"
-         data-as="@character.TierAS"
-         data-moc="@character.TierMOC"
-         data-pf="@character.TierPF">
-
-        <a asp-controller="Character" asp-action="Details" asp-route-name="@character.Name">
-            <div class="character">
-                <img src="/Images/@character.Image">
-            </div>
-        </a>
-
-    </div>
-}
-
-<div class="tier-list">
-
-    <!-- Role Headers -->
-    <div class="role-header">
-        <div></div>
-        <div>DPS</div>
-        <div>SubDPS</div>
-        <div>Support</div>
-        <div>Sustain</div>
+    <div class="mode-buttons">
+        <button class="mode-btn" data-mode="as">
+            <img src="/Images/Backgrounds/Apocalyptic Shadow.webp" />
+            <span>Apocalyptic Shadow</span>
+        </button>
+        <button class="mode-btn" data-mode="moc">
+            <img src="/Images/Backgrounds/Memory of Chaos.webp" />
+            <span>Memory of Chaos</span>
+        </button>
+        <button class="mode-btn" data-mode="pf">
+            <img src="/Images/Backgrounds/Pure Fiction.webp" />
+            <span>Pure Fiction</span>
+         </button>
     </div>
 
-    <!--Create the table-->
-    @foreach (var tier in tiers)
+    @foreach (var character in Model)
     {
-        <div class="tier" data-tier="@tier">
+        <div class="character-card"
+             data-role="@character.Role"
+             data-as="@character.TierAS"
+             data-moc="@character.TierMOC"
+             data-pf="@character.TierPF"
+             data-rarity="@character.Rarity"
+             data-element="@character.Element"
+             data-path="@character.Path">
 
-            <div class="tier-row">
+            <a asp-controller="Character" asp-action="Details" asp-route-name="@character.Name">
+                <div class="character">
+                    <img src="/Images/@character.Image">
+                </div>
+            </a>
 
-                <div class="tier-label @tier">@tier</div>
-
-                @foreach (var role in roles)
-                {
-                    <div class="role-column" data-role="@role">
-                        <div class="tier-container"></div>
-                    </div>
-                }
-
-            </div>
         </div>
     }
 
-</div>
+    <!--Filter buttons-->
+    <div class="filters">
+
+        <h4>Rarity: </h4>
+        <button class="filter-btn clear-filter-btn" data-filter="rarity">*</button>
+        <button class="filter-btn rarity-btn" data-filter="rarity" data-value="5" style="color:gold">5★</button>
+        <button class="filter-btn rarity-btn" data-filter="rarity" data-value="4" style="color:mediumpurple">4★</button>
+
+        <h4>Path: </h4>
+        <button class="filter-btn clear-filter-btn" data-filter="path">*</button>
+        <button class="filter-btn path-btn" data-filter="path" data-value="Abundance"> <img src="/Images/Paths/Abundance.webp" /> </button>
+        <button class="filter-btn path-btn" data-filter="path" data-value="Destruction"><img src="/Images/Paths/Destruction.webp" /></button>
+        <button class="filter-btn path-btn" data-filter="path" data-value="Elation"><img src="/Images/Paths/Elation.webp" /></button>
+        <button class="filter-btn path-btn" data-filter="path" data-value="Erudition"><img src="/Images/Paths/Erudition.webp" /></button>
+        <button class="filter-btn path-btn" data-filter="path" data-value="Harmony"><img src="/Images/Paths/Harmony.webp" /></button>
+        <button class="filter-btn path-btn" data-filter="path" data-value="Hunt"><img src="/Images/Paths/The Hunt.webp" /></button>
+        <button class="filter-btn path-btn" data-filter="path" data-value="Nihility"><img src="/Images/Paths/Nihility.webp" /></button>
+        <button class="filter-btn path-btn" data-filter="path" data-value="Preservation"><img src="/Images/Paths/Preservation.webp" /></button>
+        <button class="filter-btn path-btn" data-filter="path" data-value="Remembrance"><img src="/Images/Paths/Remembrance.webp" /></button>
+
+        <h4>Element: </h4>
+        <button class="filter-btn clear-filter-btn" data-filter="element">*</button>
+        <button class="filter-btn element-btn" data-filter="element" data-value="Fire"><img src="~/Images/Elements/Fire.webp" /></button>
+        <button class="filter-btn element-btn" data-filter="element" data-value="Ice"><img src="~/Images/Elements/Ice.webp" /></button>
+        <button class="filter-btn element-btn" data-filter="element" data-value="Imaginary"><img src="~/Images/Elements/Imaginary.webp" /></button>
+        <button class="filter-btn element-btn" data-filter="element" data-value="Lightning"><img src="~/Images/Elements/Lightning.webp" /></button>
+        <button class="filter-btn element-btn" data-filter="element" data-value="Physical"><img src="~/Images/Elements/Physical.webp" /></button>
+        <button class="filter-btn element-btn" data-filter="element" data-value="Quantum"><img src="~/Images/Elements/Quantum.webp" /></button>
+        <button class="filter-btn element-btn" data-filter="element" data-value="Wind"><img src="~/Images/Elements/Wind.webp" /></button>
+
+    </div>
+
+    <!--Creating Tier List-->
+    <div class="tier-list">
+
+        <!-- Role Headers -->
+        <div class="role-header">
+            <div></div>
+            <div>DPS</div>
+            <div>SubDPS</div>
+            <div>Support</div>
+            <div>Sustain</div>
+        </div>
+
+        <!--Create the table-->
+        @foreach (var tier in tiers)
+        {
+            <div class="tier" data-tier="@tier">
+
+                <div class="tier-row">
+
+                    <div class="tier-label @tier">@tier</div>
+
+                    @foreach (var role in roles)
+                    {
+                        <div class="role-column" data-role="@role">
+                            <div class="tier-container"></div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        }
+
+    </div>
+</body>
+</html>
