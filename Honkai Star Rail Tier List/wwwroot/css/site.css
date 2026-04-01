@@ -37,7 +37,7 @@ body {
     Accordian and panel code taken and modified from W3Schools
 */
 .accordion {
-    background-color: black;
+    background-color: rgba(15, 23, 42, 0.9);
     color: white;
     cursor: pointer;
     padding: 18px;
@@ -143,6 +143,16 @@ body {
     object-fit: cover;
     border-radius: 6px;
     text-align: center;
+}
+
+.character-card[data-rarity="5"] .character {
+    background: linear-gradient(135deg, #facc15, #fde68a);
+    box-shadow: 0 0 10px rgba(250, 204, 21, 0.7);
+}
+
+.character-card[data-rarity="4"] .character {
+    background: linear-gradient(135deg, #a855f7, #d8b4fe);
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.6);
 }
 
 .S {
@@ -292,7 +302,8 @@ body {
 }
 
     .mode-btn.active {
-        box-shadow: 0 0 0 2px gold;
+        box-shadow: 0 0 10px gold;
+        transform: scale(1.02);
     }
 
     .mode-btn img {
@@ -353,7 +364,9 @@ body {
 .clear-filter-btn{
     color:whitesmoke;
     font-size:100%;
+    background-color:black;
 }
+
 
 .path-btn.active {
     box-shadow: 0 0 0 2px gold;

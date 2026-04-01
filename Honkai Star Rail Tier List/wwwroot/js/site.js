@@ -166,6 +166,22 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    document.getElementById("clearAllFiltersBtn").addEventListener("click", function () {
+
+        activeFilters = {
+            rarity: [],
+            path: [],
+            element: []
+        };
+
+        document.querySelectorAll(".filter-btn")
+            .forEach(btn => btn.classList.remove("active"));
+
+        updateTierList(currentMode);
+
+        this.blur();
+    });
+
     function clearFilter(filterType) {
 
         // Reset the filter array
