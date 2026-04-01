@@ -12,6 +12,7 @@
         Honkai: Star Rail Tier List
     </h1>
 
+    <!--Creatinng the accordian at the top of the page-->
     <button class="accordion">About the tier list</button>
     <div class="panel">
         <p>This tier list ranks each charcter based on his or her performance in each of the different end game modes</p>
@@ -21,16 +22,16 @@
     <div class="panel">
         <ul>
             <li>
-                DPS - DPS is the main damage dealer of the team. Their goals are to defeat the enemy.
+                <strong style="color:red">DPS</strong> - DPS is the main damage dealer of the team. Their goals are to defeat the enemy.
             </li>
             <li>
-                Sub-DPS - A secondary damage dealer, that typically doesn't deal as much damage as a proper DPS, but can make up for it by also providing a bit of support to other team members.
+                <strong style="color:mediumpurple">Sub-DPS</strong> - A secondary damage dealer, that typically doesn't deal as much damage as a proper DPS, but can make up for it by also providing a bit of support to other team members.
             </li>
             <li>
-                Support - Supports are there to help the team by buffing other team members or debuffing enemies.
+                <strong style="color:yellow">Support</strong> - Supports are there to help the team by buffing other team members or debuffing enemies.
             </li>
             <li>
-                Sustain - Sustain units keep their teammates alive. This is done by either healing or providing the team with shields.
+                <strong style="color:greenyellow">Sustain</strong> - Sustain units keep their teammates alive. This is done by either healing or providing the team with shields.
             </li>
         </ul>
     </div>
@@ -58,6 +59,7 @@
     @foreach (var character in Model)
     {
         <div class="character-card"
+             data-name="@character.Name"
              data-role="@character.Role"
              data-as="@character.TierAS"
              data-moc="@character.TierMOC"
@@ -140,5 +142,7 @@
         }
 
     </div>
+
+    <div id="character-tooltip" class="character-tooltip"></div>
 </body>
 </html>
