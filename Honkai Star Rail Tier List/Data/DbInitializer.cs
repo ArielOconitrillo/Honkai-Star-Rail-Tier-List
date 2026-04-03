@@ -306,13 +306,11 @@ namespace Honkai_Star_Rail_Tier_List.Data
             var guide = new CharacterGuide()
             {
                 Character = firefly,
-                Strengths = @"Strengths
-                              Can help keep herself alive with self healing
+                Strengths = @"Can help keep herself alive with self healing
                               Has plenty of viable team members, including some easily accesable ones</li>
                               Her E1 helps a lot with skill point management, as her enhanced skill no longer consumes them
                               Best girl",
-                Weaknesses = @"Weaknesses
-                               Requires a lot of speed to build properly
+                Weaknesses = @"Requires a lot of speed to build properly
                                High speed means she uses a lot of skill points if she doesn't have at least E1
                                Best support units are all currently limited 5*
                                Enemies with high toughness take much longer to beat",

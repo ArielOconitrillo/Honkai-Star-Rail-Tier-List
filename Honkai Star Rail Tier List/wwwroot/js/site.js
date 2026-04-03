@@ -77,7 +77,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const buttons = document.querySelectorAll(".mode-btn");
     const characters = document.querySelectorAll(".character-card");
-    const characterTooltip = document.getElementById("character-tooltip");
 
     function updateTierList(mode) {
 
@@ -197,20 +196,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //Tooltip code
 
-    characters.forEach(char => {
+    document.addEventListener("mouseover", function (e) {
+        const char = e.target.closest(".character-card");
+        if (!char || char.contains(e.relatedTarget)) return;
 
-        char.addEventListener("mouseenter", function (e) {
+        const tooltip = document.getElementById("character-tooltip");
 
-            const rarity = char.dataset.rarity;
-            const path = char.dataset.path;
-            const element = char.dataset.element;
-            const as = char.dataset.as;
-            const moc = char.dataset.moc;
-            const pf = char.dataset.pf;
-            const name = char.dataset.name;
+        const rarity = char.dataset.rarity;
+        const path = char.dataset.path;
+        const element = char.dataset.element;
+        const as = char.dataset.as;
+        const moc = char.dataset.moc;
+        const pf = char.dataset.pf;
+        const name = char.dataset.name;
 
-            characterTooltip.innerHTML = `
-            <div class="character-tooltip-name">${name}</div>
+        tooltip.innerHTML = `
+        <div class="character-tooltip-name">${name}</div>
             <div>${rarity}★</div>
             <div><img src="/Images/Elements/${element}.webp" width="20"> ${element}</div>
             <div><img src="/Images/Paths/${path}.webp" width="20"> ${path}</div>
@@ -231,26 +232,45 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div class="tooltip-label">PF</div>
                 </div>
             </div>
-        `;
+    `;
 
-            characterTooltip.style.display = "block";
+        tooltip.style.display = "block";
 
-            const rect = char.getBoundingClientRect();
+        const rect = char.getBoundingClientRect();
 
-            characterTooltip.style.left =
-            rect.left + rect.width / 2 + "px";
+        tooltip.style.left = rect.left + rect.width / 2 + "px";
+        tooltip.style.top = rect.top - tooltip.offsetHeight - 10 + "px";
+        tooltip.style.transform = "translateX(-50%)";
+    });
 
-            characterTooltip.style.top = rect.top - characterTooltip.offsetHeight - 10 + "px";
+    document.addEventListener("mouseout", function (e) {
+        const char = e.target.closest(".character-card");
+        if (!char) return;
 
-            characterTooltip.style.transform = "translateX(-50%)";
-        });
+        if (char.contains(e.relatedTarget)) return;
 
-        
-        char.addEventListener("mouseleave", function () {
-            characterTooltip.style.display = "none";
-            characterTooltip.style.transform = "none";
-        });
+        document.getElementById("character-tooltip").style.display = "none";
     });
 
 });
 
+document.querySelectorAll(".character-tab-btn").forEach(btn => {
+    btn.addEventListener("click", function () {
+
+        const tab = this.dataset.tab;
+
+        // Remove active from all buttons
+        document.querySelectorAll(".character-tab-btn")
+            .forEach(b => b.classList.remove("active"));
+
+        // Hide all panels
+        document.querySelectorAll(".character-panel")
+            .forEach(p => p.classList.remove("active"));
+
+        // Activate clicked button
+        this.classList.add("active");
+
+        // Show correct panel
+        document.getElementById(tab).classList.add("active");
+    });
+});

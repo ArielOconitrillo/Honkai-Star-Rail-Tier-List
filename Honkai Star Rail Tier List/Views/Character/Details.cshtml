@@ -1,201 +1,218 @@
-﻿@{
-    ViewData["Title"] = "Character";
-}
-@using Honkai_Star_Rail_Tier_List.Helpers
+﻿@using Honkai_Star_Rail_Tier_List.Helpers
 
 @model Honkai_Star_Rail_Tier_List.Models.Character
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
 
 <h1>@Model.Name</h1>
 <img src="/Images/@Model.Image" width="300">
 <p>@Model.Role</p>
 
-@foreach (var skill in Model.Skills)
-{
-    <div class="skill" id="skill_@skill.Id">
+<div class="character-tab-buttons">
+    <button class="character-tab-btn active" data-tab="information">Info</button>
+    <button class="character-tab-btn" data-tab="review">Review</button>
+    <button class="character-tab-btn" data-tab="build">Build</button>
+</div>
 
-        <h3>@skill.Name</h3>
-        <p>@skill.SkillType</p>
-
-        @*@ Display the discription and add a slider if needed to view the skill at differnt levels *@
-        <p class="skill-description">
-            @Html.Raw(skill.Description)
-        </p>
-
-        @if (skill.MaxLevel > 1)
+<div class="character-tabs">
+    <div class="character-panel active" id="information">
+        @foreach (var skill in Model.Skills)
         {
-            var startLevel = Math.Max(1, skill.MaxLevel - 2);
+            <div class="skill" id="skill_@skill.Id">
 
-            <label>
-                Skill Level: <span id="levelDisplay_@skill.Id">@startLevel</span>
-            </label>
+                <h3>@skill.Name</h3>
+                <p>@skill.SkillType</p>
+
+                @*@ Display the discription and add a slider if needed to view the skill at differnt levels *@
+                <p class="skill-description">
+                    @Html.Raw(skill.Description)
+                </p>
+
+                @if (skill.MaxLevel > 1)
+                {
+                    var startLevel = Math.Max(1, skill.MaxLevel - 2);
+
+                    <label>
+                        Skill Level: <span id="levelDisplay_@skill.Id">@startLevel</span>
+                    </label>
 
 
 
-            <input type="range"
-                   class="skill-slider"
-                   id="slider_@skill.Id"
-                   data-display="levelDisplay_@skill.Id"
-                   data-container="skill_@skill.Id"
-                   data-values='@Html.Raw(Json.Serialize(
+                    <input type="range"
+                           class="skill-slider"
+                           id="slider_@skill.Id"
+                           data-display="levelDisplay_@skill.Id"
+                           data-container="skill_@skill.Id"
+                           data-values='@Html.Raw(Json.Serialize(
                  skill.LevelValue.Select(v => new
                  {
-                     level = v.Level,
-                     statType = v.StatType.ToString(),
-                     value = v.Value
+                  level = v.Level,
+                  statType = v.StatType.ToString(),
+                  value = v.Value
                  })
                  ))'
-                   min="1"
-                   max="@skill.MaxLevel"
-                   value="@startLevel">
+                           min="1"
+                           max="@skill.MaxLevel"
+                           value="@startLevel">
+                }
+
+            </div>
         }
 
-    </div>
-}
-
-@if (Model.Companions != null && Model.Companions.Any())
-{
-    var companion = Model.Companions.First();
-
-    <h4>Memosprite: @companion.Name</h4>
-    <img src="/Images/Companions/@companion.Image" width="500" />
-
-    @foreach(var skill in companion.Skills)
-    {
-        <div class="skill" id="skill_@skill.Id">
-            <h5>@skill.Name</h5>
-            <p>@skill.SkillType</p>
-
-            <p class="skill-description">
-                @Html.Raw(skill.Description)
-            </p>
-
-            @if (skill.MaxLevel > 1)
-            {
-                var startLevel = Math.Max(1, skill.MaxLevel - 2);
-
-                <label>
-                    Skill Level: <span id="levelDisplay_@skill.Id">@startLevel</span>
-                </label>
-
-
-
-                <input type="range"
-                       class="skill-slider"
-                       id="slider_@skill.Id"
-                       data-display="levelDisplay_@skill.Id"
-                       data-container="skill_@skill.Id"
-                       data-values='@Html.Raw(Json.Serialize(
-                  skill.LevelValue.Select(v => new
-                  {
-                      level = v.Level,
-                      statType = v.StatType.ToString(),
-                      value = v.Value
-                  })
-                  ))'
-                       min="1"
-                       max="@skill.MaxLevel"
-                       value="@startLevel">
-            }
-        </div>
-    }
-}
-
-@foreach (var eidolon in Model.Eidolons.OrderBy(e => e.Level))
-{
-    <div class="eidolon" id="eidolon_@eidolon.Id">
-        <h4>E@(eidolon.Level)</h4>
-        <p>@eidolon.Name</p>
-        <p>@eidolon.Description</p>
-    </div>
-}
-
-@{
-    var guide = Model.CharacterGuide;
-}
-
-@if (!string.IsNullOrWhiteSpace(guide?.Strengths)){
-<h4 style="color:greenyellow">Strengths</h4>
-<ul>
-@foreach (var strength in Model.CharacterGuide.Strengths.Split('\n'))
-{
-    if (!string.IsNullOrWhiteSpace(strength))
-    {
-        <li>@strength.Trim()</li>
-    }
-}
-</ul>
-}
-
-@if (!string.IsNullOrWhiteSpace(guide?.Weaknesses)){
-<h4 style="color:red">Weaknesses</h4>
-<ul>
-    @foreach (var weakness in Model.CharacterGuide.Weaknesses.Split('\n'))
-    {
-        if (!string.IsNullOrWhiteSpace(weakness))
+        @if (Model.Companions != null && Model.Companions.Any())
         {
-            <li>@weakness.Trim()</li>
+            var companion = Model.Companions.First();
+
+            <h4>Memosprite: @companion.Name</h4>
+            <img src="/Images/Companions/@companion.Image" width="500" />
+
+            @foreach (var skill in companion.Skills)
+            {
+                <div class="skill" id="skill_@skill.Id">
+                    <h5>@skill.Name</h5>
+                    <p>@skill.SkillType</p>
+
+                    <p class="skill-description">
+                        @Html.Raw(skill.Description)
+                    </p>
+
+                    @if (skill.MaxLevel > 1)
+                    {
+                        var startLevel = Math.Max(1, skill.MaxLevel - 2);
+
+                        <label>
+                            Skill Level: <span id="levelDisplay_@skill.Id">@startLevel</span>
+                        </label>
+
+
+
+                        <input type="range"
+                               class="skill-slider"
+                               id="slider_@skill.Id"
+                               data-display="levelDisplay_@skill.Id"
+                               data-container="skill_@skill.Id"
+                               data-values='@Html.Raw(Json.Serialize(
+                   skill.LevelValue.Select(v => new
+                   {
+                       level = v.Level,
+                       statType = v.StatType.ToString(),
+                       value = v.Value
+                   })
+                   ))'
+                               min="1"
+                               max="@skill.MaxLevel"
+                               value="@startLevel">
+                    }
+                </div>
+            }
         }
-    }
-</ul>
-}
 
-@if (!string.IsNullOrWhiteSpace(guide?.Review))
-{
-    <h4 style="color:fuchsia">Review</h4>
-@Model.CharacterGuide.Review
-}
-
-<h6 style="color:deeppink">Builds</h6>
-@foreach (var build in Model.Builds)
-{
-    <p>@build.Name</p>
-    <p>@build.Description</p>
-    @foreach (var relicSet in build.RelicSets)
-    {
-        <p>@relicSet.Rank</p>
-        if(relicSet.RelicSet1Id == relicSet.RelicSet2Id)
-            {
-                <img src="~/Images/Relics/@relicSet.RelicSet1.Image" width="100" />
-                <p>4pc @relicSet.RelicSet1.FourPieceEffect</p>
-            }
-        else
-            {
-                <p>2pc @relicSet.RelicSet1.Name + 2pc @relicSet.RelicSet2.Name</p>
-                <ul><img src="/Images/Relics/@relicSet.RelicSet1.Image" width="25"/> @relicSet.RelicSet1.Name: @relicSet.RelicSet1.TwoPieceEffect</ul>
-                <ul><img src="/Images/Relics/@relicSet.RelicSet2.Image" width="40" /> @relicSet.RelicSet2.Name: @relicSet.RelicSet2.TwoPieceEffect</ul>
-            }
-    }
-    <p>Recommended Stats:</p>
-    <ul>Body: @build.BuildStats.Body</ul>
-    <ul>Feet: @build.BuildStats.Feet</ul>
-    <ul>Substats: @build.BuildStats.SubstatPriority</ul>
-
-    <h6 style="color:lightpink">Light Cones</h6>
-    @foreach( var lightCone in build.LightCones.OrderBy(lc => lc.Rank))
-    {
-        <div>
-            <img src="/Images/Light Cones/@lightCone.LightCone.Image" width="100" />
-            <p>@lightCone.LightCone.Name</p>
-        </div>
-        
-        <p>@lightCone.Description</p>
-        
-    }
-}
-
-<h6 style="color:gold">Teams</h6>
-@foreach (var ct in Model.CharacterTeams.OrderBy(ct => ct.Rank))
-{
-    <h4>@ct.Type Team</h4>
-
-    <div style="display:flex; gap:10px;">
-        @foreach (var member in ct.Team.TeamMembers.OrderBy(m => m.Order))
+        @foreach (var eidolon in Model.Eidolons.OrderBy(e => e.Level))
         {
-            <div style="text-align:center;">
-                <img src="/Images/@member.Character.Image" width="60" />
-                <p>@member.Character.Name</p>
-                <p>@member.Role</p>
+            <div class="eidolon" id="eidolon_@eidolon.Id">
+                <h4>E@(eidolon.Level)</h4>
+                <p>@eidolon.Name</p>
+                <p>@eidolon.Description</p>
             </div>
         }
     </div>
-}
+
+    <div class="character-panel" id="review">
+        @{
+            var guide = Model.CharacterGuide;
+        }
+
+        @if (!string.IsNullOrWhiteSpace(guide?.Strengths))
+        {
+            <h4 style="color:greenyellow">Strengths</h4>
+            <ul>
+                @foreach (var strength in Model.CharacterGuide.Strengths.Split('\n'))
+                {
+                    if (!string.IsNullOrWhiteSpace(strength))
+                    {
+                        <li>@strength.Trim()</li>
+                    }
+                }
+            </ul>
+        }
+
+        @if (!string.IsNullOrWhiteSpace(guide?.Weaknesses))
+        {
+            <h4 style="color:red">Weaknesses</h4>
+            <ul>
+                @foreach (var weakness in Model.CharacterGuide.Weaknesses.Split('\n'))
+                {
+                    if (!string.IsNullOrWhiteSpace(weakness))
+                    {
+                        <li>@weakness.Trim()</li>
+                    }
+                }
+            </ul>
+        }
+
+        @if (!string.IsNullOrWhiteSpace(guide?.Review))
+        {
+            <h4 style="color:fuchsia">Review</h4>
+            @Model.CharacterGuide.Review
+        }
+    </div>
+    <div class="character-panel" id="build">
+        <h6 style="color:deeppink">Builds</h6>
+        @foreach (var build in Model.Builds)
+        {
+            <p>@build.Name</p>
+            <p>@build.Description</p>
+            @foreach (var relicSet in build.RelicSets)
+            {
+                <p>@relicSet.Rank</p>
+                if (relicSet.RelicSet1Id == relicSet.RelicSet2Id)
+                {
+                    <img src="~/Images/Relics/@relicSet.RelicSet1.Image" width="100" />
+                    <p>4pc @relicSet.RelicSet1.FourPieceEffect</p>
+                }
+                else
+                {
+                    <p>2pc @relicSet.RelicSet1.Name + 2pc @relicSet.RelicSet2.Name</p>
+                    <ul><img src="/Images/Relics/@relicSet.RelicSet1.Image" width="25" /> @relicSet.RelicSet1.Name: @relicSet.RelicSet1.TwoPieceEffect</ul>
+                    <ul><img src="/Images/Relics/@relicSet.RelicSet2.Image" width="40" /> @relicSet.RelicSet2.Name: @relicSet.RelicSet2.TwoPieceEffect</ul>
+                }
+            }
+            <p>Recommended Stats:</p>
+            <ul>Body: @build.BuildStats.Body</ul>
+            <ul>Feet: @build.BuildStats.Feet</ul>
+            <ul>Substats: @build.BuildStats.SubstatPriority</ul>
+
+            <h6 style="color:lightpink">Light Cones</h6>
+            @foreach (var lightCone in build.LightCones.OrderBy(lc => lc.Rank))
+            {
+                <div>
+                    <img src="/Images/Light Cones/@lightCone.LightCone.Image" width="100" />
+                    <p>@lightCone.LightCone.Name</p>
+                </div>
+
+                <p>@lightCone.Description</p>
+
+            }
+        }
+
+        <h6 style="color:gold">Teams</h6>
+        @foreach (var ct in Model.CharacterTeams.OrderBy(ct => ct.Rank))
+        {
+            <h4>@ct.Type Team</h4>
+
+            <div style="display:flex; gap:10px;">
+                @foreach (var member in ct.Team.TeamMembers.OrderBy(m => m.Order))
+                {
+                    <div style="text-align:center;">
+                        <img src="/Images/@member.Character.Image" width="60" />
+                        <p>@member.Character.Name</p>
+                        <p>@member.Role</p>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>

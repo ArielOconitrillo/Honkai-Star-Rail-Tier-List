@@ -70,7 +70,7 @@
 
             <a asp-controller="Character" asp-action="Details" asp-route-name="@character.Name">
                 <div class="character">
-                    <img src="/Images/@character.Image">
+                    <img src="/Images/Characters/@character.Image">
                 </div>
             </a>
 
@@ -143,9 +143,6 @@
                 </div>
             </div>
         }
-
     </div>
-
-    <div id="character-tooltip" class="character-tooltip"></div>
 </body>
 </html>
