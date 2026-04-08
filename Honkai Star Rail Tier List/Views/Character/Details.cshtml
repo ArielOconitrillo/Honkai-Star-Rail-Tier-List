@@ -19,6 +19,8 @@
 
     <div class="character-tabs">
         <div class="character-panel active" id="information">
+
+            @*Skill display*@
             <h1>Skills</h1>
             @foreach (var skill in Model.Skills)
             {
@@ -114,14 +116,21 @@
                 }
             }
 
+            @* Eidolon display*@
+            <h1 class="eidolon-header">Eidolons</h1>
+            <div class="eidolon-display">
             @foreach (var eidolon in Model.Eidolons.OrderBy(e => e.Level))
             {
+                
                 <div class="eidolon" id="eidolon_@eidolon.Id">
-                    <h4>E@(eidolon.Level)</h4>
-                    <p>@eidolon.Name</p>
-                    <p>@eidolon.Description</p>
-                </div>
+                    <div class="eidolon-title">
+                        <span class="eidolon-level @Model.Element">E@(eidolon.Level)</span>
+                        <span class="eidolon-name">@eidolon.Name</span>
+                    </div>
+                        <p class="eidolon-description">@eidolon.Description</p>
+                   </div>
             }
+            </div>
         </div>
 
         <div class="character-panel" id="review">

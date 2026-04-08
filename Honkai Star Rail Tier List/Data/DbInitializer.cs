@@ -193,11 +193,11 @@ namespace Honkai_Star_Rail_Tier_List.Data
             },
 
             new Skill
-            {
+            {   
                 CharacterId = firefly.Id,
                 SkillType = "Talent",
                 Name = "Chrysalid Pyronexus",
-                Description = "The lower the HP, the less DMG received. When HP is 20% or lower, the DMG Reduction reaches its maximum effect, reducing up to <span class=\"skill-value\" data-stat=\"DamageReduction\"></span>%. During the Complete Combustion, the DMG Reduction remains at its maximum effect, and the Effect RES increases by <span data-stat=\"EffectRES\"></span>%.\r\nIf Energy is lower than 50% when the battle starts, regenerates Energy to 50%. Once Energy is regenerated to its maximum, dispels all debuffs on this unit.",
+                Description = "The lower the HP, the less DMG received. When HP is 20% or lower, the DMG Reduction reaches its maximum effect, reducing up to <span class=\"skill-value\" data-stat=\"DamageReduction\"></span>%. During the Complete Combustion, the DMG Reduction remains at its maximum effect, and the Effect RES increases by <span class=\"skill-value\" data-stat=\"EffectRES\"></span>%.\r\nIf Energy is lower than 50% when the battle starts, regenerates Energy to 50%. Once Energy is regenerated to its maximum, dispels all debuffs on this unit.",
                 MaxLevel = 12
             },
 

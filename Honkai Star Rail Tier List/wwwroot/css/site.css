@@ -422,11 +422,15 @@ body {
     display: block;
 }
 
+/*
+    Skill display
+*/
 .skill {
     background-color: grey;
     border:solid;
     border-color: lightgray;
     color:white;
+    margin-top:10px;
 }
 
 .skill-info {
@@ -464,6 +468,59 @@ body {
 .skill-value{
     color: gold;
     font-weight: bold;
+}
+
+/*
+    Eidolon Display
+*/
+
+.eidolon-header {
+    margin-top: 100px;
+}
+
+.eidolon-display{
+}
+
+.eidolon {
+    background-color: grey;
+    border: solid;
+    border-color: lightgray;
+    margin-top:10px;
+}
+
+.eidolon-title {
+    display: flex;
+    align-items: stretch;
+    border: solid lightgrey;
+    border-width: 0 0 2px 0;
+}
+
+.eidolon-level {
+    display: flex;
+    width: 60px;
+    height: 60px;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    border: solid lightgrey;
+    border-width: 0 2px 0 0;
+    margin: 0;
+    font-weight: bold;
+}
+
+.eidolon-name {
+    display: flex;
+    flex: 1;
+    margin: 0;
+    margin-left: 5px;
+    font-weight:bold;
+    font-size: 30px;
+    align-items:center;
+}
+
+.eidolon-description {
+    margin-left: 5px;
+    margin-top: 5px;
 }
 
 .Fire{
