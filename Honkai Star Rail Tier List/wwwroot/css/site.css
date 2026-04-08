@@ -33,6 +33,10 @@ body {
     color: white;
 }
 
+.character-deatails-body{
+    background-color: black;
+    color: white;
+}
 /*
     Accordian and panel code taken and modified from W3Schools
 */
@@ -386,9 +390,9 @@ body {
         box-shadow: 0 0 0 2px gold;
     }
 
-    /*
-        Charcter details page
-    */
+/*
+    Charcter details page
+*/
 
 .charcter-tab-buttons {
     display: flex;
@@ -414,6 +418,58 @@ body {
     display: none;
 }
 
-    .character-panel.active {
-        display: block;
-    }
+.character-panel.active {
+    display: block;
+}
+
+.skill {
+    background-color: grey;
+    border:solid;
+    border-color: lightgray;
+    color:white;
+}
+
+.skill-info {
+    display: flex;
+    align-items: stretch;
+    border: solid lightgrey;
+    border-width: 0 0 2px 0;
+}
+.skill-type {
+    display: flex;
+    width:200px;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    border: solid lightgrey;
+    border-width: 0 2px 0 0;
+    margin: 0;
+}
+
+.skill-name{
+    display: flex;
+    flex: 1;
+    margin: 0;
+    margin-left: 5px;
+}
+
+.skill-description{
+    margin-left: 5px;
+}
+
+.skill-changer{
+    margin-left: 5px;
+}
+
+.skill-value{
+    color: gold;
+    font-weight: bold;
+}
+
+.Fire{
+    background-color:red;
+}
+
+.Quantum {
+    background-color: mediumpurple;
+}
