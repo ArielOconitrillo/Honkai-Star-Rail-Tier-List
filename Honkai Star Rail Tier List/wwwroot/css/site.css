@@ -25,6 +25,11 @@ body {
     color: yellow;
 }
 
+.container-fluid{
+    padding-left:100px;
+    padding-right:100px;
+}
+
 /*
     Page Backgrounds
 */
@@ -401,6 +406,20 @@ body {
     Charcter details page
 */
 
+.character-header{
+    display:flex;
+    align-items:stretch;
+}
+
+.character-header-name {
+    display: flex;
+    font-weight: bold;
+    font-size: 100px;
+    align-items: center;
+    justify-content: center;
+    margin-left:50px;
+}
+
 .charcter-tab-buttons {
     display: flex;
     gap: 10px;
@@ -549,6 +568,73 @@ body {
     margin-top: 5px;
 }
 
+/*
+    Character details page review 
+*/
+
+.strengths-weaknesses{
+    display:flex;
+    margin-top:30px;
+}
+
+.strengths {
+    flex: 1;
+    background-color: grey;
+    margin-right:100px;
+    padding-left:10px;
+}
+
+.weaknesses {
+    flex: 1;
+    background-color: grey;
+    padding-left:10px;
+}
+
+.strengths ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.strengths li {
+    display: flex;
+    align-items: flex-start; 
+    gap: 8px;
+}
+
+    .strengths li::before {
+        content: "+";
+        color: greenyellow;
+        font-weight: bold;
+        line-height: 1; 
+        margin-top: 2px; 
+    }
+
+.weaknesses ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.weaknesses li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+    .weaknesses li::before {
+        content: "-";
+        color: red;
+        font-weight: bold;
+        line-height: 1;
+        margin-top: 2px;
+    }
+
+.character-review {
+    background-color: grey;
+    padding: 5px 0 20px 5px;
+}
+/*
+    Colors for elements
+*/
 .Fire{
     background-color:red;
 }

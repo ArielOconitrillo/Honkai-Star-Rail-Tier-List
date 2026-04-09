@@ -8,8 +8,11 @@
 
 <body class="character-deatails-body">
 
-    <h1>@Model.Name</h1>
-    <img src="/Images/Characters/@Model.Image" width="150" style="background: linear-gradient(135deg, #facc15, #fde68a);">
+    <div class="character-header">
+        <img class="@Model.Element" src="/Images/Characters/@Model.Image" width="150">
+        <span class="character-header-name">@Model.Name</span>
+    </div>
+    
 
     <div class="character-tab-buttons">
         <button class="character-tab-btn active" data-tab="information">Info</button>
@@ -142,43 +145,55 @@
             </div>
         </div>
 
+        @* Character Review *@
         <div class="character-panel" id="review">
             @{
                 var guide = Model.CharacterGuide;
             }
 
-            @if (!string.IsNullOrWhiteSpace(guide?.Strengths))
-            {
-                <h4 style="color:greenyellow">Strengths</h4>
-                <ul>
-                    @foreach (var strength in Model.CharacterGuide.Strengths.Split('\n'))
+            <div class="strengths-weaknesses">
+                <div class="strengths">
+                    @if (!string.IsNullOrWhiteSpace(guide?.Strengths))
                     {
-                        if (!string.IsNullOrWhiteSpace(strength))
-                        {
-                            <li>@strength.Trim()</li>
-                        }
+                        <h2 style="color:greenyellow">Strengths</h2>
+                        <hr />
+                        <ul>
+                            @foreach (var strength in Model.CharacterGuide.Strengths.Split('\n'))
+                            {
+                                if (!string.IsNullOrWhiteSpace(strength))
+                                {
+                                    <li>@strength.Trim()</li>
+                                }
+                            }
+                        </ul>
                     }
-                </ul>
-            }
+                </div>
+                
+                <div class="weaknesses">
+                    @if (!string.IsNullOrWhiteSpace(guide?.Weaknesses))
+                    {
+                        <h2 style="color:red">Weaknesses</h2>
+                        <hr />
+                        <ul>
+                            @foreach (var weakness in Model.CharacterGuide.Weaknesses.Split('\n'))
+                            {
+                                if (!string.IsNullOrWhiteSpace(weakness))
+                                {
+                                    <li>@weakness.Trim()</li>
+                                }
+                            }
+                        </ul>
+                    }
+                </div>
+            </div>
+            
 
-            @if (!string.IsNullOrWhiteSpace(guide?.Weaknesses))
-            {
-                <h4 style="color:red">Weaknesses</h4>
-                <ul>
-                    @foreach (var weakness in Model.CharacterGuide.Weaknesses.Split('\n'))
-                    {
-                        if (!string.IsNullOrWhiteSpace(weakness))
-                        {
-                            <li>@weakness.Trim()</li>
-                        }
-                    }
-                </ul>
-            }
+            
 
             @if (!string.IsNullOrWhiteSpace(guide?.Review))
             {
-                <h4 style="color:fuchsia">Review</h4>
-                @Model.CharacterGuide.Review
+                <h1 style="color:fuchsia">Review</h1>
+                <p class="character-review">@Model.CharacterGuide.Review</p>
             }
         </div>
 
