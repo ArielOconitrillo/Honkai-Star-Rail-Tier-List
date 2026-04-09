@@ -72,15 +72,22 @@
             {
                 var companion = Model.Companions.First();
 
-                <h4>Memosprite: @companion.Name</h4>
-                <img src="/Images/Companions/@companion.Image" width="500" />
+                <h1 style="margin-top:100px">@companion.Type</h1>
+                <div class="companion-header">
+                    <img src="/Images/Companions/@companion.Image" width="500" />
+                    <span class="companion-name">@companion.Name</span>
+                </div>
 
                 @foreach (var skill in companion.Skills)
                 {
                     <div class="skill" id="skill_@skill.Id">
-                        <h5>@skill.Name</h5>
-                        <p>@skill.SkillType</p>
 
+                        <div class="skill-info">
+                            <p class="skill-type @Model.Element">@skill.SkillType</p>
+                            <h3 class="skill-name ">@skill.Name</h3>
+                        </div>
+
+                        @*@ Display the discription and add a slider if needed to view the skill at differnt levels *@
                         <p class="skill-description">
                             @Html.Raw(skill.Description)
                         </p>
@@ -89,29 +96,31 @@
                         {
                             var startLevel = Math.Max(1, skill.MaxLevel - 2);
 
-                            <label>
-                                Skill Level: <span id="levelDisplay_@skill.Id">@startLevel</span>
-                            </label>
+                            <div class="skill-changer">
+                                <label>
+                                    Skill Level: <span id="levelDisplay_@skill.Id">@startLevel</span>
+                                </label>
 
 
-
-                            <input type="range"
-                                   class="skill-slider"
-                                   id="slider_@skill.Id"
-                                   data-display="levelDisplay_@skill.Id"
-                                   data-container="skill_@skill.Id"
-                                   data-values='@Html.Raw(Json.Serialize(
-                    skill.LevelValue.Select(v => new
-                    {
-                        level = v.Level,
-                        statType = v.StatType.ToString(),
-                        value = v.Value
-                    })
-                    ))'
-                                   min="1"
-                                   max="@skill.MaxLevel"
-                                   value="@startLevel">
+                                <input type="range"
+                                       class="skill-slider"
+                                       id="slider_@skill.Id"
+                                       data-display="levelDisplay_@skill.Id"
+                                       data-container="skill_@skill.Id"
+                                       data-values='@Html.Raw(Json.Serialize(
+                                         skill.LevelValue.Select(v => new
+                                         {
+                                             level = v.Level,
+                                             statType = v.StatType.ToString(),
+                                             value = v.Value
+                                         })
+                                    ))'
+                                       min="1"
+                                       max="@skill.MaxLevel"
+                                       value="@startLevel">
+                            </div>
                         }
+
                     </div>
                 }
             }

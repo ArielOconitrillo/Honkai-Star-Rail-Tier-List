@@ -25,6 +25,10 @@ body {
     color: yellow;
 }
 
+/*
+    Page Backgrounds
+*/
+
 .TLBackground {
     background-image: url('/Images/BackgroundTL.webp');
     background-repeat: no-repeat;
@@ -33,8 +37,11 @@ body {
     color: white;
 }
 
-.character-deatails-body{
-    background-color: black;
+.character-deatails-body {
+    background-image: url('/Images/Backgrounds/Space.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
     color: white;
 }
 /*
@@ -468,6 +475,25 @@ body {
 .skill-value{
     color: gold;
     font-weight: bold;
+}
+
+/*
+    Companion Display
+*/
+
+.companion-header{
+    display:flex;
+    margin-top:100px;
+    align-items:stretch;
+}
+
+.companion-name{
+    flex:auto;
+    display:flex;
+    font-weight:bold;
+    font-size:100px;
+    align-items:center;
+    justify-content:center;
 }
 
 /*

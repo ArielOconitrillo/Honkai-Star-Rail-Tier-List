@@ -7,6 +7,7 @@
         public string Description { get; set; }
         public int CharacterId { get; set; }
         public string Image {  get; set; } 
+        public string Type { get; set; }
         public Character Character { get; set; }
         public List<Skill> Skills { get; set; }
     }

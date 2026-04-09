@@ -558,8 +558,8 @@ namespace Honkai_Star_Rail_Tier_List.Data
 
             var memosprites = new Companion[]
             {
-                new Companion{Name = "Netherwing", Description = "A powerful Dragon that fights alongside Castorice and contributes most of her damage", Character = castorice, Image = "Netherwing.webp"},
-                new Companion{Name = "Little Ica", Description = "Hyacines memosprite, Little Ica, helps her by healing allies and constantly launching follow up attacks", Character = hyacine, Image = "Little Ica.webp"}
+                new Companion{Name = "Netherwing", Description = "A powerful Dragon that fights alongside Castorice and contributes most of her damage", Character = castorice, Image = "Netherwing.webp", Type= "Memosprite"},
+                new Companion{Name = "Little Ica", Description = "Hyacines memosprite, Little Ica, helps her by healing allies and constantly launching follow up attacks", Character = hyacine, Image = "Little Ica.webp", Type = "Memosprite"}
             };
 
             context.Companions.AddRange(memosprites);
