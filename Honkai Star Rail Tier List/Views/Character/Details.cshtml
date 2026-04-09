@@ -12,7 +12,7 @@
         <img class="@Model.Element" src="/Images/Characters/@Model.Image" width="150">
         <span class="character-header-name">@Model.Name</span>
     </div>
-    
+
 
     <div class="character-tab-buttons">
         <button class="character-tab-btn active" data-tab="information">Info</button>
@@ -44,9 +44,9 @@
                         var startLevel = Math.Max(1, skill.MaxLevel - 2);
 
                         <div class="skill-changer">
-                        <label>
-                            Skill Level: <span id="levelDisplay_@skill.Id">@startLevel</span>
-                        </label>
+                            <label>
+                                Skill Level: <span id="levelDisplay_@skill.Id">@startLevel</span>
+                            </label>
 
 
                             <input type="range"
@@ -55,13 +55,13 @@
                                    data-display="levelDisplay_@skill.Id"
                                    data-container="skill_@skill.Id"
                                    data-values='@Html.Raw(Json.Serialize(
-                                        skill.LevelValue.Select(v => new
-                                        {
-                                            level = v.Level,
-                                            statType = v.StatType.ToString(),
-                                            value = v.Value
-                                        })
-                                   ))'
+                                  skill.LevelValue.Select(v => new
+                                  {
+                                      level = v.Level,
+                                      statType = v.StatType.ToString(),
+                                      value = v.Value
+                                  })
+                             ))'
                                    min="1"
                                    max="@skill.MaxLevel"
                                    value="@startLevel">
@@ -111,13 +111,13 @@
                                        data-display="levelDisplay_@skill.Id"
                                        data-container="skill_@skill.Id"
                                        data-values='@Html.Raw(Json.Serialize(
-                                         skill.LevelValue.Select(v => new
-                                         {
-                                             level = v.Level,
-                                             statType = v.StatType.ToString(),
-                                             value = v.Value
-                                         })
-                                    ))'
+                                           skill.LevelValue.Select(v => new
+                                           {
+                                               level = v.Level,
+                                               statType = v.StatType.ToString(),
+                                               value = v.Value
+                                           })
+                                      ))'
                                        min="1"
                                        max="@skill.MaxLevel"
                                        value="@startLevel">
@@ -131,17 +131,17 @@
             @* Eidolon display*@
             <h1 class="eidolon-header">Eidolons</h1>
             <div class="eidolon-display">
-            @foreach (var eidolon in Model.Eidolons.OrderBy(e => e.Level))
-            {
-                
-                <div class="eidolon" id="eidolon_@eidolon.Id">
-                    <div class="eidolon-title">
-                        <span class="eidolon-level @Model.Element">E@(eidolon.Level)</span>
-                        <span class="eidolon-name">@eidolon.Name</span>
-                    </div>
+                @foreach (var eidolon in Model.Eidolons.OrderBy(e => e.Level))
+                {
+
+                    <div class="eidolon" id="eidolon_@eidolon.Id">
+                        <div class="eidolon-title">
+                            <span class="eidolon-level @Model.Element">E@(eidolon.Level)</span>
+                            <span class="eidolon-name">@eidolon.Name</span>
+                        </div>
                         <p class="eidolon-description">@eidolon.Description</p>
-                   </div>
-            }
+                    </div>
+                }
             </div>
         </div>
 
@@ -168,7 +168,7 @@
                         </ul>
                     }
                 </div>
-                
+
                 <div class="weaknesses">
                     @if (!string.IsNullOrWhiteSpace(guide?.Weaknesses))
                     {
@@ -186,38 +186,66 @@
                     }
                 </div>
             </div>
-            
-
-            
 
             @if (!string.IsNullOrWhiteSpace(guide?.Review))
             {
-                <h1 style="color:fuchsia">Review</h1>
+                <h1>Review</h1>
                 <p class="character-review">@Model.CharacterGuide.Review</p>
             }
         </div>
 
+        @* Builds section*@
         <div class="character-panel" id="build">
-            <h6 style="color:deeppink">Builds</h6>
+            <h1>Builds</h1>
             @foreach (var build in Model.Builds)
             {
-                <p>@build.Name</p>
-                <p>@build.Description</p>
-                @foreach (var relicSet in build.RelicSets)
-                {
-                    <p>@relicSet.Rank</p>
-                    if (relicSet.RelicSet1Id == relicSet.RelicSet2Id)
+                <div class="build">
+                    <div class="build-header">
+                        <span class="build-name">@build.Name </span>
+                        <span class="build-description">@build.Description</span>
+                    </div>
+
+                    <h1>Recommended Relics</h1>
+                    @foreach (var relicSet in build.RelicSets)
                     {
-                        <img src="~/Images/Relics/@relicSet.RelicSet1.Image" width="100" />
-                        <p>4pc @relicSet.RelicSet1.FourPieceEffect</p>
+                        <div class="build-relics">
+                            @if (relicSet.RelicSet1Id == relicSet.RelicSet2Id)
+                            {
+                                <div class="build-relic-header">
+                                    <span class="relic-header-rank @Model.Element">@relicSet.Rank</span>
+                                    <span class="relic-header-name">4pc: @relicSet.RelicSet1.Name</span>
+                                </div>
+                                <div class="relic-build-4">
+                                    <img src="/Images/Relics/@relicSet.RelicSet1.Image" width="80" />
+                                    <div class="relic-build-4-text">
+                                        <p>2pc: @relicSet.RelicSet1.TwoPieceEffect</p>
+                                        <p>4pc: @relicSet.RelicSet1.FourPieceEffect</p>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="build-relic-header">
+                                    <span class="relic-header-rank @Model.Element">@relicSet.Rank</span>
+                                    <span class="relic-header-name">2pc: @relicSet.RelicSet1.Name + 2pc: @relicSet.RelicSet2.Name</span>
+                                </div>
+                                <div class="relic-build-2">
+                                    <img src="/Images/Relics/@relicSet.RelicSet1.Image" width="60" />
+                                    <p>2pc: @relicSet.RelicSet1.TwoPieceEffect</p>
+                                </div>
+                                <div class="relic-build-2">
+                                    <img src="/Images/Relics/@relicSet.RelicSet2.Image" width="60" />
+                                    <p>2pc: @relicSet.RelicSet2.TwoPieceEffect</p>
+                                </div>
+
+                            }
+                            <p>@relicSet.Description</p>
+                        </div>
                     }
-                    else
-                    {
-                        <p>2pc @relicSet.RelicSet1.Name + 2pc @relicSet.RelicSet2.Name</p>
-                        <ul><img src="/Images/Relics/@relicSet.RelicSet1.Image" width="25" /> @relicSet.RelicSet1.Name: @relicSet.RelicSet1.TwoPieceEffect</ul>
-                        <ul><img src="/Images/Relics/@relicSet.RelicSet2.Image" width="40" /> @relicSet.RelicSet2.Name: @relicSet.RelicSet2.TwoPieceEffect</ul>
-                    }
-                }
+
+
+                </div>
+
                 <p>Recommended Stats:</p>
                 <ul>Body: @build.BuildStats.Body</ul>
                 <ul>Feet: @build.BuildStats.Feet</ul>
