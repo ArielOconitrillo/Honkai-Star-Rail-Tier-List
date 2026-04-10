@@ -243,32 +243,70 @@
                         </div>
                     }
 
-
-                </div>
-
-                <p>Recommended Stats:</p>
-                <ul>Body: @build.BuildStats.Body</ul>
-                <ul>Feet: @build.BuildStats.Feet</ul>
-                <ul>Substats: @build.BuildStats.SubstatPriority</ul>
-
-                <h6 style="color:lightpink">Light Cones</h6>
-                @foreach (var lightCone in build.LightCones.OrderBy(lc => lc.Rank))
-                {
-                    <div>
-                        <img src="/Images/Light Cones/@lightCone.LightCone.Image" width="100" />
-                        <p>@lightCone.LightCone.Name</p>
+                    @* Stats section*@
+                    <h4>Recommended Stats</h4>
+                    <div class="character-stats">
+                        <div class="recommended-stat">
+                            <img src="/Images/Relics/Body.webp" width="40"/>
+                            <span>Body:</span>
+                            <span>@build.BuildStats.Body</span>
+                        </div>
+                        <div class="recommended-stat">
+                            <img src="/Images/Relics/Feet.webp" width="40" />
+                            <span>Feet:</span>
+                            <span>@build.BuildStats.Feet</span>
+                        </div>
+                        <div class="recommended-stat">
+                            <span>Substats:</span>
+                            <span>@build.BuildStats.SubstatPriority</span>
+                        </div>
                     </div>
 
-                    <p>@lightCone.Description</p>
-
-                }
+                    @* Recommended Light Cones section*@
+                    <div class="character-light-cones">
+                        <h1>Light Cones</h1>
+                        @foreach (var lightCone in build.LightCones.OrderBy(lc => lc.Rank))
+                        {
+                            <div class="build-light-cone">
+                                <img src="/Images/Light Cones/@lightCone.LightCone.Image" width="100" />
+                                <div class="build-light-cone-info">
+                                    <div>
+                                        <span class="light-cone-rank">@lightCone.Rank.</span> <span class="character-light-cone-name rarity-@lightCone.LightCone.Rarity">@lightCone.LightCone.Name</span>
+                                    </div>
+                                    <span class="character-light-cone-description">@lightCone.LightCone.Description</span>
+                                    <span class="character-light-cone-reasoning">@lightCone.Description</span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
             }
 
-            <h6 style="color:gold">Teams</h6>
+            @* Teams*@
+            <div class="character-teams">
+                <h1>Teams</h1>
+                @foreach (var ct in Model.CharacterTeams.OrderBy(ct => ct.Rank))
+                {
+                    <span class="team-name">@Model.Name @ct.Type Team</span>
+                    <div class="team-display">
+                        @foreach (var member in ct.Team.TeamMembers.OrderBy(m => m.Order))
+                        {
+                            <div class="team-member">
+                                <img src="/Images/Characters/@member.Character.Image" />
+                                <div>
+                                    <span class="team-member-role">@member.Role:</span>
+                                    <span class="team-member-name">@member.Character.Name</span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                
+            </div>
+
+            
             @foreach (var ct in Model.CharacterTeams.OrderBy(ct => ct.Rank))
             {
-                <h4>@ct.Type Team</h4>
-
                 <div style="display:flex; gap:10px;">
                     @foreach (var member in ct.Team.TeamMembers.OrderBy(m => m.Order))
                     {
