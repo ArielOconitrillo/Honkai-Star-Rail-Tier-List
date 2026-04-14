@@ -165,21 +165,25 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    document.getElementById("clearAllFiltersBtn").addEventListener("click", function () {
+    const clearAllBtn = document.getElementById("clearAllFiltersBtn");
 
-        activeFilters = {
-            rarity: [],
-            path: [],
-            element: []
-        };
+    if (clearAllBtn) {
+        clearAllBtn.addEventListener("click", function () {
 
-        document.querySelectorAll(".filter-btn")
-            .forEach(btn => btn.classList.remove("active"));
+            activeFilters = {
+                rarity: [],
+                path: [],
+                element: []
+            };
 
-        updateTierList(currentMode);
+            document.querySelectorAll(".filter-btn")
+                .forEach(btn => btn.classList.remove("active"));
 
-        this.blur();
-    });
+            updateTierList(currentMode);
+
+            this.blur();
+        });
+    }
 
     function clearFilter(filterType) {
 
@@ -197,8 +201,10 @@ document.addEventListener("DOMContentLoaded", function () {
     //Tooltip code
 
     document.addEventListener("mouseover", function (e) {
-        const char = e.target.closest(".character-card");
-        if (!char || char.contains(e.relatedTarget)) return;
+        const img = e.target.closest(".character-card img");
+        if (!img) return;
+
+        const char = img.closest(".character-card");
 
         const tooltip = document.getElementById("character-tooltip");
 
@@ -244,10 +250,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     document.addEventListener("mouseout", function (e) {
-        const char = e.target.closest(".character-card");
-        if (!char) return;
-
-        if (char.contains(e.relatedTarget)) return;
+        const img = e.target.closest(".character-card img");
+        if (!img) return;
 
         document.getElementById("character-tooltip").style.display = "none";
     });

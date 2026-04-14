@@ -30,7 +30,7 @@ namespace Honkai_Star_Rail_Tier_List.Data
                     TierMOC = "S",
                     TierAS = "S",
                     TierPF = "S",
-                    Image = "Firefly_profile.webp",
+                    Image = "Firefly.webp",
                     Description = "A powerful fire DPS character."
                 },
 

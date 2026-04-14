@@ -251,6 +251,7 @@ body {
     font-size: 15px;
     text-align: center;
     margin-bottom: 5px;
+    overflow-wrap:break-word;
 }
 
 .tier-box {
@@ -773,24 +774,59 @@ body {
 */
 
 .character-teams{
+    display:flex;
+    flex-direction:column;
     background-color:grey;
+    gap:50px;
+}
+
+.character-team{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    padding-bottom:10px;
+    border:1px solid;
 }
 
 .team-display{
     display:flex;
+    justify-content:space-around;
+    align-items:flex-start;
 }
 
 .team-member{
-    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    width:250px;
+}
+
+
+    .team-member img {
+        width:100%;
+        height: auto;
+    }
+
+.team-name{
+    display:flex;
+    font-weight:bold;   
+    font-size:35px;
+    justify-content:center;
+    border:1px solid;
+}
+
+.team-member-text {
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 2px 5px;
 }
 
 .team-member img{
-    width:80%;
-    height:80%;
-}
-
-.team-name{
-    font-weight:bold;
+    cursor:pointer;
 }
 
 /*
@@ -818,4 +854,32 @@ body {
 
 .rarity-4{
     color:purple;
+}
+
+/*
+    Roles
+*/
+
+.DPS {
+    background-color: red;
+    border-radius: 10px;
+    color:black;
+}
+
+.SubDPS {
+    background-color: mediumpurple;
+    border-radius:10px;
+    color:black;
+}
+
+.Support {
+    background-color: yellow;
+    border-radius: 10px;
+    color:black;
+}
+
+.Sustain {
+    background-color: greenyellow;
+    border-radius: 10px;
+    color:black;
 }

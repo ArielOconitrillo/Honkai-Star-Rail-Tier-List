@@ -287,37 +287,30 @@
                 <h1>Teams</h1>
                 @foreach (var ct in Model.CharacterTeams.OrderBy(ct => ct.Rank))
                 {
-                    <span class="team-name">@Model.Name @ct.Type Team</span>
-                    <div class="team-display">
-                        @foreach (var member in ct.Team.TeamMembers.OrderBy(m => m.Order))
-                        {
-                            <div class="team-member">
-                                <img src="/Images/Characters/@member.Character.Image" />
-                                <div>
-                                    <span class="team-member-role">@member.Role:</span>
-                                    <span class="team-member-name">@member.Character.Name</span>
+                    <div class="character-team">
+                        <span class="team-name @Model.Element">@Model.Name @ct.Type Team</span>
+                        <div class="team-display">
+                            @foreach (var member in ct.Team.TeamMembers.OrderBy(m => m.Order))
+                            {
+                                <div class="team-member character-card @member.Role"
+                                     data-name="@member.Character.Name"
+                                     data-rarity="@member.Character.Rarity"
+                                     data-path="@member.Character.Path"
+                                     data-element="@member.Character.Element"
+                                     data-as="@member.Character.TierAS"
+                                     data-moc="@member.Character.TierMOC"
+                                     data-pf="@member.Character.TierPF">
+                                    <img src="/Images/Characters/@member.Character.Image" />
+                                    <div class="team-member-text">
+                                        <span class="team-member-role">@member.Role:</span>
+                                        <span class="team-member-name">@member.Character.Name</span>
+                                    </div>
                                 </div>
-                            </div>
-                        }
-                    </div>
-                }
-                
-            </div>
-
-            
-            @foreach (var ct in Model.CharacterTeams.OrderBy(ct => ct.Rank))
-            {
-                <div style="display:flex; gap:10px;">
-                    @foreach (var member in ct.Team.TeamMembers.OrderBy(m => m.Order))
-                    {
-                        <div style="text-align:center;">
-                            <img src="/Images/Characters/@member.Character.Image" width="60" />
-                            <p>@member.Character.Name</p>
-                            <p>@member.Role</p>
+                            }
                         </div>
-                    }
-                </div>
-            }
+                    </div> 
+                }
+            </div>
         </div>
     </div>
 </body>
