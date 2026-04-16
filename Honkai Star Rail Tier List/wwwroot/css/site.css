@@ -449,15 +449,34 @@ body {
     display: block;
 }
 
+.info-page{
+    display:flex;
+    flex-direction:column;
+    gap:50px;
+}
+
 /*
     Skill display
 */
+
+.skill-display{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    padding-top:10px;
+}
+
+.skills{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
 .skill {
     background-color: grey;
     border:solid;
     border-color: lightgray;
     color:white;
-    margin-top:10px;
 }
 
 .skill-info {
@@ -501,9 +520,14 @@ body {
     Companion Display
 */
 
+.companion-display{
+    display:flex;
+    flex-direction:column;
+    gap:40px;
+}
+
 .companion-header{
     display:flex;
-    margin-top:100px;
     align-items:stretch;
 }
 
@@ -520,18 +544,22 @@ body {
     Eidolon Display
 */
 
-.eidolon-header {
-    margin-top: 100px;
+.eidolon-display{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
 }
 
-.eidolon-display{
+.eidolons{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:10px;
 }
 
 .eidolon {
     background-color: grey;
     border: solid;
     border-color: lightgray;
-    margin-top:10px;
 }
 
 .eidolon-title {

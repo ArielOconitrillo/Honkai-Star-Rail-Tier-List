@@ -24,126 +24,139 @@
         <div class="character-panel active" id="information">
 
             @*Skill display*@
-            <h1>Skills</h1>
-            @foreach (var skill in Model.Skills)
-            {
-                <div class="skill" id="skill_@skill.Id">
-
-                    <div class="skill-info">
-                        <p class="skill-type @Model.Element">@skill.SkillType</p>
-                        <h3 class="skill-name ">@skill.Name</h3>
-                    </div>
-
-                    @*@ Display the discription and add a slider if needed to view the skill at differnt levels *@
-                    <p class="skill-description">
-                        @Html.Raw(skill.Description)
-                    </p>
-
-                    @if (skill.MaxLevel > 1)
-                    {
-                        var startLevel = Math.Max(1, skill.MaxLevel - 2);
-
-                        <div class="skill-changer">
-                            <label>
-                                Skill Level: <span id="levelDisplay_@skill.Id">@startLevel</span>
-                            </label>
-
-
-                            <input type="range"
-                                   class="skill-slider"
-                                   id="slider_@skill.Id"
-                                   data-display="levelDisplay_@skill.Id"
-                                   data-container="skill_@skill.Id"
-                                   data-values='@Html.Raw(Json.Serialize(
-                                  skill.LevelValue.Select(v => new
-                                  {
-                                      level = v.Level,
-                                      statType = v.StatType.ToString(),
-                                      value = v.Value
-                                  })
-                             ))'
-                                   min="1"
-                                   max="@skill.MaxLevel"
-                                   value="@startLevel">
-                        </div>
-                    }
-
-                </div>
-            }
-
-            @if (Model.Companions != null && Model.Companions.Any())
-            {
-                var companion = Model.Companions.First();
-
-                <h1 style="margin-top:100px">@companion.Type</h1>
-                <div class="companion-header">
-                    <img src="/Images/Companions/@companion.Image" width="500" />
-                    <span class="companion-name">@companion.Name</span>
-                </div>
-
-                @foreach (var skill in companion.Skills)
-                {
-                    <div class="skill" id="skill_@skill.Id">
-
-                        <div class="skill-info">
-                            <p class="skill-type @Model.Element">@skill.SkillType</p>
-                            <h3 class="skill-name ">@skill.Name</h3>
-                        </div>
-
-                        @*@ Display the discription and add a slider if needed to view the skill at differnt levels *@
-                        <p class="skill-description">
-                            @Html.Raw(skill.Description)
-                        </p>
-
-                        @if (skill.MaxLevel > 1)
+            <div class="info-page">
+                <div class="skill-display">
+                    <h1>Skills</h1>
+                    <div class="skills">
+                        @foreach (var skill in Model.Skills)
                         {
-                            var startLevel = Math.Max(1, skill.MaxLevel - 2);
+                            <div class="skill" id="skill_@skill.Id">
 
-                            <div class="skill-changer">
-                                <label>
-                                    Skill Level: <span id="levelDisplay_@skill.Id">@startLevel</span>
-                                </label>
+                                <div class="skill-info">
+                                    <p class="skill-type @Model.Element">@skill.SkillType</p>
+                                    <h3 class="skill-name ">@skill.Name</h3>
+                                </div>
+
+                                @*@ Display the discription and add a slider if needed to view the skill at differnt levels *@
+                                <p class="skill-description">
+                                    @Html.Raw(skill.Description)
+                                </p>
+
+                                @if (skill.MaxLevel > 1)
+                                {
+                                    var startLevel = Math.Max(1, skill.MaxLevel - 2);
+
+                                    <div class="skill-changer">
+                                        <label>
+                                            Skill Level: <span id="levelDisplay_@skill.Id">@startLevel</span>
+                                        </label>
 
 
-                                <input type="range"
-                                       class="skill-slider"
-                                       id="slider_@skill.Id"
-                                       data-display="levelDisplay_@skill.Id"
-                                       data-container="skill_@skill.Id"
-                                       data-values='@Html.Raw(Json.Serialize(
-                                           skill.LevelValue.Select(v => new
-                                           {
-                                               level = v.Level,
-                                               statType = v.StatType.ToString(),
-                                               value = v.Value
-                                           })
-                                      ))'
-                                       min="1"
-                                       max="@skill.MaxLevel"
-                                       value="@startLevel">
+                                        <input type="range"
+                                               class="skill-slider"
+                                               id="slider_@skill.Id"
+                                               data-display="levelDisplay_@skill.Id"
+                                               data-container="skill_@skill.Id"
+                                               data-values='@Html.Raw(Json.Serialize(
+                               skill.LevelValue.Select(v => new
+                               {
+                                   level = v.Level,
+                                   statType = v.StatType.ToString(),
+                                   value = v.Value
+                               })
+                             ))'
+                                               min="1"
+                                               max="@skill.MaxLevel"
+                                               value="@startLevel">
+                                    </div>
+                                }
+
                             </div>
                         }
-
                     </div>
-                }
-            }
+                </div>
 
-            @* Eidolon display*@
-            <h1 class="eidolon-header">Eidolons</h1>
-            <div class="eidolon-display">
-                @foreach (var eidolon in Model.Eidolons.OrderBy(e => e.Level))
+                @if (Model.Companions != null && Model.Companions.Any())
                 {
+                    var companion = Model.Companions.First();
 
-                    <div class="eidolon" id="eidolon_@eidolon.Id">
-                        <div class="eidolon-title">
-                            <span class="eidolon-level @Model.Element">E@(eidolon.Level)</span>
-                            <span class="eidolon-name">@eidolon.Name</span>
+                    <div class="companion-display">
+                        <h1>@companion.Type</h1>
+                        <div class="companion-header">
+                            <img src="/Images/Companions/@companion.Image" width="500" />
+                            <span class="companion-name">@companion.Name</span>
                         </div>
-                        <p class="eidolon-description">@eidolon.Description</p>
+                        <div class="skills">
+                            @foreach (var skill in companion.Skills)
+                            {
+                                <div class="skill" id="skill_@skill.Id">
+
+                                    <div class="skill-info">
+                                        <p class="skill-type @Model.Element">@skill.SkillType</p>
+                                        <h3 class="skill-name ">@skill.Name</h3>
+                                    </div>
+
+                                    @*@ Display the discription and add a slider if needed to view the skill at differnt levels *@
+                                    <p class="skill-description">
+                                        @Html.Raw(skill.Description)
+                                    </p>
+
+                                    @if (skill.MaxLevel > 1)
+                                    {
+                                        var startLevel = Math.Max(1, skill.MaxLevel - 2);
+
+                                        <div class="skill-changer">
+                                            <label>
+                                                Skill Level: <span id="levelDisplay_@skill.Id">@startLevel</span>
+                                            </label>
+
+
+                                            <input type="range"
+                                                   class="skill-slider"
+                                                   id="slider_@skill.Id"
+                                                   data-display="levelDisplay_@skill.Id"
+                                                   data-container="skill_@skill.Id"
+                                                   data-values='@Html.Raw(Json.Serialize(
+                                              skill.LevelValue.Select(v => new
+                                              {
+                                                  level = v.Level,
+                                                  statType = v.StatType.ToString(),
+                                                  value = v.Value
+                                              })
+                                         ))'
+                                                   min="1"
+                                                   max="@skill.MaxLevel"
+                                                   value="@startLevel">
+                                        </div>
+                                    }
+
+                                </div>
+                            }
+                        </div>
                     </div>
+                    
                 }
+
+                @* Eidolon display*@
+                <div class="eidolon-display">
+                    <h1>Eidolons</h1>
+                    <div class="eidolons">
+                        @foreach (var eidolon in Model.Eidolons.OrderBy(e => e.Level))
+                        {
+
+                            <div class="eidolon" id="eidolon_@eidolon.Id">
+                                <div class="eidolon-title">
+                                    <span class="eidolon-level @Model.Element">E@(eidolon.Level)</span>
+                                    <span class="eidolon-name">@eidolon.Name</span>
+                                </div>
+                                <p class="eidolon-description">@eidolon.Description</p>
+                            </div>
+                        }
+                    </div>
+                </div>
             </div>
-        </div>
+                
+            </div>
 
         @* Character Review *@
         <div class="character-panel" id="review">
