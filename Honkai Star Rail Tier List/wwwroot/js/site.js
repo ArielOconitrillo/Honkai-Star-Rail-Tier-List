@@ -258,6 +258,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+/**
+ * Character details page tab button code
+ */
 document.querySelectorAll(".character-tab-btn").forEach(btn => {
     btn.addEventListener("click", function () {
 

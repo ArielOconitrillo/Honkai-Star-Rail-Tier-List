@@ -407,9 +407,23 @@ body {
     Charcter details page
 */
 
-.character-header{
+.character-details-header{
     display:flex;
-    align-items:stretch;
+    flex-direction:column;
+    gap:20px;
+}
+
+.character-intro {
+    background-color: grey;
+}
+
+.intro-paragraph{
+    
+}
+
+.character-header {
+    display: flex;
+    align-items: stretch;
 }
 
 .character-header-name {
@@ -421,24 +435,37 @@ body {
     margin-left:50px;
 }
 
-.charcter-tab-buttons {
+.character-tab-buttons {
     display: flex;
     gap: 10px;
-    margin-bottom: 20px;
 }
 
 .character-tab-btn {
+    display: flex;
+    flex: 1;
     padding: 8px 16px;
     background: #1e293b;
     border: 1px solid #334155;
     color: white;
     border-radius: 6px;
     cursor: pointer;
+    text-align: center;
+    justify-content: center;
+    gap:5px;
 }
 
     .character-tab-btn.active {
         background: #334155;
         border-color: gold;
+    }
+
+    .character-tab-btn img{
+        width:25px;
+    }
+
+    .character-tab-btn span{
+        font-weight:bold;
+        font-size:25px;
     }
 
 .character-panel {
@@ -463,7 +490,6 @@ body {
 .skill-display{
     display:flex;
     flex-direction:column;
-    gap:10px;
 }
 
 .skill-group{

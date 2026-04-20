@@ -8,16 +8,33 @@
 
 <body class="character-deatails-body">
 
-    <div class="character-header">
-        <img class="@Model.Element" src="/Images/Characters/@Model.Image" width="150">
-        <span class="character-header-name">@Model.Name</span>
-    </div>
+    <div class="character-details-header">
+        <div class="character-header">
+            <img class="@Model.Element" src="/Images/Characters/@Model.Image" width="150">
+            <span class="character-header-name">@Model.Name</span>
+        </div>
 
+        <div class="character-intro">
+            <h1>Introduction</h1>
+            <hr />
+            <p class="intro-paragraph">@Model.Description</p>
+        </div>
+        
 
-    <div class="character-tab-buttons">
-        <button class="character-tab-btn active" data-tab="information">Info</button>
-        <button class="character-tab-btn" data-tab="review">Review</button>
-        <button class="character-tab-btn" data-tab="build">Build</button>
+        <div class="character-tab-buttons">
+            <button class="character-tab-btn active" data-tab="information">
+                <img src="/Images/Icons/Info.svg" />
+                <span>Info</span>
+            </button>
+            <button class="character-tab-btn" data-tab="review">
+                <img src="/Images/Icons/Review.svg" />
+                <span>Review</span>
+            </button>
+            <button class="character-tab-btn" data-tab="build">
+                <img src="/Images/Icons/Build.svg" />
+                <span>Build</span>
+            </button>
+        </div>
     </div>
 
     <div class="character-tabs">
