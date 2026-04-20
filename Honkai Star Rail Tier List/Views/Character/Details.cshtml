@@ -348,7 +348,7 @@
                                              data-as="@member.Character.TierAS"
                                              data-moc="@member.Character.TierMOC"
                                              data-pf="@member.Character.TierPF">
-                                             <a asp-controller="Character" asp-action="Details" asp-route-name="@member.Character.Name" style="width:100%">
+                                             <a asp-controller="Character" asp-action="Details" asp-route-slug="@member.Character.Slug" style="width:100%">
                                                 <img src="/Images/Characters/@member.Character.Image" />
                                              </a>
                                             <div class="team-member-text">

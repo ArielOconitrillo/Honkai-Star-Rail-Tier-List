@@ -27,6 +27,8 @@ namespace Honkai_Star_Rail_Tier_List.Models
 
         public string Description { get; set; }
 
+        public string Slug { get; set; }
+
         public List<Skill> Skills { get; set; }
 
         public List<Eidolon> Eidolons { get; set; }

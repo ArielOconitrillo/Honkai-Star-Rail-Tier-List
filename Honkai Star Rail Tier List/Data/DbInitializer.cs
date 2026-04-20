@@ -31,7 +31,8 @@ namespace Honkai_Star_Rail_Tier_List.Data
                     TierAS = "S",
                     TierPF = "S",
                     Image = "Firefly.webp",
-                    Description = "A powerful fire DPS character."
+                    Description = "A powerful fire DPS character.",
+                    Slug = "firefly"
                 },
 
                 new Character
@@ -44,8 +45,9 @@ namespace Honkai_Star_Rail_Tier_List.Data
                     TierMOC = "S",
                     TierAS = "A",
                     TierPF = "A",
-                    Image = "Fugue_profile.webp",
-                    Description = "An important break team amplifier."
+                    Image = "Fugue.webp",
+                    Description = "An important break team amplifier.",
+                    Slug = "fugue"
                 },
 
                 new Character
@@ -59,7 +61,8 @@ namespace Honkai_Star_Rail_Tier_List.Data
                     TierAS = "S",
                     TierPF = "S",
                     Image = "Lingsha_profile.webp",
-                    Description = "An important break team healer."
+                    Description = "An important break team healer.",
+                    Slug = "lingsha"
                 },
 
                 new Character
@@ -73,7 +76,8 @@ namespace Honkai_Star_Rail_Tier_List.Data
                     TierAS = "A",
                     TierPF = "A",
                     Image = "The_Dahlia_profile.webp",
-                    Description = "An crucial member of the break team."
+                    Description = "An crucial member of the break team.",
+                    Slug = "the-dahlia"
                 },
 
                 new Character {
@@ -86,7 +90,8 @@ namespace Honkai_Star_Rail_Tier_List.Data
                     TierAS = "A",
                     TierPF = "S",
                     Image = "Harmony_Trailblazer.webp",
-                    Description = "A great Super Break damage enabler"
+                    Description = "A great Super Break damage enabler",
+                    Slug = "trailblazer-harmony"
                 },
 
                 new Character {
@@ -99,7 +104,8 @@ namespace Honkai_Star_Rail_Tier_List.Data
                     TierAS = "A",
                     TierPF = "B",
                     Image = "Ruan_Mei.webp",
-                    Description = "A fantastic damage buffer"
+                    Description = "A fantastic damage buffer",
+                    Slug = "ruan-mei"
                 },
 
                 new Character {
@@ -112,7 +118,8 @@ namespace Honkai_Star_Rail_Tier_List.Data
                     TierAS = "F",
                     TierPF = "F",
                     Image = "Gallagher_profile.webp",
-                    Description = "A good easily obatainable sustainer"
+                    Description = "A good easily obatainable sustainer",
+                    Slug = "gallagher"
                 },
 
                 new Character {
@@ -125,7 +132,8 @@ namespace Honkai_Star_Rail_Tier_List.Data
                     TierAS = "S",
                     TierPF = "S",
                     Image = "Castorice.webp",
-                    Description = "The best Remembrance damage dealer"
+                    Description = "The best Remembrance damage dealer",
+                    Slug = "castorice"
                 },
                 new Character {
                     Name = "Hyacine",
@@ -137,7 +145,8 @@ namespace Honkai_Star_Rail_Tier_List.Data
                     TierAS = "S",
                     TierPF = "S",
                     Image = "Hyacine.webp",
-                    Description = "One of the best healers in the game"
+                    Description = "One of the best healers in the game",
+                    Slug = "hyacine"
                 }
             };
 

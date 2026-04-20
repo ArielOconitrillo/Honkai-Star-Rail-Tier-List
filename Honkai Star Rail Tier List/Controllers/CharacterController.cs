@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Honkai_Star_Rail_Tier_List.Controllers
 {
-
+    [Route("Character")]
     public class CharacterController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -14,9 +14,10 @@ namespace Honkai_Star_Rail_Tier_List.Controllers
         public CharacterController(ApplicationDbContext context)
         {
             _context = context;
-        } 
+        }
 
-        public IActionResult Details(string name)
+        [HttpGet("{slug}")]
+        public IActionResult Details(string slug)
         {
             var character = _context.Characters
                 .Include(c => c.Skills)
@@ -43,7 +44,7 @@ namespace Honkai_Star_Rail_Tier_List.Controllers
                     .ThenInclude(co => co.Skills)
                         .ThenInclude(s => s.LevelValue)
                 .Include(c => c.CharacterGuide)
-                .FirstOrDefault(c => c.Name == name);
+                .FirstOrDefault(c => c.Slug == slug);
 
             if (character == null)
             {
