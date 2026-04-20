@@ -13,7 +13,7 @@
 
         public string Description { get; set; }
         public int MaxLevel {  get; set; }
-
+        public string SkillCategory { get; set; }
         public Character Character { get; set; }
         public Companion Companion { get; set; }
 

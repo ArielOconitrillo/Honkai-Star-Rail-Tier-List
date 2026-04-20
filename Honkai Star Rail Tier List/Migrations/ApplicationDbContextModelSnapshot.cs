@@ -382,6 +382,10 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("SkillCategory")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("SkillType")
                         .IsRequired()
                         .HasColumnType("TEXT");

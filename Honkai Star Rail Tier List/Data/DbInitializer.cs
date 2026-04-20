@@ -155,7 +155,8 @@ namespace Honkai_Star_Rail_Tier_List.Data
                 SkillType = "Basic ATK",
                 Name = "Order: Flare Propulsion",
                 Description = "Deals Fire DMG equal to <span class=\"skill-value\" data-stat=\"Damage\"></span>% of SAM's ATK to a single target enemy.",
-                MaxLevel = 7
+                MaxLevel = 7,
+                SkillCategory = "Basic ATK"
             },
 
             new Skill {
@@ -163,7 +164,8 @@ namespace Honkai_Star_Rail_Tier_List.Data
                 SkillType = "Basic ATK (Enhanced)",
                 Name = "Fyrefly Type-IV: Pyrogenic Decimation",
                 Description = "Restores HP by an amount equal to 20% of this unit's Max HP. Deals Fire DMG equal to <span class=\"skill-value\" data-stat=\"Damage\"></span>% of SAM's ATK to a single target enemy.",
-                MaxLevel = 7
+                MaxLevel = 7,
+                SkillCategory = "Basic ATK"
             },
 
             new Skill
@@ -172,7 +174,8 @@ namespace Honkai_Star_Rail_Tier_List.Data
                 SkillType = "Skill",
                 Name = "Order: Aerial Bombardment",
                 Description = "Consumes SAM's HP equal to 40% of SAM's Max HP and regenerates a fixed amount of Energy equal to <span class=\"skill-value\" data-stat=\"Energy\"></span>% of SAM's Max Energy. Deals Fire DMG equals to <span class=\"skill-value\" data-stat=\"Damage\"></span>% of SAM's ATK to a single target enemy. If the current HP is not sufficient, then SAM's HP is reduced to 1 when using this skill. Enables this unit's next Action to be Advanced by 25%.",
-                MaxLevel = 12
+                MaxLevel = 12,
+                SkillCategory = "Skill"
             },
 
             new Skill {
@@ -180,7 +183,8 @@ namespace Honkai_Star_Rail_Tier_List.Data
                 SkillType = "Skill (Enhanced)",
                 Name = "Fyrefly Type-IV: Deathstar Overload",
                 Description = "Restores HP by an amount equal to 25% of this unit's Max HP. Applies Fire Weakness to a single target enemy, lasting for 2 turn(s). Deals Fire DMG equal to (0.2 x Break Effect + <span class=\"skill-value\" data-stat=\"MainDamage\"></span>%) of SAM's ATK to this target. At the same time, deal Fire DMG equal to (0.10 x Break Effect + <span class=\"skill-value\" data-stat=\"AdjacentDamage\"></span>%) of SAM's ATK to adjacent targets. The Break Effect taken into the calculation is capped at 360%.",
-                MaxLevel= 12
+                MaxLevel= 12,
+                SkillCategory = "Skill"
             },
 
             new Skill
@@ -189,7 +193,8 @@ namespace Honkai_Star_Rail_Tier_List.Data
                 SkillType = "Ultimate",
                 Name = "Fyrefly Type-IV: Complete Combustion",
                 Description = "Upon entering the Complete Combustion state, Advances SAM's Action by 100% and gains Enhanced Basic ATK and Enhanced Skill. While in Complete Combustion, increases SPD by <span class=\"skill-value\" data-stat=\"Speed\"></span>, and when using the Enhance Basic ATK or Enhance Skill, increases this unit's Weakness Break efficiency by 50% and Break DMG received by enemy targets by <span class=\"skill-value\" data-stat=\"Damage\"></span>%, lasting until the current attack ends.\r\n\r\nA countdown timer for the Complete Combustion state appears on the Action Order. When the countdown turn starts, SAM exits Complete Combustion state. The countdown has a fixed SPD of 70.\r\n\r\nSAM cannot use Ultimate while in Complete Combustion.",
-                MaxLevel = 12
+                MaxLevel = 12,
+                SkillCategory = "Ultimate"
             },
 
             new Skill
@@ -198,7 +203,8 @@ namespace Honkai_Star_Rail_Tier_List.Data
                 SkillType = "Talent",
                 Name = "Chrysalid Pyronexus",
                 Description = "The lower the HP, the less DMG received. When HP is 20% or lower, the DMG Reduction reaches its maximum effect, reducing up to <span class=\"skill-value\" data-stat=\"DamageReduction\"></span>%. During the Complete Combustion, the DMG Reduction remains at its maximum effect, and the Effect RES increases by <span class=\"skill-value\" data-stat=\"EffectRES\"></span>%.\r\nIf Energy is lower than 50% when the battle starts, regenerates Energy to 50%. Once Energy is regenerated to its maximum, dispels all debuffs on this unit.",
-                MaxLevel = 12
+                MaxLevel = 12,
+                SkillCategory = "Talent"
             },
 
             new Skill
@@ -207,7 +213,8 @@ namespace Honkai_Star_Rail_Tier_List.Data
                 SkillType = "Technique",
                 Name = "Δ Order: Meteoric Incineratoin",
                 Description = "Leaps into the air and moves about freely for 5 seconds, which can ended early by launching a plunging attack. When the duration ends, plunges and immediately attacks all enemies within a set area. At the start of each wave, applies a Fire Weakness to all enemies, lasting for 2 turn(s). Then, deals Fire DMG equal to 200% of SAM's ATK to all enemies.",
-                MaxLevel = 1
+                MaxLevel = 1,
+                SkillCategory = "Technique"
             }
             };
 
@@ -456,7 +463,8 @@ namespace Honkai_Star_Rail_Tier_List.Data
                     SkillType = "Basic ATK",
                     Name = "Lament, Nethersea's Ripple",
                     Description = "Deals Quantum DMG equal to <span data-stat=\"Damage\"></span>% of Castorice's Max HP to one designated enemy.",
-                    MaxLevel = 7
+                    MaxLevel = 7,
+                    SkillCategory = "Basic ATK"
                 },
                 new Skill
                 {
@@ -464,7 +472,8 @@ namespace Honkai_Star_Rail_Tier_List.Data
                     SkillType = "Skill",
                     Name = "Silence, Wraithfly's Caress",
                     Description = "Consumes 30% of all allies' current HP. Deals Quantum DMG equal to <span data-stat=\"MainDamage\"></span>% of Castorice's Max HP to one designated enemy and Quantum DMG equal to <span data-stat=\"AdjacentDamage\"></span>% of Castorice's Max HP to adjacent targets.\r\nIf the current HP is insufficient, reduces the current HP down to 1.\r\nIf Netherwing is on the battlefield, the Skill becomes \"Boneclaw, Doomdrake's Embrace\" instead.",
-                    MaxLevel = 12
+                    MaxLevel = 12,
+                    SkillCategory = "Skill"
                 },
                 new Skill
                 {
@@ -472,7 +481,8 @@ namespace Honkai_Star_Rail_Tier_List.Data
                     SkillType = "Skill (Enhanced)",
                     Name = "Boneclaw, Doomdrake's Embrace",
                     Description = "Consumes 40% of the current HP of all allies (except Netherwing). Castorice and Netherwing launch Joint ATK on the targets, dealing Quantum DMG equal to <span data-stat=\"MainDamage\"></span>% and <span data-stat=\"SecondaryDamage\"></span>% of Castorice's Max HP to all enemies.\r\nIf the current HP is insufficient, reduces the current HP down to 1.",
-                    MaxLevel = 12
+                    MaxLevel = 12,
+                    SkillCategory = "Skill"
                 },
                 new Skill
                 {
@@ -480,7 +490,8 @@ namespace Honkai_Star_Rail_Tier_List.Data
                     SkillType = "Ultimate",
                     Name = "Doomshriek, Dawn's Chime",
                     Description = "Summons the memosprite Netherwing and advances its action by 100%. At the same time, deploys the Territory \"Lost Netherland,\" which decreases all enemies' All-Type RES by <span data-stat=\"DamageReduction\"></span>%. If Castorice has the DMG Boost effect from her Talent, then this effect spreads to Netherwing. Netherwing has an initial SPD of 165 and a set Max HP equal to 100% of max \"Newbud.\"\r\nAfter Netherwing experiences 3 turns or when its HP is 0, it disappears and dispels the Territory \"Lost Netherland.\"",
-                    MaxLevel = 12
+                    MaxLevel = 12,
+                    SkillCategory = "Ultimate"
                 },
                 new Skill
                 {
@@ -488,7 +499,8 @@ namespace Honkai_Star_Rail_Tier_List.Data
                     SkillType = "Talent",
                     Name = "Desolation Across Palms",
                     Description = "The maximum limit of \"Newbud\" is related to the levels of all characters on the battlefield. For every 1 point of HP lost by all allies, Castorice gains 1 point of \"Newbud.\" When \"Newbud\" reaches its maximum limit, can activate the Ultimate. When allies lose HP, Castorice's and Netherwing's DMG dealt increases by <span data-stat=\"DamageBoost\"></span>%. This effect can stack up to 3 time(s), lasting for 3 turn(s).\r\nWhen Netherwing is on the field, \"Newbud\" cannot be gained through Talent, and every 1 point of HP lost by all allies (except Netherwing) will be converted to an equal amount of HP for Netherwing.",
-                    MaxLevel = 12
+                    MaxLevel = 12,
+                    SkillCategory = "Talent"
                 },
                 new Skill
                 {
@@ -496,7 +508,8 @@ namespace Honkai_Star_Rail_Tier_List.Data
                     SkillType = "Technique",
                     Name = "Wail, Death's Herald",
                     Description = "After using Technique, enters the \"Netherveil\" state that lasts for 20 seconds. While \"Netherveil\" is active, enemies are unable to actively approach Castorice.\r\nDuring \"Netherveil,\" active attacks will cause all enemies within range to enter combat. At the same time, summons the memosprite Netherwing, advances its action by 100%, and deploys the Territory \"Lost Netherland.\" Netherwing has its current HP equal to 50% of max \"Newbud.\" After entering battle, consumes 40% of the current HP of all allies (except Netherwing).\r\nIf Netherwing is not summoned after entering battle, Castorice gains \"Newbud\" by an amount equal to 30% of max \"Newbud.\"",
-                    MaxLevel = 1
+                    MaxLevel = 1,
+                    SkillCategory = "Technique"
                 },
                 new Skill
                 {
@@ -504,7 +517,8 @@ namespace Honkai_Star_Rail_Tier_List.Data
                     SkillType = "Exclusive",
                     Name = "Sanctuary of Mooncocoon",
                     Description = "After obtaining Castorice or when Castorice is in the current team, receive the following effect: In battle, when an ally character receives a killing blow, all ally characters that received a killing blow in this action enter the \"Mooncocoon\" state. Characters in \"Mooncocoon\" temporarily delay becoming downed and can take actions normally. After the action and before the start of the next turn, if their current HP increases or they gain a Shield, \"Mooncocoon\" is removed. Otherwise, they will be downed immediately. This effect can only trigger once per battle.",
-                    MaxLevel = 1
+                    MaxLevel = 1,
+                    SkillCategory = "Exclusive"
                 }
             };
 
@@ -577,6 +591,7 @@ namespace Honkai_Star_Rail_Tier_List.Data
                     Name = "Claw Splits the Veil",
                     Description = "Deals Quantum DMG equal to <span data-stat=\"Damage\"></span>% of Castorice's Max HP to all enemies.",
                     MaxLevel = 9,
+                    SkillCategory = "Memosprite Skill"
                 },
                 new Skill
                 {
@@ -585,6 +600,7 @@ namespace Honkai_Star_Rail_Tier_List.Data
                     Name = "Breath Scorches the Shadow",
                     Description = "Launching \"Breath Scorches the Shadow\" will consume 25% of Netherwing's Max HP to deal Quantum DMG equal to <span data-stat=\"Damage\"></span>% of Castorice's Max HP to all enemies.\r\nIn one attack, \"Breath Scorches the Shadow\" can be launched repeatedly, with the DMG multiplier increased progressively to <span data-stat=\"DamageBoost\"></span>% / <span data-stat=\"DamageReduction\"></span>%. After reaching <span data-stat=\"DamageReduction\"></span>%, it will not increase further. The DMG Multiplier Boost effect will not decrease before Netherwing disappears.\r\nWhen Netherwing's current HP is equal to or less than 25% of its Max HP, launching this ability will actively reduce HP down to 1, and then trigger the ability effect equal to that of the Talent \"Wings Sweep the Ruins.\"",
                     MaxLevel = 9,
+                    SkillCategory = "Memosprite Skill"
                 },
                 new Skill
                 {
@@ -593,6 +609,7 @@ namespace Honkai_Star_Rail_Tier_List.Data
                     Name = "Mooncocoon Shrouds the Form",
                     Description = "When Netherwing is on the field, it acts as backup for allies. When allies take DMG or consume HP, their current HP can be reduced down to a minimum of 1, after which Netherwing will consume HP at 500% of the original value until Netherwing disappears.",
                     MaxLevel = 1,
+                    SkillCategory = "Memosprite Talent"
                 },
                 new Skill
                 {
@@ -601,6 +618,7 @@ namespace Honkai_Star_Rail_Tier_List.Data
                     Name = "Roar Rumbles the Realm",
                     Description = "When Netherwing is summoned, increases DMG dealt by all allies by 10%, lasting for 3 turn(s).",
                     MaxLevel = 1,
+                    SkillCategory = "Memosprite Talent"
                 },
                 new Skill
                 {
@@ -609,6 +627,7 @@ namespace Honkai_Star_Rail_Tier_List.Data
                     Name = "Wings Sweep the Ruins",
                     Description = "When Netherwing disappears, deals 6 instance(s) of DMG, with each instance dealing Quantum DMG equal to <span data-stat=\"Damage\"></span>% of Castorice's Max HP to one random enemy. At the same time, restores HP by an amount equal to <span data-stat=\"Healing\"></span>% of Castorice's Max HP plus <span data-stat=\"Health\"></span> for all allies.",
                     MaxLevel = 7,
+                    SkillCategory = "Memosprite Talent"
                 },
             };
 

@@ -28,51 +28,56 @@
                 <div class="skill-display">
                     <h1>Skills</h1>
                     <div class="skills">
-                        @foreach (var skill in Model.Skills)
-                        {
-                            <div class="skill" id="skill_@skill.Id">
+                        @foreach ( var skillGroup in Model.Skills.GroupBy(sg => sg.SkillCategory))
+                            {
+                                <div class="skill-group">
+                                    @foreach (var skill in skillGroup)
+                                    {
+                                        <div class="skill" id="skill_@skill.Id">
 
-                                <div class="skill-info">
-                                    <p class="skill-type @Model.Element">@skill.SkillType</p>
-                                    <h3 class="skill-name ">@skill.Name</h3>
+                                            <div class="skill-info">
+                                                <p class="skill-type @Model.Element">@skill.SkillType</p>
+                                                <h3 class="skill-name ">@skill.Name</h3>
+                                            </div>
+
+                                            @*@ Display the discription and add a slider if needed to view the skill at differnt levels *@
+                                            <p class="skill-description">
+                                                @Html.Raw(skill.Description)
+                                            </p>
+
+                                            @if (skill.MaxLevel > 1)
+                                            {
+                                                var startLevel = Math.Max(1, skill.MaxLevel - 2);
+
+                                                <div class="skill-changer">
+                                                    <label>
+                                                        Skill Level: <span id="levelDisplay_@skill.Id">@startLevel</span>
+                                                    </label>
+
+
+                                                    <input type="range"
+                                                           class="skill-slider"
+                                                           id="slider_@skill.Id"
+                                                           data-display="levelDisplay_@skill.Id"
+                                                           data-container="skill_@skill.Id"
+                                                           data-values='@Html.Raw(Json.Serialize(
+                                                    skill.LevelValue.Select(v => new
+                                                    {
+                                                        level = v.Level,
+                                                        statType = v.StatType.ToString(),
+                                                        value = v.Value
+                                                    })
+                                               ))'
+                                                           min="1"
+                                                           max="@skill.MaxLevel"
+                                                           value="@startLevel">
+                                                </div>
+                                            }
+
+                                        </div>
+                                    }
                                 </div>
-
-                                @*@ Display the discription and add a slider if needed to view the skill at differnt levels *@
-                                <p class="skill-description">
-                                    @Html.Raw(skill.Description)
-                                </p>
-
-                                @if (skill.MaxLevel > 1)
-                                {
-                                    var startLevel = Math.Max(1, skill.MaxLevel - 2);
-
-                                    <div class="skill-changer">
-                                        <label>
-                                            Skill Level: <span id="levelDisplay_@skill.Id">@startLevel</span>
-                                        </label>
-
-
-                                        <input type="range"
-                                               class="skill-slider"
-                                               id="slider_@skill.Id"
-                                               data-display="levelDisplay_@skill.Id"
-                                               data-container="skill_@skill.Id"
-                                               data-values='@Html.Raw(Json.Serialize(
-                               skill.LevelValue.Select(v => new
-                               {
-                                   level = v.Level,
-                                   statType = v.StatType.ToString(),
-                                   value = v.Value
-                               })
-                             ))'
-                                               min="1"
-                                               max="@skill.MaxLevel"
-                                               value="@startLevel">
-                                    </div>
-                                }
-
-                            </div>
-                        }
+                            }
                     </div>
                 </div>
 
@@ -87,54 +92,59 @@
                             <span class="companion-name">@companion.Name</span>
                         </div>
                         <div class="skills">
-                            @foreach (var skill in companion.Skills)
+                            @foreach ( var skillGroup in companion.Skills.GroupBy(sg => sg.SkillCategory))
                             {
-                                <div class="skill" id="skill_@skill.Id">
-
-                                    <div class="skill-info">
-                                        <p class="skill-type @Model.Element">@skill.SkillType</p>
-                                        <h3 class="skill-name ">@skill.Name</h3>
-                                    </div>
-
-                                    @*@ Display the discription and add a slider if needed to view the skill at differnt levels *@
-                                    <p class="skill-description">
-                                        @Html.Raw(skill.Description)
-                                    </p>
-
-                                    @if (skill.MaxLevel > 1)
+                                <div class="skill-group">
+                                    @foreach (var skill in skillGroup)
                                     {
-                                        var startLevel = Math.Max(1, skill.MaxLevel - 2);
+                                        <div class="skill" id="skill_@skill.Id">
 
-                                        <div class="skill-changer">
-                                            <label>
-                                                Skill Level: <span id="levelDisplay_@skill.Id">@startLevel</span>
-                                            </label>
+                                            <div class="skill-info">
+                                                <p class="skill-type @Model.Element">@skill.SkillType</p>
+                                                <h3 class="skill-name ">@skill.Name</h3>
+                                            </div>
+
+                                            @*@ Display the discription and add a slider if needed to view the skill at differnt levels *@
+                                            <p class="skill-description">
+                                                @Html.Raw(skill.Description)
+                                            </p>
+
+                                            @if (skill.MaxLevel > 1)
+                                            {
+                                                var startLevel = Math.Max(1, skill.MaxLevel - 2);
+
+                                                <div class="skill-changer">
+                                                    <label>
+                                                        Skill Level: <span id="levelDisplay_@skill.Id">@startLevel</span>
+                                                    </label>
 
 
-                                            <input type="range"
-                                                   class="skill-slider"
-                                                   id="slider_@skill.Id"
-                                                   data-display="levelDisplay_@skill.Id"
-                                                   data-container="skill_@skill.Id"
-                                                   data-values='@Html.Raw(Json.Serialize(
-                                              skill.LevelValue.Select(v => new
-                                              {
-                                                  level = v.Level,
-                                                  statType = v.StatType.ToString(),
-                                                  value = v.Value
-                                              })
-                                         ))'
-                                                   min="1"
-                                                   max="@skill.MaxLevel"
-                                                   value="@startLevel">
+                                                    <input type="range"
+                                                           class="skill-slider"
+                                                           id="slider_@skill.Id"
+                                                           data-display="levelDisplay_@skill.Id"
+                                                           data-container="skill_@skill.Id"
+                                                           data-values='@Html.Raw(Json.Serialize(
+                                                    skill.LevelValue.Select(v => new
+                                                    {
+                                                        level = v.Level,
+                                                        statType = v.StatType.ToString(),
+                                                        value = v.Value
+                                                    })
+                                               ))'
+                                                           min="1"
+                                                           max="@skill.MaxLevel"
+                                                           value="@startLevel">
+                                                </div>
+                                            }
+
                                         </div>
                                     }
-
                                 </div>
                             }
                         </div>
                     </div>
-                    
+
                 }
 
                 @* Eidolon display*@
@@ -155,175 +165,188 @@
                     </div>
                 </div>
             </div>
-                
-            </div>
+
+        </div>
 
         @* Character Review *@
         <div class="character-panel" id="review">
-            @{
-                var guide = Model.CharacterGuide;
-            }
+            <div class="review-page">
+                @{
+                    var guide = Model.CharacterGuide;
+                }
 
-            <div class="strengths-weaknesses">
-                <div class="strengths">
-                    @if (!string.IsNullOrWhiteSpace(guide?.Strengths))
-                    {
-                        <h2 style="color:greenyellow">Strengths</h2>
-                        <hr />
-                        <ul>
-                            @foreach (var strength in Model.CharacterGuide.Strengths.Split('\n'))
-                            {
-                                if (!string.IsNullOrWhiteSpace(strength))
+                <div class="strengths-weaknesses">
+                    <div class="strengths">
+                        @if (!string.IsNullOrWhiteSpace(guide?.Strengths))
+                        {
+                            <h2 style="color:greenyellow">Strengths</h2>
+                            <hr />
+                            <ul>
+                                @foreach (var strength in Model.CharacterGuide.Strengths.Split('\n'))
                                 {
-                                    <li>@strength.Trim()</li>
+                                    if (!string.IsNullOrWhiteSpace(strength))
+                                    {
+                                        <li>@strength.Trim()</li>
+                                    }
                                 }
-                            }
-                        </ul>
-                    }
+                            </ul>
+                        }
+                    </div>
+
+                    <div class="weaknesses">
+                        @if (!string.IsNullOrWhiteSpace(guide?.Weaknesses))
+                        {
+                            <h2 style="color:red">Weaknesses</h2>
+                            <hr />
+                            <ul>
+                                @foreach (var weakness in Model.CharacterGuide.Weaknesses.Split('\n'))
+                                {
+                                    if (!string.IsNullOrWhiteSpace(weakness))
+                                    {
+                                        <li>@weakness.Trim()</li>
+                                    }
+                                }
+                            </ul>
+                        }
+                    </div>
                 </div>
 
-                <div class="weaknesses">
-                    @if (!string.IsNullOrWhiteSpace(guide?.Weaknesses))
-                    {
-                        <h2 style="color:red">Weaknesses</h2>
-                        <hr />
-                        <ul>
-                            @foreach (var weakness in Model.CharacterGuide.Weaknesses.Split('\n'))
-                            {
-                                if (!string.IsNullOrWhiteSpace(weakness))
-                                {
-                                    <li>@weakness.Trim()</li>
-                                }
-                            }
-                        </ul>
-                    }
-                </div>
+                @if (!string.IsNullOrWhiteSpace(guide?.Review))
+                {
+                    <h1>Review</h1>
+                    <p class="character-review">@Model.CharacterGuide.Review</p>
+                }
             </div>
-
-            @if (!string.IsNullOrWhiteSpace(guide?.Review))
-            {
-                <h1>Review</h1>
-                <p class="character-review">@Model.CharacterGuide.Review</p>
-            }
         </div>
 
         @* Builds section*@
         <div class="character-panel" id="build">
-            <h1>Builds</h1>
-            @foreach (var build in Model.Builds)
-            {
-                <div class="build">
-                    <div class="build-header">
-                        <span class="build-name">@build.Name </span>
-                        <span class="build-description">@build.Description</span>
-                    </div>
-
-                    <h1>Recommended Relics</h1>
-                    @foreach (var relicSet in build.RelicSets)
-                    {
-                        <div class="build-relics">
-                            @if (relicSet.RelicSet1Id == relicSet.RelicSet2Id)
-                            {
-                                <div class="build-relic-header">
-                                    <span class="relic-header-rank @Model.Element">@relicSet.Rank</span>
-                                    <span class="relic-header-name">4pc: @relicSet.RelicSet1.Name</span>
-                                </div>
-                                <div class="relic-build-4">
-                                    <img src="/Images/Relics/@relicSet.RelicSet1.Image" width="80" />
-                                    <div class="relic-build-4-text">
-                                        <p>2pc: @relicSet.RelicSet1.TwoPieceEffect</p>
-                                        <p>4pc: @relicSet.RelicSet1.FourPieceEffect</p>
-                                    </div>
-                                </div>
-                            }
-                            else
-                            {
-                                <div class="build-relic-header">
-                                    <span class="relic-header-rank @Model.Element">@relicSet.Rank</span>
-                                    <span class="relic-header-name">2pc: @relicSet.RelicSet1.Name + 2pc: @relicSet.RelicSet2.Name</span>
-                                </div>
-                                <div class="relic-build-2">
-                                    <img src="/Images/Relics/@relicSet.RelicSet1.Image" width="60" />
-                                    <p>2pc: @relicSet.RelicSet1.TwoPieceEffect</p>
-                                </div>
-                                <div class="relic-build-2">
-                                    <img src="/Images/Relics/@relicSet.RelicSet2.Image" width="60" />
-                                    <p>2pc: @relicSet.RelicSet2.TwoPieceEffect</p>
-                                </div>
-
-                            }
-                            <p>@relicSet.Description</p>
-                        </div>
-                    }
-
-                    @* Stats section*@
-                    <h4>Recommended Stats</h4>
-                    <div class="character-stats">
-                        <div class="recommended-stat">
-                            <img src="/Images/Relics/Body.webp" width="40"/>
-                            <span>Body:</span>
-                            <span>@build.BuildStats.Body</span>
-                        </div>
-                        <div class="recommended-stat">
-                            <img src="/Images/Relics/Feet.webp" width="40" />
-                            <span>Feet:</span>
-                            <span>@build.BuildStats.Feet</span>
-                        </div>
-                        <div class="recommended-stat">
-                            <span>Substats:</span>
-                            <span>@build.BuildStats.SubstatPriority</span>
-                        </div>
-                    </div>
-
-                    @* Recommended Light Cones section*@
-                    <div class="character-light-cones">
-                        <h1>Light Cones</h1>
-                        @foreach (var lightCone in build.LightCones.OrderBy(lc => lc.Rank))
+            <div class="build-page">
+                <div class="build-display">
+                    <h1>Builds</h1>
+                    <div class="builds">
+                        @foreach (var build in Model.Builds)
                         {
-                            <div class="build-light-cone">
-                                <img src="/Images/Light Cones/@lightCone.LightCone.Image" width="100" />
-                                <div class="build-light-cone-info">
-                                    <div>
-                                        <span class="light-cone-rank">@lightCone.Rank.</span> <span class="character-light-cone-name rarity-@lightCone.LightCone.Rarity">@lightCone.LightCone.Name</span>
+                            <div class="build">
+                                <div class="build-header">
+                                    <span class="build-name">@build.Name </span>
+                                    <span class="build-description">@build.Description</span>
+                                </div>
+
+                                <h1>Recommended Relics</h1>
+                                @foreach (var relicSet in build.RelicSets)
+                                {
+                                    <div class="build-relics">
+                                        @if (relicSet.RelicSet1Id == relicSet.RelicSet2Id)
+                                        {
+                                            <div class="build-relic-header">
+                                                <span class="relic-header-rank @Model.Element">@relicSet.Rank</span>
+                                                <span class="relic-header-name">4pc: @relicSet.RelicSet1.Name</span>
+                                            </div>
+                                            <div class="relic-build-4">
+                                                <img src="/Images/Relics/@relicSet.RelicSet1.Image" width="80" />
+                                                <div class="relic-build-4-text">
+                                                    <p>2pc: @relicSet.RelicSet1.TwoPieceEffect</p>
+                                                    <p>4pc: @relicSet.RelicSet1.FourPieceEffect</p>
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="build-relic-header">
+                                                <span class="relic-header-rank @Model.Element">@relicSet.Rank</span>
+                                                <span class="relic-header-name">2pc: @relicSet.RelicSet1.Name + 2pc: @relicSet.RelicSet2.Name</span>
+                                            </div>
+                                            <div class="relic-build-2">
+                                                <img src="/Images/Relics/@relicSet.RelicSet1.Image" width="60" />
+                                                <p>2pc: @relicSet.RelicSet1.TwoPieceEffect</p>
+                                            </div>
+                                            <div class="relic-build-2">
+                                                <img src="/Images/Relics/@relicSet.RelicSet2.Image" width="60" />
+                                                <p>2pc: @relicSet.RelicSet2.TwoPieceEffect</p>
+                                            </div>
+
+                                        }
+                                        <p>@relicSet.Description</p>
                                     </div>
-                                    <span class="character-light-cone-description">@lightCone.LightCone.Description</span>
-                                    <span class="character-light-cone-reasoning">@lightCone.Description</span>
+                                }
+
+                                @* Stats section*@
+                                <h4>Recommended Stats</h4>
+                                <div class="character-stats">
+                                    <div class="recommended-stat">
+                                        <img src="/Images/Relics/Body.webp" width="40" />
+                                        <span>Body:</span>
+                                        <span>@build.BuildStats.Body</span>
+                                    </div>
+                                    <div class="recommended-stat">
+                                        <img src="/Images/Relics/Feet.webp" width="40" />
+                                        <span>Feet:</span>
+                                        <span>@build.BuildStats.Feet</span>
+                                    </div>
+                                    <div class="recommended-stat">
+                                        <span>Substats:</span>
+                                        <span>@build.BuildStats.SubstatPriority</span>
+                                    </div>
+                                </div>
+
+                                @* Recommended Light Cones section*@
+                                <div class="character-light-cones">
+                                    <h1>Light Cones</h1>
+                                    @foreach (var lightCone in build.LightCones.OrderBy(lc => lc.Rank))
+                                    {
+                                        <div class="build-light-cone">
+                                            <img src="/Images/Light Cones/@lightCone.LightCone.Image" width="100" />
+                                            <div class="build-light-cone-info">
+                                                <div>
+                                                    <span class="light-cone-rank">@lightCone.Rank.</span> <span class="character-light-cone-name rarity-@lightCone.LightCone.Rarity">@lightCone.LightCone.Name</span>
+                                                </div>
+                                                <span class="character-light-cone-description">@lightCone.LightCone.Description</span>
+                                                <span class="character-light-cone-reasoning">@lightCone.Description</span>
+                                            </div>
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         }
                     </div>
                 </div>
-            }
 
-            @* Teams*@
-            <div class="character-teams">
-                <h1>Teams</h1>
-                @foreach (var ct in Model.CharacterTeams.OrderBy(ct => ct.Rank))
-                {
-                    <div class="character-team">
-                        <span class="team-name @Model.Element">@Model.Name @ct.Type Team</span>
-                        <div class="team-display">
-                            @foreach (var member in ct.Team.TeamMembers.OrderBy(m => m.Order))
-                            {
-                                <div class="team-member character-card @member.Role"
-                                     data-name="@member.Character.Name"
-                                     data-rarity="@member.Character.Rarity"
-                                     data-path="@member.Character.Path"
-                                     data-element="@member.Character.Element"
-                                     data-as="@member.Character.TierAS"
-                                     data-moc="@member.Character.TierMOC"
-                                     data-pf="@member.Character.TierPF">
-                                    <img src="/Images/Characters/@member.Character.Image" />
-                                    <div class="team-member-text">
-                                        <span class="team-member-role">@member.Role:</span>
-                                        <span class="team-member-name">@member.Character.Name</span>
-                                    </div>
+                @* Teams*@
+                <div class="character-teams-display">
+                    <h1>Teams</h1>
+                    <div class="character-teams">
+                        @foreach (var ct in Model.CharacterTeams.OrderBy(ct => ct.Rank))
+                        {
+                            <div class="character-team">
+                                <span class="team-name @Model.Element">@Model.Name @ct.Type Team</span>
+                                <div class="team-display">
+                                    @foreach (var member in ct.Team.TeamMembers.OrderBy(m => m.Order))
+                                    {
+                                        <div class="team-member character-card @member.Role"
+                                             data-name="@member.Character.Name"
+                                             data-rarity="@member.Character.Rarity"
+                                             data-path="@member.Character.Path"
+                                             data-element="@member.Character.Element"
+                                             data-as="@member.Character.TierAS"
+                                             data-moc="@member.Character.TierMOC"
+                                             data-pf="@member.Character.TierPF">
+                                             <a asp-controller="Character" asp-action="Details" asp-route-name="@member.Character.Name" style="width:100%">
+                                                <img src="/Images/Characters/@member.Character.Image" />
+                                             </a>
+                                            <div class="team-member-text">
+                                                <span class="team-member-role">@member.Role:</span>
+                                                <span class="team-member-name">@member.Character.Name</span>
+                                            </div>
+                                        </div>
+                                    }
                                 </div>
-                            }
-                        </div>
-                    </div> 
-                }
+                            </div>
+                        }
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
 </body>

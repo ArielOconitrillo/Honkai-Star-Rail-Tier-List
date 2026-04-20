@@ -453,6 +453,7 @@ body {
     display:flex;
     flex-direction:column;
     gap:50px;
+    padding-top:40px;
 }
 
 /*
@@ -463,13 +464,18 @@ body {
     display:flex;
     flex-direction:column;
     gap:10px;
-    padding-top:10px;
 }
 
-.skills{
+.skill-group{
     display:flex;
     flex-direction:column;
-    gap:10px;
+}
+
+.skills {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    align-items:stretch;
 }
 
 .skill {
@@ -477,6 +483,9 @@ body {
     border:solid;
     border-color: lightgray;
     color:white;
+    height:100%;
+    display:flex;
+    flex-direction:column;
 }
 
 .skill-info {
@@ -598,23 +607,29 @@ body {
 }
 
 /*
-    Character details page review 
+    Character review page
 */
 
-.strengths-weaknesses{
+.review-page{
     display:flex;
-    margin-top:30px;
+    flex-direction:column;
+    gap:20px;
+    padding-top:40px;
+}
+
+.strengths-weaknesses {
+    display: flex;
+    gap:100px;
 }
 
 .strengths {
-    flex: 1;
+    flex:1;
     background-color: grey;
-    margin-right:100px;
     padding-left:10px;
 }
 
 .weaknesses {
-    flex: 1;
+    flex:1;
     background-color: grey;
     padding-left:10px;
 }
@@ -666,9 +681,27 @@ body {
     Build section
 */
 
+.build-page{
+    display:flex;
+    flex-direction:column;
+    gap:50px;
+    padding-top:40px;
+}
+
+.build-display{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.builds{
+    display:flex;
+    flex-direction:column;
+    gap:50px;
+}
+
 .build{
     background-color:grey;
-    padding-left:5px;
 }
 
 .build-header{
@@ -683,8 +716,8 @@ body {
     font-size:30px;
     border:solid;
     border-width: 0 3px 0 0;
-    padding-right:10px;
-    margin-left:5px;
+    padding-right:10px; 
+    padding-left:5px;
 }
 
 .build-description{
@@ -750,7 +783,9 @@ body {
 */
 
 .character-stats{
-
+    display:flex;
+    flex-direction:column;
+    gap:10px;
 }
 
 /*
@@ -761,7 +796,6 @@ body {
     display:flex;
     flex-direction:column;
     gap:10px;
-    margin-bottom:50px;
 }
 
 .build-light-cone{
@@ -801,19 +835,26 @@ body {
     Teams Display
 */
 
-.character-teams{
-    display:flex;
-    flex-direction:column;
-    background-color:grey;
-    gap:50px;
-}
-
-.character-team{
+.character-teams-display{
     display:flex;
     flex-direction:column;
     gap:20px;
-    padding-bottom:10px;
-    border:1px solid;
+}
+
+.character-teams {
+    display: flex;
+    flex-direction: column;
+    
+    gap:20px;
+}
+
+.character-team {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-bottom: 10px;
+    border: 1px solid;
+    background-color: grey;
 }
 
 .team-display{
@@ -829,7 +870,6 @@ body {
     text-align:center;
     width:250px;
 }
-
 
     .team-member img {
         width:100%;

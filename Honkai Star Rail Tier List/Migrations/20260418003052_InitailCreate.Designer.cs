@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Honkai_Star_Rail_Tier_List.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260408222500_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260418003052_InitailCreate")]
+    partial class InitailCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -262,6 +262,10 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CharacterId");
@@ -378,6 +382,10 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SkillCategory")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

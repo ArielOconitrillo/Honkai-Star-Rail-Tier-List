@@ -5,7 +5,7 @@
 namespace Honkai_Star_Rail_Tier_List.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitailCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -132,7 +132,8 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: false),
                     CharacterId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Image = table.Column<string>(type: "TEXT", nullable: false)
+                    Image = table.Column<string>(type: "TEXT", nullable: false),
+                    Type = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -359,7 +360,8 @@ namespace Honkai_Star_Rail_Tier_List.Migrations
                     SkillType = table.Column<string>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: false),
-                    MaxLevel = table.Column<int>(type: "INTEGER", nullable: false)
+                    MaxLevel = table.Column<int>(type: "INTEGER", nullable: false),
+                    SkillCategory = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
