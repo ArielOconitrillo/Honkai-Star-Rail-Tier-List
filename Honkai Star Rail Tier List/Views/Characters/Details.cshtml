@@ -340,7 +340,7 @@
                                 <div class="team-display">
                                     @foreach (var member in ct.Team.TeamMembers.OrderBy(m => m.Order))
                                     {
-                                        <div class="team-member character-card @member.Role"
+                                        <div class="team-member has-tooltip @member.Role"
                                              data-name="@member.Character.Name"
                                              data-rarity="@member.Character.Rarity"
                                              data-path="@member.Character.Path"
@@ -348,7 +348,7 @@
                                              data-as="@member.Character.TierAS"
                                              data-moc="@member.Character.TierMOC"
                                              data-pf="@member.Character.TierPF">
-                                             <a asp-controller="Character" asp-action="Details" asp-route-slug="@member.Character.Slug" style="width:100%">
+                                             <a asp-controller="Characters" asp-action="Details" asp-route-slug="@member.Character.Slug" style="width:100%">
                                                 <img src="/Images/Characters/@member.Character.Image" />
                                              </a>
                                             <div class="team-member-text">

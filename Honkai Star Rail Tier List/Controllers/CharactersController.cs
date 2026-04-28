@@ -6,14 +6,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Honkai_Star_Rail_Tier_List.Controllers
 {
-    [Route("Character")]
-    public class CharacterController : Controller
+    [Route("Characters")]
+    public class CharactersController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public CharacterController(ApplicationDbContext context)
+        public CharactersController(ApplicationDbContext context)
         {
             _context = context;
+        }
+
+        [HttpGet("")]
+        public IActionResult Index()
+        {
+            var characters = _context.Characters.ToList();
+            return View(characters);
         }
 
         [HttpGet("{slug}")]

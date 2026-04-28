@@ -76,7 +76,7 @@ let currentMode = "as";
 document.addEventListener("DOMContentLoaded", function () {
 
     const buttons = document.querySelectorAll(".mode-btn");
-    const characters = document.querySelectorAll(".character-card");
+    const characters = document.querySelectorAll(".has-tooltip");
 
     function updateTierList(mode) {
 
@@ -201,10 +201,8 @@ document.addEventListener("DOMContentLoaded", function () {
     //Tooltip code
 
     document.addEventListener("mouseover", function (e) {
-        const img = e.target.closest(".character-card img");
-        if (!img) return;
-
-        const char = img.closest(".character-card");
+        const char = e.target.closest(".has-tooltip");
+        if (!char) return;
 
         const tooltip = document.getElementById("character-tooltip");
 
@@ -250,8 +248,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     document.addEventListener("mouseout", function (e) {
-        const img = e.target.closest(".character-card img");
-        if (!img) return;
+        const char = e.target.closest(".has-tooltip");
+        if (!char) return;
 
         document.getElementById("character-tooltip").style.display = "none";
     });

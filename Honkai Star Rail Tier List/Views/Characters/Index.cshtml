@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Honkai_Star_Rail_Tier_List.Models.Character>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<body class="characters-page">
+    <h1>Characters</h1>
+    <p>There are currently @Model.Count() characters</p>
+
+    <div class="characters-list">
+        @foreach (var character in Model)
+        {
+            <a asp-controller="Characters" asp-action="Details" asp-route-slug="@character.Slug">
+                <div class="character-portrait has-tooltip" 
+                     data-name="@character.Name"
+                     data-rarity="@character.Rarity"
+                     data-path="@character.Path"
+                     data-element="@character.Element"
+                     data-as="@character.TierAS"
+                     data-moc="@character.TierMOC"
+                     data-pf="@character.TierPF">
+
+                    <img class="rarity-@character.Rarity" src="/Images/Characters/Portraits/@character.Image" />
+                    <div class="character-name">@character.Name</div>
+                </div>
+            </a>
+        }
+    </div>
+</body>

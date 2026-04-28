@@ -49,6 +49,11 @@ body {
     background-size: cover;
     color: white;
 }
+
+.characters-page{
+    background-color:black;
+    color:white;
+}
 /*
     Accordian and panel code taken and modified from W3Schools
 */
@@ -296,6 +301,73 @@ body {
 }
 
 /*
+    Characters Page
+*/
+
+.characters-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.character-portrait {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .character-portrait a {
+        display: block;
+    }
+
+    .character-portrait img{
+        object-fit:cover;
+        width:100%;
+        aspect-ratio: 2/3;
+        transition: transform 0.6s ease;
+    }
+
+    .character-portrait:hover {
+        transform: translateY(-3px);
+    }
+
+    .character-portrait:hover img {
+        transform: scale(1.1);
+    }
+
+    .character-portrait img.rarity-5{
+        background-color:gold;
+    }
+
+    .character-portrait img.rarity-4 {
+        background-color: purple;
+    }
+
+    .character-portrait::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient( to top, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.1) 20%, transparent 45% );
+    }
+
+.character-name {
+    position: absolute;
+    width: 100%;
+    bottom: 10px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.8);
+    z-index: 2;
+    word-wrap: break-word;
+}
+
+/*
     Mode buttons
 */
 .mode-buttons {
@@ -346,9 +418,24 @@ body {
 
 .filters {
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: center;
+    flex:1; 
+    gap: 15px;
+    justify-content: space-between;
+}
+
+.rarity-filters{
+    display:flex;
+    gap:10px;
+}
+
+.path-filters{
+    display:flex;
+    gap:10px;
+}
+
+.element-filters{
+    display:flex;
+    gap:10px;
 }
 
 .filter-btn {
