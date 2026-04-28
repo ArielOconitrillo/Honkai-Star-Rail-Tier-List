@@ -50,7 +50,7 @@ body {
     color: white;
 }
 
-.characters-page{
+.characters-page-background{
     background-color:black;
     color:white;
 }
@@ -127,7 +127,7 @@ body {
 .tier-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 15px;
     justify-content: flex-start;
     align-content: flex-start;
 }
@@ -166,12 +166,12 @@ body {
     text-align: center;
 }
 
-.character-card[data-rarity="5"] .character {
+[data-rarity="5"] .character {
     background: linear-gradient(135deg, #facc15, #fde68a);
     box-shadow: 0 0 10px rgba(250, 204, 21, 0.7);
 }
 
-.character-card[data-rarity="4"] .character {
+[data-rarity="4"] .character {
     background: linear-gradient(135deg, #a855f7, #d8b4fe);
     box-shadow: 0 0 10px rgba(168, 85, 247, 0.6);
 }
@@ -303,6 +303,12 @@ body {
 /*
     Characters Page
 */
+
+.characters-page{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
 
 .characters-list {
     display: grid;
@@ -446,7 +452,7 @@ body {
     justify-content: center;
     border-radius: 6px;
     background-color: black;
-    border: 2px solid transparent;
+    border: 1px solid white;
     box-sizing: border-box;
     cursor: pointer;
     line-height: 0;
@@ -475,11 +481,13 @@ body {
 .path-btn.active {
     box-shadow: 0 0 0 2px gold;
     background: #334155;
+    border:none;
 }
 
 .element-btn.active {
     box-shadow: 0 0 0 2px gold;
     background: #EBD5D1;
+    border:none;
 }
 
 .rarity-btn{
@@ -488,6 +496,7 @@ body {
 
     .rarity-btn.active {
         box-shadow: 0 0 0 2px gold;
+        border:none;
     }
 
 /*
@@ -1023,18 +1032,6 @@ body {
 
 .Wind{
     background-color:lawngreen;
-}
-
-/*
-    Rarities
-*/
-
-.rarity-5{
-    color:gold;
-}
-
-.rarity-4{
-    color:purple;
 }
 
 /*

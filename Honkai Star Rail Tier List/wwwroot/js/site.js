@@ -77,7 +77,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const buttons = document.querySelectorAll(".mode-btn");
     const characters = document.querySelectorAll(".has-tooltip");
+    const isTierPage = document.querySelector(".tier-container");
 
+    //Function for tier list filtering.sorting
     function updateTierList(mode) {
 
         document.querySelectorAll(".tier-container").forEach(c => c.innerHTML = "");
@@ -111,6 +113,26 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    //Function for characters page list filtering
+    function updateCharacterGrid() {
+
+        const characters = document.querySelectorAll(".has-tooltip");
+
+        characters.forEach(char => {
+
+            const rarity = char.dataset.rarity;
+            const path = char.dataset.path;
+            const element = char.dataset.element;
+
+            const hidden =
+                (activeFilters.rarity.length && !activeFilters.rarity.includes(rarity)) ||
+                (activeFilters.path.length && !activeFilters.path.includes(path)) ||
+                (activeFilters.element.length && !activeFilters.element.includes(element));
+
+            char.style.display = hidden ? "none" : "";
+        });
+    }
+
     // Default
     updateTierList("as");
 
@@ -125,7 +147,11 @@ document.addEventListener("DOMContentLoaded", function () {
             buttons.forEach(b => b.classList.remove("active"));
             this.classList.add("active");
 
-            updateTierList(currentMode);
+            if (isTierPage) {
+                updateTierList(currentMode);
+            } else {
+                updateCharacterGrid();
+            }
         });
     });
 
@@ -153,7 +179,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 this.classList.add("active");
             }
 
-            updateTierList(currentMode);
+            if (isTierPage) {
+                updateTierList(currentMode);
+            } else {
+                updateCharacterGrid();
+            }
 
             this.blur();
         });
@@ -179,7 +209,11 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelectorAll(".filter-btn")
                 .forEach(btn => btn.classList.remove("active"));
 
-            updateTierList(currentMode);
+            if (isTierPage) {
+                updateTierList(currentMode);
+            } else {
+                updateCharacterGrid();
+            }
 
             this.blur();
         });
@@ -195,7 +229,11 @@ document.addEventListener("DOMContentLoaded", function () {
             .forEach(btn => btn.classList.remove("active"));
 
         // Re-render list
-        updateTierList(currentMode);
+        if (isTierPage) {
+            updateTierList(currentMode);
+        } else {
+            updateCharacterGrid();
+        }
     }
 
     //Tooltip code
