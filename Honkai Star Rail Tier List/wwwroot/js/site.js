@@ -69,6 +69,7 @@ let activeFilters = {
 };
 
 let currentMode = "as";
+let searchQuery = "";
 
 /**
  * Code for the mode/filter buttons that change the tier list
@@ -77,7 +78,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const buttons = document.querySelectorAll(".mode-btn");
     const characters = document.querySelectorAll(".has-tooltip");
-    const isTierPage = document.querySelector(".tier-container");
 
     //Function for tier list filtering.sorting
     function updateTierList(mode) {
@@ -88,16 +88,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             let tier = char.dataset[mode];
             let role = char.dataset.role;
-            let rarity = char.dataset.rarity;
-            let path = char.dataset.path;
-            let element = char.dataset.element;
 
-            if (
-                (activeFilters.rarity.length && !activeFilters.rarity.includes(rarity)) ||
-                (activeFilters.path.length && !activeFilters.path.includes(path)) ||
-                (activeFilters.element.length && !activeFilters.element.includes(element))
-            ) { return; }
-
+            if (!matchesFilters(char)) return;
 
             if (!tier || !role) return;
 
@@ -113,25 +105,54 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    //Function for characters page list filtering
-    function updateCharacterGrid() {
+    //Function for characters or light cone page filtering
+    function updateGrid(selector) {
+        const items = document.querySelectorAll(selector);
 
-        const characters = document.querySelectorAll(".has-tooltip");
-
-        characters.forEach(char => {
-
-            const rarity = char.dataset.rarity;
-            const path = char.dataset.path;
-            const element = char.dataset.element;
-
-            const hidden =
-                (activeFilters.rarity.length && !activeFilters.rarity.includes(rarity)) ||
-                (activeFilters.path.length && !activeFilters.path.includes(path)) ||
-                (activeFilters.element.length && !activeFilters.element.includes(element));
-
-            char.style.display = hidden ? "none" : "";
+        items.forEach(el => {
+            const hidden = !matchesFilters(el);
+            el.style.display = hidden ? "none" : "";
         });
     }
+
+    function matchesFilters(el) {
+        //Name filter
+        if (searchQuery) {
+            const name = (el.dataset.name || "").toLowerCase();
+
+            if (!name.includes(searchQuery)) {
+                return false;
+            }
+        }
+
+        //Other filters
+        for (const key in activeFilters) {
+            const values = activeFilters[key];
+
+            if (values.length === 0) continue;
+
+            const dataValue = el.dataset[key];
+
+            if (!dataValue) continue;
+
+            if (!values.includes(dataValue)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    function runFilters() {
+        if (document.querySelector(".tier-container")) {
+            updateTierList(currentMode);
+        } else if (document.querySelector(".characters-list")) {
+            updateGrid(".has-tooltip");
+        } else if (document.querySelector(".light-cone-grid")) {
+            updateGrid(".light-cone");
+        }
+    }
+
 
     // Default
     updateTierList("as");
@@ -147,10 +168,12 @@ document.addEventListener("DOMContentLoaded", function () {
             buttons.forEach(b => b.classList.remove("active"));
             this.classList.add("active");
 
-            if (isTierPage) {
+            if (document.querySelector(".tier-container")) {
                 updateTierList(currentMode);
-            } else {
-                updateCharacterGrid();
+            } else if (document.querySelector(".characters-list")) {
+                updateGrid(".has-tooltip");
+            } else if (document.querySelector(".light-cone-grid")) {
+                updateGrid(".light-cone");
             }
         });
     });
@@ -168,21 +191,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
             let filterArray = activeFilters[filterType];
 
-            // Toggle behavior
             if (filterArray.includes(value)) {
                 activeFilters[filterType] = filterArray.filter(v => v !== value);
                 this.classList.remove("active");
             } else {
 
-                // remove active from same group
                 filterArray.push(value);
                 this.classList.add("active");
             }
 
-            if (isTierPage) {
+            if (document.querySelector(".tier-container")) {
                 updateTierList(currentMode);
-            } else {
-                updateCharacterGrid();
+            } else if (document.querySelector(".characters-list")) {
+                updateGrid(".has-tooltip");
+            } else if (document.querySelector(".light-cone-grid")) {
+                updateGrid(".light-cone");
             }
 
             this.blur();
@@ -209,11 +232,16 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelectorAll(".filter-btn")
                 .forEach(btn => btn.classList.remove("active"));
 
-            if (isTierPage) {
-                updateTierList(currentMode);
-            } else {
-                updateCharacterGrid();
+            if (searchInput) {
+                searchInput.value = "";
+                searchQuery = "";
             }
+
+            if (clearSearchBtn) {
+                clearSearchBtn.style.display = "none";
+            }
+
+            runFilters();
 
             this.blur();
         });
@@ -221,19 +249,60 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function clearFilter(filterType) {
 
-        // Reset the filter array
         activeFilters[filterType] = [];
 
-        // Remove active class from buttons of that type
         document.querySelectorAll(`.filter-btn[data-filter="${filterType}"]`)
             .forEach(btn => btn.classList.remove("active"));
 
-        // Re-render list
-        if (isTierPage) {
+        if (document.querySelector(".tier-container")) {
             updateTierList(currentMode);
-        } else {
-            updateCharacterGrid();
+        } else if (document.querySelector(".characters-list")) {
+            updateGrid(".has-tooltip");
+        } else if (document.querySelector(".light-cone-grid")) {
+            updateGrid(".light-cone");
         }
+    }
+
+    //Name search
+    let searchTimeout;
+    const searchInput = document.getElementById("searchInput");
+    const clearSearchBtn = document.getElementById("clearSearchBtn");
+
+    document.getElementById("searchInput").addEventListener("input", function () {
+        clearTimeout(searchTimeout);
+
+        searchTimeout = setTimeout(() => {
+            searchQuery = this.value.toLowerCase().trim();
+
+            if (document.querySelector(".tier-container")) {
+                updateTierList(currentMode);
+            } else if (document.querySelector(".characters-list")) {
+                updateGrid(".has-tooltip");
+            } else if (document.querySelector(".light-cone-grid")) {
+                updateGrid(".light-cone");
+            }
+        }, 150);
+    });
+
+    if (searchInput) {
+        searchInput.addEventListener("input", function () {
+            searchQuery = this.value.toLowerCase().trim();
+
+            clearSearchBtn.style.display = this.value ? "block" : "none";
+
+            runFilters();
+        });
+    }
+
+    // Click X → clear search
+    if (clearSearchBtn) {
+        clearSearchBtn.addEventListener("click", function () {
+            searchInput.value = "";
+            searchQuery = "";
+            clearSearchBtn.style.display = "none";
+
+            runFilters();
+        });
     }
 
     //Tooltip code
@@ -302,18 +371,14 @@ document.querySelectorAll(".character-tab-btn").forEach(btn => {
 
         const tab = this.dataset.tab;
 
-        // Remove active from all buttons
         document.querySelectorAll(".character-tab-btn")
             .forEach(b => b.classList.remove("active"));
 
-        // Hide all panels
         document.querySelectorAll(".character-panel")
             .forEach(p => p.classList.remove("active"));
 
-        // Activate clicked button
         this.classList.add("active");
 
-        // Show correct panel
         document.getElementById(tab).classList.add("active");
     });
 });

@@ -1,25 +1,26 @@
-﻿@model IEnumerable<Honkai_Star_Rail_Tier_List.Models.Character>
+﻿@model IEnumerable<Honkai_Star_Rail_Tier_List.Models.LightCone>
 
 @{
     ViewData["Title"] = "Index";
 }
 
 <body class="page-background">
-    <div class="characters-page">
-        <h1>Characters</h1>
-        <p>There are currently @Model.Count() characters</p>
+    <div class="light-cones-page">
+        <h1>Light Cones</h1>
+        <p>There are @Model.Count() light cones</p>
 
         <div class="filters">
             <div class="search-container">
                 <input id="searchInput" type="text" placeholder="Character Name..." />
                 <button id="clearSearchBtn">✕</button>
             </div>
-
+            
             <div class="rarity-filters">
                 <h4>Rarity: </h4>
                 <button class="filter-btn clear-filter-btn" data-filter="rarity">*</button>
                 <button class="filter-btn rarity-btn" data-filter="rarity" data-value="5" style="color:gold">5★</button>
                 <button class="filter-btn rarity-btn" data-filter="rarity" data-value="4" style="color:mediumpurple">4★</button>
+                <button class="filter-btn rarity-btn" data-filter="rarity" data-value="3" style="color:dodgerblue">3★</button>
             </div>
 
             <div class="path-filters">
@@ -36,38 +37,22 @@
                 <button class="filter-btn path-btn" data-filter="path" data-value="Remembrance"><img src="/Images/Paths/Remembrance.webp" /></button>
             </div>
 
-            <div class="element-filters">
-                <h4>Element: </h4>
-                <button class="filter-btn clear-filter-btn" data-filter="element">*</button>
-                <button class="filter-btn element-btn" data-filter="element" data-value="Fire"><img src="~/Images/Elements/Fire.webp" /></button>
-                <button class="filter-btn element-btn" data-filter="element" data-value="Ice"><img src="~/Images/Elements/Ice.webp" /></button>
-                <button class="filter-btn element-btn" data-filter="element" data-value="Imaginary"><img src="~/Images/Elements/Imaginary.webp" /></button>
-                <button class="filter-btn element-btn" data-filter="element" data-value="Lightning"><img src="~/Images/Elements/Lightning.webp" /></button>
-                <button class="filter-btn element-btn" data-filter="element" data-value="Physical"><img src="~/Images/Elements/Physical.webp" /></button>
-                <button class="filter-btn element-btn" data-filter="element" data-value="Quantum"><img src="~/Images/Elements/Quantum.webp" /></button>
-                <button class="filter-btn element-btn" data-filter="element" data-value="Wind"><img src="~/Images/Elements/Wind.webp" /></button>
-            </div>
-
             <button id="clearAllFiltersBtn" class="clear-filter-btn">
                 Clear All
             </button>
         </div>
-
-        <div class="characters-list">
-            @foreach (var character in Model.OrderBy(c => c.Name))
+        <div class="light-cone-grid">
+            @foreach (var lightCone in Model.OrderBy(lc => lc.Name))
             {
-                <a class="character-portrait has-tooltip" asp-controller="Characters" asp-action="Details" asp-route-slug="@character.Slug" 
-                   data-name="@character.Name"
-                   data-rarity="@character.Rarity"
-                   data-path="@character.Path"
-                   data-element="@character.Element"
-                   data-as="@character.TierAS"
-                   data-moc="@character.TierMOC"
-                   data-pf="@character.TierPF">
-                         
-                    <img class="rarity-@character.Rarity" src="/Images/Characters/Portraits/@character.Image" />
-                    <div class="character-name">@character.Name</div>
-                </a>
+                <div class="light-cone" data-rarity="@lightCone.Rarity" data-path="@lightCone.Path" data-name="@lightCone.Name">
+                    <img class="rarity-@lightCone.Rarity" src="/Images/Light Cones/@lightCone.Image" />
+                    <div class="light-cone-info">
+                        <span class="light-cone-name rarity-@lightCone.Rarity">@lightCone.Name</span>
+                        <span class="light-cone-path"> Path: @lightCone.Path</span>
+                        <hr />
+                        <span class="light-cone-description">@lightCone.Description</span>
+                    </div>
+                </div>
             }
         </div>
     </div>

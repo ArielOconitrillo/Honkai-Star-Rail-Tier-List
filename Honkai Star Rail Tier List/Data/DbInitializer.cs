@@ -60,7 +60,7 @@ namespace Honkai_Star_Rail_Tier_List.Data
                     TierMOC = "S",
                     TierAS = "S",
                     TierPF = "S",
-                    Image = "Lingsha_profile.webp",
+                    Image = "Lingsha.webp",
                     Description = "An important break team healer.",
                     Slug = "lingsha"
                 },
@@ -75,7 +75,7 @@ namespace Honkai_Star_Rail_Tier_List.Data
                     TierMOC = "A",
                     TierAS = "A",
                     TierPF = "A",
-                    Image = "The_Dahlia_profile.webp",
+                    Image = "The Dahlia.webp",
                     Description = "An crucial member of the break team.",
                     Slug = "the-dahlia"
                 },
@@ -89,7 +89,7 @@ namespace Honkai_Star_Rail_Tier_List.Data
                     TierMOC = "A",
                     TierAS = "A",
                     TierPF = "S",
-                    Image = "Harmony_Trailblazer.webp",
+                    Image = "Trailblazer Harmony.webp",
                     Description = "A great Super Break damage enabler",
                     Slug = "trailblazer-harmony"
                 },
@@ -103,7 +103,7 @@ namespace Honkai_Star_Rail_Tier_List.Data
                     TierMOC = "A",
                     TierAS = "A",
                     TierPF = "B",
-                    Image = "Ruan_Mei.webp",
+                    Image = "Ruan Mei.webp",
                     Description = "A fantastic damage buffer",
                     Slug = "ruan-mei"
                 },
@@ -117,7 +117,7 @@ namespace Honkai_Star_Rail_Tier_List.Data
                     TierMOC = "F",
                     TierAS = "F",
                     TierPF = "F",
-                    Image = "Gallagher_profile.webp",
+                    Image = "Gallagher.webp",
                     Description = "A good easily obatainable sustainer",
                     Slug = "gallagher"
                 },
