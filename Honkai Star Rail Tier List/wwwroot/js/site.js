@@ -291,29 +291,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const searchInput = document.getElementById("searchInput");
     const clearSearchBtn = document.getElementById("clearSearchBtn");
 
-    document.getElementById("searchInput").addEventListener("input", function () {
-        clearTimeout(searchTimeout);
-
-        searchTimeout = setTimeout(() => {
-            searchQuery = this.value.toLowerCase().trim();
-
-            if (document.querySelector(".tier-container")) {
-                updateTierList(currentMode);
-            } else if (document.querySelector(".characters-list")) {
-                updateGrid(".has-tooltip", "characters");
-            } else if (document.querySelector(".light-cone-grid")) {
-                updateGrid(".light-cone", "light cones");
-            }
-        }, 150);
-    });
-
     if (searchInput) {
         searchInput.addEventListener("input", function () {
-            searchQuery = this.value.toLowerCase().trim();
+
+            clearTimeout(searchTimeout);
+
+            searchTimeout = setTimeout(() => {
+
+                searchQuery = this.value.toLowerCase().trim();
+
+                runFilters();
+
+            }, 150);
 
             clearSearchBtn.style.display = this.value ? "block" : "none";
-
-            runFilters();
         });
     }
 

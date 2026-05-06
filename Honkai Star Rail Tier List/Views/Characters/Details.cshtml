@@ -19,7 +19,7 @@
             <hr />
             <p class="intro-paragraph">@Model.Description</p>
         </div>
-        
+
 
         <div class="character-tab-buttons">
             <button class="character-tab-btn active" data-tab="information">
@@ -45,56 +45,56 @@
                 <div class="skill-display">
                     <h1>Skills</h1>
                     <div class="skills">
-                        @foreach ( var skillGroup in Model.Skills.GroupBy(sg => sg.SkillCategory))
-                            {
-                                <div class="skill-group">
-                                    @foreach (var skill in skillGroup)
-                                    {
-                                        <div class="skill" id="skill_@skill.Id">
+                        @foreach (var skillGroup in Model.Skills.GroupBy(sg => sg.SkillCategory))
+                        {
+                            <div class="skill-group">
+                                @foreach (var skill in skillGroup)
+                                {
+                                    <div class="skill" id="skill_@skill.Id">
 
-                                            <div class="skill-info">
-                                                <p class="skill-type @Model.Element">@skill.SkillType</p>
-                                                <h3 class="skill-name ">@skill.Name</h3>
-                                            </div>
-
-                                            @*@ Display the discription and add a slider if needed to view the skill at differnt levels *@
-                                            <p class="skill-description">
-                                                @Html.Raw(skill.Description)
-                                            </p>
-
-                                            @if (skill.MaxLevel > 1)
-                                            {
-                                                var startLevel = Math.Max(1, skill.MaxLevel - 2);
-
-                                                <div class="skill-changer">
-                                                    <label>
-                                                        Skill Level: <span id="levelDisplay_@skill.Id">@startLevel</span>
-                                                    </label>
-
-
-                                                    <input type="range"
-                                                           class="skill-slider"
-                                                           id="slider_@skill.Id"
-                                                           data-display="levelDisplay_@skill.Id"
-                                                           data-container="skill_@skill.Id"
-                                                           data-values='@Html.Raw(Json.Serialize(
-                                                    skill.LevelValue.Select(v => new
-                                                    {
-                                                        level = v.Level,
-                                                        statType = v.StatType.ToString(),
-                                                        value = v.Value
-                                                    })
-                                               ))'
-                                                           min="1"
-                                                           max="@skill.MaxLevel"
-                                                           value="@startLevel">
-                                                </div>
-                                            }
-
+                                        <div class="skill-info">
+                                            <p class="skill-type @Model.Element">@skill.SkillType</p>
+                                            <h3 class="skill-name ">@skill.Name</h3>
                                         </div>
-                                    }
-                                </div>
-                            }
+
+                                        @*@ Display the discription and add a slider if needed to view the skill at differnt levels *@
+                                        <p class="skill-description">
+                                            @Html.Raw(skill.Description)
+                                        </p>
+
+                                        @if (skill.MaxLevel > 1)
+                                        {
+                                            var startLevel = Math.Max(1, skill.MaxLevel - 2);
+
+                                            <div class="skill-changer">
+                                                <label>
+                                                    Skill Level: <span id="levelDisplay_@skill.Id">@startLevel</span>
+                                                </label>
+
+
+                                                <input type="range"
+                                                       class="skill-slider"
+                                                       id="slider_@skill.Id"
+                                                       data-display="levelDisplay_@skill.Id"
+                                                       data-container="skill_@skill.Id"
+                                                       data-values='@Html.Raw(Json.Serialize(
+                                                     skill.LevelValue.Select(v => new
+                                                     {
+                                                         level = v.Level,
+                                                         statType = v.StatType.ToString(),
+                                                         value = v.Value
+                                                     })
+                                                ))'
+                                                       min="1"
+                                                       max="@skill.MaxLevel"
+                                                       value="@startLevel">
+                                            </div>
+                                        }
+
+                                    </div>
+                                }
+                            </div>
+                        }
                     </div>
                 </div>
 
@@ -109,7 +109,7 @@
                             <span class="companion-name">@companion.Name</span>
                         </div>
                         <div class="skills">
-                            @foreach ( var skillGroup in companion.Skills.GroupBy(sg => sg.SkillCategory))
+                            @foreach (var skillGroup in companion.Skills.GroupBy(sg => sg.SkillCategory))
                             {
                                 <div class="skill-group">
                                     @foreach (var skill in skillGroup)
@@ -142,13 +142,13 @@
                                                            data-display="levelDisplay_@skill.Id"
                                                            data-container="skill_@skill.Id"
                                                            data-values='@Html.Raw(Json.Serialize(
-                                                    skill.LevelValue.Select(v => new
-                                                    {
-                                                        level = v.Level,
-                                                        statType = v.StatType.ToString(),
-                                                        value = v.Value
-                                                    })
-                                               ))'
+                                                         skill.LevelValue.Select(v => new
+                                                         {
+                                                             level = v.Level,
+                                                             statType = v.StatType.ToString(),
+                                                             value = v.Value
+                                                         })
+                                                    ))'
                                                            min="1"
                                                            max="@skill.MaxLevel"
                                                            value="@startLevel">
@@ -342,15 +342,16 @@
                                     {
                                         <div class="team-member has-tooltip @member.Role"
                                              data-name="@member.Character.Name"
+                                             data-role="@member.Character.Role"
                                              data-rarity="@member.Character.Rarity"
                                              data-path="@member.Character.Path"
                                              data-element="@member.Character.Element"
                                              data-as="@member.Character.TierAS"
                                              data-moc="@member.Character.TierMOC"
                                              data-pf="@member.Character.TierPF">
-                                             <a asp-controller="Characters" asp-action="Details" asp-route-slug="@member.Character.Slug" style="width:100%">
-                                                <img src="/Images/Characters/@member.Character.Image" />
-                                             </a>
+                                            <a asp-controller="Characters" asp-action="Details" asp-route-slug="@member.Character.Slug" style="width:100%">
+                                                <img loading="lazy" src="/Images/Characters/@member.Character.Image" />
+                                            </a>
                                             <div class="team-member-text">
                                                 <span class="team-member-role">@member.Role:</span>
                                                 <span class="team-member-name">@member.Character.Name</span>

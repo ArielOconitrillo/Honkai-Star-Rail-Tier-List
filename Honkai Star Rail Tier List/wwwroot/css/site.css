@@ -54,6 +54,55 @@ body {
     background-color: black;
     color: white;
 }
+
+/*
+    Navigation bar
+*/
+
+.main-navbar {
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #334155;
+    padding: 12px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+}
+
+.navbar-brand {
+    color: gold !important;
+    font-weight: bold;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    transition: color 0.2s ease;
+}
+
+    .navbar-brand:hover {
+        color: #fde68a !important;
+    }
+
+.nav-link {
+    color: #e2e8f0 !important;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+    .nav-link:hover {
+        color: gold !important;
+        transform: translateY(-1px);
+    }
+
+.navbar-nav {
+    gap: 20px;
+}
+
+.active-nav {
+    color: gold !important;
+    border-bottom: 2px solid gold;
+}
+
 /*
     Accordian and panel code taken and modified from W3Schools
 */
@@ -216,7 +265,7 @@ body {
     border-radius: 8px;
     pointer-events: none;
     font-size: 12px;
-    z-index: 1000;
+    z-index: 9999;
     display: none;
     border: 1px solid #334155;
     width: 180px;
