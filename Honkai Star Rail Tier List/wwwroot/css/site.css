@@ -1044,8 +1044,14 @@ body {
 }
 
 /*
-    Light Cones
+    Light Cones page
 */
+
+.light-cones-page{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
 
 .light-cone-grid {
     display: grid;
@@ -1103,6 +1109,56 @@ body {
 .light-cone-description {
     font-size: 16px;
     line-height: 1.4;
+}
+
+/*
+    Relics Page
+*/
+
+.relic {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.relics-page {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.relics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(300px, 1fr));
+    gap: 20px;
+    align-items:stretch;
+}
+
+.relic-header {
+    display: flex;
+    background-color: #898490;
+}
+
+    .relic-header img {
+        width: 80px;
+        background-color: #5662a9;
+    }
+
+.relic-name{
+    display:flex;
+    align-items:center;
+    padding-left:10px;
+}
+
+.relic-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 10px;
+    padding-left: 5px;
+    padding-bottom: 10px;
+    background-color: #746f7b;
+    flex:1;
 }
 
 /*

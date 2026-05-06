@@ -106,13 +106,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     //Function for characters or light cone page filtering
-    function updateGrid(selector) {
+    function updateGrid(selector, label) {
         const items = document.querySelectorAll(selector);
 
         items.forEach(el => {
             const hidden = !matchesFilters(el);
             el.style.display = hidden ? "none" : "";
         });
+
+        updateCount(selector, label);
     }
 
     function matchesFilters(el) {
@@ -147,9 +149,30 @@ document.addEventListener("DOMContentLoaded", function () {
         if (document.querySelector(".tier-container")) {
             updateTierList(currentMode);
         } else if (document.querySelector(".characters-list")) {
-            updateGrid(".has-tooltip");
+            updateGrid(".has-tooltip", "characters");
         } else if (document.querySelector(".light-cone-grid")) {
-            updateGrid(".light-cone");
+            updateGrid(".light-cone", "light cones");
+        }
+    }
+
+    //Function for upadting the count after selecting filters
+    function updateCount(selector, label) {
+        const items = document.querySelectorAll(selector);
+
+        let visibleCount = 0;
+
+        items.forEach(el => {
+            if (el.style.display !== "none") {
+                visibleCount++;
+            }
+        });
+
+        const countEl = document.getElementById("item-count");
+
+        if (countEl) {
+            countEl.textContent = visibleCount === 1
+                    ? `Displaying 1 ${label.slice(0, -1)}`
+                    : `Displaying ${visibleCount} ${label}`;
         }
     }
 
@@ -171,9 +194,9 @@ document.addEventListener("DOMContentLoaded", function () {
             if (document.querySelector(".tier-container")) {
                 updateTierList(currentMode);
             } else if (document.querySelector(".characters-list")) {
-                updateGrid(".has-tooltip");
+                updateGrid(".has-tooltip", "characters");
             } else if (document.querySelector(".light-cone-grid")) {
-                updateGrid(".light-cone");
+                updateGrid(".light-cone", "light cones");
             }
         });
     });
@@ -203,9 +226,9 @@ document.addEventListener("DOMContentLoaded", function () {
             if (document.querySelector(".tier-container")) {
                 updateTierList(currentMode);
             } else if (document.querySelector(".characters-list")) {
-                updateGrid(".has-tooltip");
+                updateGrid(".has-tooltip", "characters");
             } else if (document.querySelector(".light-cone-grid")) {
-                updateGrid(".light-cone");
+                updateGrid(".light-cone", "light cones");
             }
 
             this.blur();
@@ -257,9 +280,9 @@ document.addEventListener("DOMContentLoaded", function () {
         if (document.querySelector(".tier-container")) {
             updateTierList(currentMode);
         } else if (document.querySelector(".characters-list")) {
-            updateGrid(".has-tooltip");
+            updateGrid(".has-tooltip", "characters");
         } else if (document.querySelector(".light-cone-grid")) {
-            updateGrid(".light-cone");
+            updateGrid(".light-cone", "light cones");
         }
     }
 
@@ -277,9 +300,9 @@ document.addEventListener("DOMContentLoaded", function () {
             if (document.querySelector(".tier-container")) {
                 updateTierList(currentMode);
             } else if (document.querySelector(".characters-list")) {
-                updateGrid(".has-tooltip");
+                updateGrid(".has-tooltip", "characters");
             } else if (document.querySelector(".light-cone-grid")) {
-                updateGrid(".light-cone");
+                updateGrid(".light-cone", "light cones");
             }
         }, 150);
     });
@@ -294,7 +317,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Click X → clear search
     if (clearSearchBtn) {
         clearSearchBtn.addEventListener("click", function () {
             searchInput.value = "";

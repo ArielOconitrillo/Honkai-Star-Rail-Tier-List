@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Honkai_Star_Rail_Tier_List.Models.RelicSet>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<body class="page-background">
+    <div class="relics-page"> 
+        <h1>Relic Sets</h1>
+        <p id="item-count">Displaying @Model.Count() relic sets</p>
+
+        <div class="relics-grid">
+            @foreach (var relic in Model.OrderBy(r => r.Name))
+            {
+                <div class="relic">
+                    <div class="relic-header">
+                        <img src="~/Images/Relics/@relic.Image" />
+                        <h1 class="relic-name">@relic.Name</h1>
+                    </div>
+                    <div class="relic-info">
+                        <span>(2): @relic.TwoPieceEffect</span>
+                        <span>(4): @relic.FourPieceEffect</span>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</body>
+
+
