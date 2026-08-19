@@ -3,7 +3,7 @@
     @model List<Honkai_Star_Rail_Tier_List.Models.Character>
 
     var tiers = new[] { "S", "A", "B", "F" };
-    var roles = new[] { "DPS", "Sub-DPS", "Support", "Sustain" };
+    var roles = new[] { "DPS", "SubDPS", "Support", "Sustain" };
 }
 
 <html>
@@ -58,7 +58,7 @@
 
     @foreach (var character in Model)
     {
-        <div class="has-tooltip"
+            <div class="has-tooltip tier-character"
              data-name="@character.Name"
              data-role="@character.Role"
              data-as="@character.TierAS"
@@ -129,7 +129,7 @@
         <div class="role-header">
             <div></div>
             <div>DPS</div>
-            <div>SubDPS</div>
+            <div>Sub-DPS</div>
             <div>Support</div>
             <div>Sustain</div>
         </div>
